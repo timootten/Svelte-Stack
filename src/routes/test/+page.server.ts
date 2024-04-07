@@ -1,10 +1,10 @@
 import { db } from "$lib/server/db";
-import { user } from "$lib/server/db/schema";
+import { userTable } from "$lib/server/db/schema";
 
 
 
 export async function load() {
-  const users = await db.select().from(user);
+  const users = await db.select().from(userTable);
 
   return {
     users
