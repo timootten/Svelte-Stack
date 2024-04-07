@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  web:
+    restart: unless-stopped
+    image: svelte-stack
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - backend
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/web?schema=public
+  postgres:
+    restart: unless-stopped
+    image: postgres
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'web'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+volumes:
+  postgres-data:
+
+networks:
+  backend:
