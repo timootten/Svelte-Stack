@@ -3,12 +3,10 @@ import { userTable } from "$lib/server/db/schema";
 
 
 
-export async function load({ locals }) {
+export async function load() {
   const users = await db.select().from(userTable);
 
-
-
   return {
-    users, user: locals.user
+    users
   };
 }

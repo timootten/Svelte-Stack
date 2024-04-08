@@ -33,8 +33,8 @@
 </script>
 
 <div class="flex min-h-screen w-full flex-col bg-muted/40">
-	<aside class="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
-		<nav class="flex flex-col items-center gap-4 px-2 sm:py-5">
+	<aside class="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background md:flex">
+		<nav class="flex flex-col items-center gap-4 px-2 md:py-5">
 			<a
 				href="##"
 				class="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
@@ -113,7 +113,7 @@
 				<Tooltip.Content side="right">Analytics</Tooltip.Content>
 			</Tooltip.Root>
 		</nav>
-		<nav class="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+		<nav class="mt-auto flex flex-col items-center gap-4 px-2 md:py-5">
 			<Tooltip.Root>
 				<Tooltip.Trigger asChild let:builder>
 					<a
@@ -130,18 +130,18 @@
 			</Tooltip.Root>
 		</nav>
 	</aside>
-	<div class="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+	<div class="flex flex-col md:gap-4 md:py-4 md:pl-14">
 		<header
-			class="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6"
+			class="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 md:static md:h-auto md:border-0 md:bg-transparent md:px-6"
 		>
 			<Sheet.Root>
 				<Sheet.Trigger asChild let:builder>
-					<Button builders={[builder]} size="icon" variant="outline" class="sm:hidden">
+					<Button builders={[builder]} size="icon" variant="outline" class="md:hidden">
 						<PanelLeft class="h-5 w-5" />
 						<span class="sr-only">Toggle Menu</span>
 					</Button>
 				</Sheet.Trigger>
-				<Sheet.Content side="left" class="sm:max-w-xs">
+				<Sheet.Content side="left" class="md:max-w-xs">
 					<nav class="grid gap-6 text-lg font-medium">
 						<a
 							href="##"
@@ -230,11 +230,11 @@
 			</DropdownMenu.Root>
 		</header>
 		<main
-			class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3"
+			class="grid flex-1 items-start gap-4 p-4 md:gap-8 md:px-6 md:py-0 lg:grid-cols-3 xl:grid-cols-3"
 		>
 			<div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-				<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-					<Card.Root class="sm:col-span-2">
+				<div class="grid gap-4 md:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+					<Card.Root class="md:col-span-2">
 						<Card.Header class="pb-3">
 							<Card.Title>Your Orders</Card.Title>
 							<Card.Description class="max-w-lg text-balance leading-relaxed">
@@ -288,7 +288,7 @@
 										builders={[builder]}
 									>
 										<ListFilter class="h-3.5 w-3.5" />
-										<span class="sr-only sm:not-sr-only">Filter</span>
+										<span class="sr-only md:not-sr-only">Filter</span>
 									</Button>
 								</DropdownMenu.Trigger>
 								<DropdownMenu.Content align="end">
@@ -301,7 +301,7 @@
 							</DropdownMenu.Root>
 							<Button size="sm" variant="outline" class="h-7 gap-1 text-sm">
 								<File class="h-3.5 w-3.5" />
-								<span class="sr-only sm:not-sr-only">Export</span>
+								<span class="sr-only md:not-sr-only">Export</span>
 							</Button>
 						</div>
 					</div>
@@ -316,8 +316,8 @@
 									<Table.Header>
 										<Table.Row>
 											<Table.Head>Customer</Table.Head>
-											<Table.Head class="hidden sm:table-cell">Type</Table.Head>
-											<Table.Head class="hidden sm:table-cell">Status</Table.Head>
+											<Table.Head class="hidden md:table-cell">Type</Table.Head>
+											<Table.Head class="hidden md:table-cell">Status</Table.Head>
 											<Table.Head class="hidden md:table-cell">Date</Table.Head>
 											<Table.Head class="text-right">Amount</Table.Head>
 										</Table.Row>
@@ -330,8 +330,8 @@
 													liam@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Sale</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Sale</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="secondary">Fulfilled</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-23</Table.Cell>
@@ -344,8 +344,8 @@
 													olivia@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Refund</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Refund</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="outline">Declined</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-24</Table.Cell>
@@ -358,8 +358,8 @@
 													noah@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Subscription</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Subscription</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="secondary">Fulfilled</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-25</Table.Cell>
@@ -372,8 +372,8 @@
 													emma@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Sale</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Sale</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="secondary">Fulfilled</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-26</Table.Cell>
@@ -386,8 +386,8 @@
 													liam@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Sale</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Sale</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="secondary">Fulfilled</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-23</Table.Cell>
@@ -400,8 +400,8 @@
 													liam@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Sale</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Sale</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="secondary">Fulfilled</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-23</Table.Cell>
@@ -414,8 +414,8 @@
 													olivia@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Refund</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Refund</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="outline">Declined</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-24</Table.Cell>
@@ -428,8 +428,8 @@
 													emma@example.com
 												</div>
 											</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">Sale</Table.Cell>
-											<Table.Cell class="hidden sm:table-cell">
+											<Table.Cell class="hidden md:table-cell">Sale</Table.Cell>
+											<Table.Cell class="hidden md:table-cell">
 												<Badge class="text-xs" variant="secondary">Fulfilled</Badge>
 											</Table.Cell>
 											<Table.Cell class="hidden md:table-cell">2023-06-26</Table.Cell>

@@ -4,5 +4,7 @@
 
 Users: <br />
 {#each data.users as user}
-	{user.id} | {user.firstName} {user.lastName} <br />
+	{user.id} | {user.email} - {user.balance} €<br />
 {/each}
+
+{data.user?.username}
