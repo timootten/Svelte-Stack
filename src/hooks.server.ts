@@ -27,5 +27,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   event.locals.user = user;
   event.locals.session = session;
+  await checkValidPath({ event, resolve });
   return resolve(event);
 };
+
+
+const checkValidPath: Handle = ({ event, resolve }) => {
+  if (event.path === '/invalid') {
+    return {
+      status: 403,
+      body: 'Invalid path'
+    };
+  }
+  return resolve(event);
+}
