@@ -38,7 +38,7 @@
 					placeholder="Timo"
 					required
 				/>
-				{#if $errors.username}<p class="px-1 text-sm text-red-500">{$errors.username}</p>{/if}
+				{#if $errors.username}<p class="px-1 text-sm text-red-500">{$errors.username[0]}</p>{/if}
 			</div>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
@@ -50,7 +50,7 @@
 					placeholder="timo@example.com"
 					required
 				/>
-				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email}</p>{/if}
+				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
 			</div>
 			<div class="grid gap-2">
 				<div class="flex items-center">
@@ -58,14 +58,14 @@
 					<a href="##" class="ml-auto inline-block text-sm underline"> Forgot your password? </a>
 				</div>
 				<Input bind:value={$form.password} name="password" id="password" type="password" required />
-				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password}</p>{/if}
+				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
 			<Button type="submit" class="w-full">Register</Button>
-			<Button variant="outline" class="w-full">Login with Google</Button>
+			<Button variant="outline" class="w-full" disabled>Login with Google</Button>
 		</form>
 		<div class="mt-4 text-center text-sm">
-			Don&apos;t have an account?
-			<a href="##" class="underline">Sign up</a>
+			You have an account?
+			<a href="/login" class="underline">Login</a>
 		</div>
 	</Card.Content>
 </Card.Root>

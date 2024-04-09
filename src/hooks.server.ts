@@ -1,11 +1,12 @@
 import { lucia } from '$lib/server/auth';
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {
     event.locals.user = null;
     event.locals.session = null;
+    await checkValidPath(event);
     return resolve(event);
   }
 
@@ -27,17 +28,30 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   event.locals.user = user;
   event.locals.session = session;
-  await checkValidPath({ event, resolve });
+  await checkValidPath(event);
   return resolve(event);
 };
 
 
-const checkValidPath: Handle = ({ event, resolve }) => {
-  if (event.path === '/invalid') {
-    return {
-      status: 403,
-      body: 'Invalid path'
-    };
+const checkValidPath = async (event: RequestEvent<Partial<Record<string, string>>, string | null>) => {
+  const path = extractRouteParam(event.route.id);
+  switch (path) {
+    case 'auth':
+      if (event.locals.user) {
+        return redirect(302, "/");
+      }
+      break;
+    case 'dashboard':
+      if (!event.locals.user) {
+        return redirect(302, "/login");
+      }
+      break;
+    default:
+      break;
   }
-  return resolve(event);
 }
+
+const extractRouteParam = (path: string | null) => {
+  const match = path?.match(/\((\w+)\)/);
+  return match ? match[1] : undefined;
+};

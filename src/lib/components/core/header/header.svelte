@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
 	import Home from 'lucide-svelte/icons/home';
@@ -10,6 +10,9 @@
 	import { Button } from '$lib/components/ui/button';
 	import { toggleMode } from 'mode-watcher';
 	import * as Sheet from '$lib/components/ui/sheet';
+	import { enhance } from '$app/forms';
+
+	export let user: import('lucia').User | null;
 </script>
 
 <header class="z-50 w-full">
@@ -117,8 +120,14 @@
 		</Sheet.Root>
 		<div class="flex flex-1 items-center justify-end space-x-2">
 			<nav class="flex items-center space-x-2">
-				<Button href="/login" variant="outline">Login</Button>
-				<Button href="/register">Register</Button>
+				{#if user}
+					<form action="?/logout" method="post" use:enhance>
+						<Button type="submit">Logout</Button>
+					</form>
+				{:else}
+					<Button href="/login" variant="outline">Login</Button>
+					<Button href="/register">Register</Button>
+				{/if}
 				<Button on:click={toggleMode} variant="outline" size="icon">
 					<Sun
 						class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
