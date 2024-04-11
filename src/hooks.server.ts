@@ -1,8 +1,11 @@
 import { lucia } from '$lib/server/auth';
 import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
+import { ORIGIN } from "$env/static/private";
 
 export const handle: Handle = async ({ event, resolve }) => {
   console.log("ORIGIN: ", event.url.origin);
+  console.log("ORIGIN_ENV: ", process.env.ORIGIN);
+  console.log("ORIGIN_ENV: ", ORIGIN);
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {
     event.locals.user = null;
