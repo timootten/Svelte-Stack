@@ -2,6 +2,7 @@ import { lucia } from '$lib/server/auth';
 import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
+  console.log("ORIGIN: ", event.url.origin);
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {
     event.locals.user = null;
