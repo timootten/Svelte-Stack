@@ -3,6 +3,8 @@
 FROM oven/bun:1 as base
 WORKDIR /usr/src/app
 
+RUN printenv
+
 # install dependencies into temp directory
 # this will cache them and speed up future builds
 FROM base AS install
