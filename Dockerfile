@@ -24,6 +24,8 @@ COPY . .
 #ENV DATABASE_URL=postgresql://postgres:postgres@postgres:5432/web?schema=public
 #ENV ORIGIN=http://dev2.shadehost.eu
 
+RUN printenv
+
 # [optional] tests & build
 ENV NODE_ENV=production
 RUN bun test
