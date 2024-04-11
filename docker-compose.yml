@@ -7,12 +7,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL='postgresql://postgres:postgres@postgres:5432/web?schema=public'
     ports:
       - 3000:3000
     networks:
       - backend
-    environment:
-      - DATABASE_URL="postgresql://postgres:postgres@postgres:5432/web?schema=public"
   postgres:
     restart: unless-stopped
     image: postgres
