@@ -23,8 +23,8 @@ FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
-#ENV DATABASE_URL=postgresql://postgres:postgres@postgres:5432/web?schema=public
-#ENV ORIGIN=http://dev2.shadehost.eu
+ENV DATABASE_URL=postgres://postgres:YEJ2TCjmmrpzOwBMTOpSXwkBjJz8sqN574xmgW2ODFeLqBSCSjAogj9vvLvg3Gch@bgksc48:5432/postgres
+ENV ORIGIN=http://dev2.shadehost.eu
 
 RUN printenv
 
