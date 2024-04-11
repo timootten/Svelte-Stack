@@ -1,5 +1,7 @@
-// Need this to force hooks to react
+import { loadFlash } from 'sveltekit-flash-message/server';
 
-export async function load({ }) {
-
-};
+export const load = loadFlash(async ({ locals }) => {
+  return {
+    user: locals.user
+  }
+});

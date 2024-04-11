@@ -9,6 +9,6 @@ export async function load({ locals }) {
 
 
   return {
-    users, user: locals.user
+    users
   };
 }
