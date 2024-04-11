@@ -22,6 +22,7 @@ COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
 ENV DATABASE_URL=postgresql://postgres:postgres@postgres:5432/web?schema=public
+ENV ORIGIN=https://dev2.shadehost.eu
 
 # [optional] tests & build
 ENV NODE_ENV=production
