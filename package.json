@@ -46,7 +46,7 @@
     "lucide-svelte": "^0.365.0",
     "mode-watcher": "^0.3.0",
     "oslo": "^1.2.0",
-    "pg": "^8.11.5",
+    "postgres": "^3.4.4",
     "svelte-adapter-bun": "^0.5.2",
     "svelte-sonner": "^0.3.21",
     "tailwind-merge": "^2.2.2",

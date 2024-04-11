@@ -1,12 +1,8 @@
 import { DATABASE_URL } from "$env/static/private";
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from 'pg';
+import postgres from 'postgres';
 import * as schema from './schema';
+import { drizzle } from "drizzle-orm/postgres-js";
 
-const client = new pg.Client({
-  connectionString: DATABASE_URL,
-});
+const queryClient = postgres(DATABASE_URL);
 
-await client.connect();
-
-export const db = drizzle(client, { schema });
+export const db = drizzle(queryClient, { schema });
