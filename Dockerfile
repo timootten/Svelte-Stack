@@ -4,6 +4,7 @@ FROM oven/bun:1 as base
 WORKDIR /usr/src/app
 
 ENV DATABASE_URL=$DATABASE_URL
+RUN echo $DATABASE_URL
 RUN printenv
 
 # install dependencies into temp directory
