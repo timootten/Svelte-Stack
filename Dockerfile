@@ -5,8 +5,6 @@ WORKDIR /usr/src/app
 
 ENV DATABASE_URL=$DATABASE_URL
 ENV ORIGIN=$ORIGIN
-RUN echo $DATABASE_URL
-RUN printenv
 
 # install dependencies into temp directory
 # this will cache them and speed up future builds
@@ -25,11 +23,6 @@ RUN cd /temp/prod && bun install --frozen-lockfile --production
 FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
-
-#ENV DATABASE_URL=postgres://postgres:YEJ2TCjmmrpzOwBMTOpSXwkBjJz8sqN574xmgW2ODFeLqBSCSjAogj9vvLvg3Gch@bgksc48:5432/postgres
-#ENV ORIGIN="http://dev2.shadehost.eu, https://dev2.shadehost.eu"
-
-RUN printenv
 
 # [optional] tests & build
 ENV NODE_ENV=production
