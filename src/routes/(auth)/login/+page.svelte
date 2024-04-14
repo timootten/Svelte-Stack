@@ -37,6 +37,7 @@
 					name="email"
 					type="email"
 					placeholder="m@example.com"
+					autocomplete="email"
 					required
 				/>
 				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
@@ -46,7 +47,14 @@
 					<Label for="password">Password</Label>
 					<a href="##" class="ml-auto inline-block text-sm underline"> Forgot your password? </a>
 				</div>
-				<Input bind:value={$form.password} name="password" id="password" type="password" required />
+				<Input
+					bind:value={$form.password}
+					name="password"
+					id="password"
+					type="password"
+					autocomplete="password"
+					required
+				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
 			<Button type="submit" class="w-full">Login</Button>
