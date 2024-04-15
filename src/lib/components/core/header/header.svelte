@@ -121,7 +121,7 @@
 		<div class="flex flex-1 items-center justify-end space-x-2">
 			<nav class="flex items-center space-x-2">
 				{#if user}
-					<form action="?/logout" method="post" use:enhance>
+					<form action="/?/logout" method="post" use:enhance>
 						<Button type="submit">Logout</Button>
 					</form>
 				{:else}

@@ -1,5 +1,6 @@
 import { lucia } from '$lib/server/auth';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
+import { redirect } from 'sveltekit-flash-message/server';
 
 export const actions = {
   logout: async (event) => {
@@ -12,6 +13,8 @@ export const actions = {
       path: ".",
       ...sessionCookie.attributes
     });
-    redirect(302, "/login");
+    redirect("/login", {
+      status: "success", text: "You have successfully logged out."
+    }, event);
   }
 };

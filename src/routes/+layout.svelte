@@ -15,7 +15,26 @@
 		}
 		$flash = undefined;
 	}
+	$: console.log($page);
+	let pageName = '';
+	$: {
+		if ($page.route.id?.includes('404')) {
+			pageName = '404';
+		} else if ($page.route.id?.includes('dashboard')) {
+			pageName = 'Dashboard';
+		} else if ($page.route.id?.includes('auth')) {
+			pageName = 'Auth';
+		}
+	}
 </script>
+
+<svelte:head>
+	<title>Svelte-Stack | {pageName}</title>
+	<meta
+		name="description"
+		content="This is a Svelte-Stack template engineered to expedite your Svelte projects, empowering faster and more efficient development."
+	/>
+</svelte:head>
 
 <ModeWatcher />
 <Toaster richColors position="top-right" />

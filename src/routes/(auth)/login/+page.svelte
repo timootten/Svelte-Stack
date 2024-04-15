@@ -36,7 +36,7 @@
 					id="email"
 					name="email"
 					type="email"
-					placeholder="m@example.com"
+					placeholder="timo@example.com"
 					autocomplete="email"
 					required
 				/>
