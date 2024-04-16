@@ -10,7 +10,6 @@ import { Argon2id } from "oslo/password";
 import { lucia } from "$lib/server/auth/index.js";
 import { redirect } from "sveltekit-flash-message/server";
 
-
 const loginSchema = userSchema.pick({
   email: true,
   password: true,

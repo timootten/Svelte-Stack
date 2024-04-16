@@ -15,7 +15,7 @@
 		}
 		$flash = undefined;
 	}
-	$: console.log($page);
+  
 	let pageName = '';
 	$: {
 		if ($page.route.id?.includes('404')) {
