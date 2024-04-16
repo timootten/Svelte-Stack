@@ -71,7 +71,9 @@
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
 			<Button type="submit" class="w-full">Register</Button>
-			<Button variant="outline" class="w-full" disabled>Login with Google</Button>
+      <form action="/login?/github" method="POST" use:enhance>
+				<Button type="submit" variant="outline" class="w-full">Login with GitHub</Button>
+			</form>
 		</form>
 		<div class="mt-4 text-center text-sm">
 			You have an account?

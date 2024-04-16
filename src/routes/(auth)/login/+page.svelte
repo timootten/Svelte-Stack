@@ -28,7 +28,7 @@
 		<Card.Description>Enter your email below to login to your account</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form class="grid gap-4" method="POST" use:enhance>
+		<form class="grid gap-4" action="?/login" method="POST" use:enhance>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
 				<Input
@@ -58,7 +58,9 @@
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
 			<Button type="submit" class="w-full">Login</Button>
-			<Button variant="outline" class="w-full" disabled>Login with Google</Button>
+			<form action="?/github" method="POST" use:enhance>
+				<Button type="submit" variant="outline" class="w-full">Login with GitHub</Button>
+			</form>
 		</form>
 		<div class="mt-4 text-center text-sm">
 			Don&apos;t have an account?

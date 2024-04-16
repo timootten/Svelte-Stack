@@ -8,6 +8,7 @@ import { eq, ilike, or } from "drizzle-orm";
 import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 import { lucia } from "$lib/server/auth/index.js";
+import { setFlash } from "sveltekit-flash-message/server";
 
 
 const registerSchema = userSchema.pick({
@@ -38,7 +39,7 @@ export const actions = {
     if (user && user?.username.toLowerCase() === form.data.username.toLowerCase()) return setError(form, 'username', 'This username is already taken.');
 
     const userId = generateId(15);
-    const hashedPassword = await new Argon2id().hash(form.data.password);
+    const hashedPassword = await new Argon2id().hash(form.data?.password || "");
 
     await db.insert(userTable).values({
       id: userId,
@@ -53,7 +54,7 @@ export const actions = {
       path: ".",
       ...sessionCookie.attributes
     });
-
+    setFlash({ status: "success", text: "You successfully registered." }, cookies);
     return message(form, { status: "success", text: "You successfully registered." });
   }
 };

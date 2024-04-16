@@ -7,15 +7,22 @@
 
 	const flash = getFlash(page);
 
+	$: toast.success('Welcome to Svelte-Stack!');
+
 	$: if ($flash) {
+		const text = $flash.text;
 		if ($flash.status === 'success') {
-			toast.success($flash.text);
+			setTimeout(() => {
+				toast.success(text);
+			}, 250);
 		} else {
-			toast.error($flash.text);
+			setTimeout(() => {
+				toast.error(text);
+			}, 250);
 		}
 		$flash = undefined;
 	}
-  
+
 	let pageName = '';
 	$: {
 		if ($page.route.id?.includes('404')) {
