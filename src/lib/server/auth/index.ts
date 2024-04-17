@@ -4,10 +4,9 @@ import { Lucia } from 'lucia';
 import { db } from '../db';
 import { sessionTable, userTable } from '../db/schema';
 import { GitHub } from "arctic";
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from '$env/static/private';
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable);
-export const github = new GitHub(GITHUB_CLIENT_ID || process.env.GITHUB_CLIENT_ID as string, GITHUB_CLIENT_SECRET || process.env.GITHUB_CLIENT_SECRET as string);
+export const github = new GitHub(process.env.GITHUB_CLIENT_ID as string, process.env.GITHUB_CLIENT_SECRET as string);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
