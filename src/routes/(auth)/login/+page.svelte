@@ -6,10 +6,19 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
 
 	export let data;
 
-	const { form, enhance, errors } = superForm(data.form, {
+	let githubLoading = false;
+
+	const {
+		form,
+		enhance: enhanceLogin,
+		errors,
+		delayed
+	} = superForm(data.form, {
+		delayMs: 0,
 		onUpdated({ form }) {
 			if (!form.message) return;
 			if (form.message.status === 'success') {
@@ -28,7 +37,7 @@
 		<Card.Description>Enter your email below to login to your account</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form class="grid gap-4" action="?/login" method="POST" use:enhance>
+		<form class="grid gap-4" action="?/login" method="POST" use:enhanceLogin>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
 				<Input
@@ -57,9 +66,17 @@
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
-			<Button type="submit" class="w-full">Login</Button>
-			<form action="?/github" method="POST" use:enhance>
-				<Button type="submit" variant="outline" class="w-full">Login with GitHub</Button>
+			<Button type="submit" class="w-full" loading={$delayed}>Login</Button>
+			<form
+				action="?/github"
+				method="POST"
+				use:enhance={() => {
+					githubLoading = true;
+				}}
+			>
+				<Button type="submit" variant="outline" class="w-full" loading={githubLoading}
+					>Login with GitHub</Button
+				>
 			</form>
 		</form>
 		<div class="mt-4 text-center text-sm">

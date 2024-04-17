@@ -34,7 +34,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 
 const checkValidPath = async (event: RequestEvent<Partial<Record<string, string>>, string | null>) => {
-  const path = extractRouteParam(event.route.id);
+  const path = extractRouteParam(event.route.id)?.toLowerCase();
+  const exactPath = event.route.id?.toLowerCase();
+  if (exactPath?.includes("email")) return;
   switch (path) {
     case 'auth':
       if (event.locals.user) {

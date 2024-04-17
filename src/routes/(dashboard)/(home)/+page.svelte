@@ -30,6 +30,8 @@
 	import * as Table from '$lib/components/ui/table/index.js';
 	import * as Tabs from '$lib/components/ui/tabs/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
+
+	export let data;
 </script>
 
 <div class="flex min-h-screen w-full flex-col bg-muted/40">
@@ -216,7 +218,13 @@
 						class="overflow-hidden rounded-full"
 						builders={[builder]}
 					>
-						<img src="/favicon.png" width={36} height={36} alt="Avatar" class="overflow-hidden" />
+						<img
+							src={data.user?.avatarUrl}
+							width={40}
+							height={40}
+							alt="Avatar"
+							class="overflow-hidden"
+						/>
 					</Button>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content align="end">

@@ -2,23 +2,6 @@ import { Head, Html, Preview } from '@react-email/components';
 import { Tailwind } from '@react-email/tailwind';
 import * as React from 'react';
 
-/*
-
-  import { render } from '@react-email/render';
-  import nodemailer from "nodemailer";
-
-  const transporter = nodemailer.createTransport({
-    url: "smtps://Admin%40ShadeHost.eu:Timo0580%21@mail.ShadeHost.eu"
-  });
-
-  transporter.sendMail({
-    from: "NoReply@ShadeHost.eu",
-    to: "timootten@icloud.com",
-    subject: "Verify your email",
-    html: render(VerificationEmail())
-  });
-*/
-
 export default function VerificationEmail({ link, username }: { link: string; username: string }) {
 	return (
 		<Html>

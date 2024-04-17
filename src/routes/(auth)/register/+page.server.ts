@@ -9,7 +9,8 @@ import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 import { lucia } from "$lib/server/auth/index.js";
 import { setFlash } from "sveltekit-flash-message/server";
-
+import crypto from 'crypto';
+import { sendEmailVerificationToken } from "$lib/server/auth/utils.js";
 
 const registerSchema = userSchema.pick({
   username: true,
@@ -41,11 +42,14 @@ export const actions = {
     const userId = generateId(15);
     const hashedPassword = await new Argon2id().hash(form.data?.password || "");
 
+    const emailHash = crypto.createHash('md5').update(form.data.email.toLowerCase()).digest("hex");
+
     await db.insert(userTable).values({
       id: userId,
       username: form.data.username,
       email: form.data.email,
-      password: hashedPassword
+      password: hashedPassword,
+      avatarUrl: `https://www.gravatar.com/avatar/${emailHash}`
     });
 
     const session = await lucia.createSession(userId, {});
@@ -54,7 +58,10 @@ export const actions = {
       path: ".",
       ...sessionCookie.attributes
     });
-    setFlash({ status: "success", text: "You successfully registered." }, cookies);
-    return message(form, { status: "success", text: "You successfully registered." });
+
+    sendEmailVerificationToken(userId, form.data.email, form.data.username);
+
+    setFlash({ status: "success", text: "You successfully registered. You got an E-Mail, please verify your." }, cookies);
+    return message(form, { status: "success", text: "You successfully registered. You got an E-Mail, please verify your." });
   }
 };

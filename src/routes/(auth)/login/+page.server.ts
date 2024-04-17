@@ -36,6 +36,8 @@ export const actions = {
 
     if (!user || user.password == null) return message(form, { status: "error", text: "Incorrect email or password." }, { status: 401 });
 
+    if (!user.emailVerified) return message(form, { status: "error", text: "E-Mail is not verified." }, { status: 401 });
+
     const validPassword = await new Argon2id().verify(user.password || "", form.data.password || "");
 
     if (!validPassword) return message(form, { status: "error", text: "Incorrect email or password." }, { status: 401 });

@@ -64,23 +64,24 @@ export async function GET({ url, cookies }) {
       .where(and(ilike(userTable.email, "timootten@icloud.com"), eq(oAuthAccountTable.providerId, "github")))
       .innerJoin(oAuthAccountTable, eq(userTable.id, oAuthAccountTable.userId)).limit(1))[0]
 
-    const existingUser = currentUser.user;
+    const existingUser = currentUser?.user;
 
     let userId = existingUser?.id as string;
 
-    if (existingUser && currentUser.oauth_account_table == null) {
+    if (existingUser && currentUser?.oauth_account_table == null) {
       await db.insert(oAuthAccountTable).values({
         providerId: "github",
         providerUserId: githubUser.id,
         userId: existingUser.id
       });
-    } else if (currentUser.oauth_account_table == null) {
+    } else if (currentUser?.oauth_account_table == null) {
       userId = generateId(15);
       await db.transaction(async (tx) => {
         await tx.insert(userTable).values({
           id: userId,
           email: primaryEmail.email,
-          username: githubUser.login
+          username: githubUser.login,
+          avatarUrl: githubUser.avatar_url
         });
         await tx.insert(oAuthAccountTable).values({
           providerId: "github",

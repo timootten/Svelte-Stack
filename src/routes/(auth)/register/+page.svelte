@@ -6,10 +6,19 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
 
 	export let data;
 
-	const { form, enhance, errors } = superForm(data.form, {
+	let githubLoading = false;
+
+	const {
+		form,
+		enhance: enhanceRegister,
+		errors,
+		delayed
+	} = superForm(data.form, {
+		delayMs: 0,
 		onUpdated({ form }) {
 			if (!form.message) return;
 			if (form.message.status === 'success') {
@@ -28,7 +37,7 @@
 		<Card.Description>Enter your email below to register a account</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form class="grid gap-4" method="POST" use:enhance>
+		<form class="grid gap-4" method="POST" use:enhanceRegister>
 			<div class="grid gap-2">
 				<Label for="username">Username</Label>
 				<Input
@@ -70,9 +79,17 @@
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
-			<Button type="submit" class="w-full">Register</Button>
-      <form action="/login?/github" method="POST" use:enhance>
-				<Button type="submit" variant="outline" class="w-full">Login with GitHub</Button>
+			<Button type="submit" class="w-full" loading={$delayed}>Register</Button>
+			<form
+				action="/login?/github"
+				method="POST"
+				use:enhance={() => {
+					githubLoading = true;
+				}}
+			>
+				<Button type="submit" variant="outline" class="w-full" loading={githubLoading}
+					>Login with GitHub</Button
+				>
 			</form>
 		</form>
 		<div class="mt-4 text-center text-sm">
