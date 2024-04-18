@@ -37,7 +37,7 @@
 		<Card.Description>Enter your email below to login to your account</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<img src="/img" alt="" />
+		<img src="/images/oauth/GitHub.svg" alt="" />
 		<form class="grid gap-4" action="?/login" method="POST" use:enhanceLogin>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
