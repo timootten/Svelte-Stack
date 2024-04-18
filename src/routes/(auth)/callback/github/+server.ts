@@ -58,23 +58,26 @@ export async function GET({ url, cookies }) {
       });
     }
 
-    const currentUser = (await db
+    const currentUser = await db
       .select()
       .from(userTable)
-      .where(and(ilike(userTable.email, "timootten@icloud.com"), eq(oAuthAccountTable.providerId, "github")))
-      .innerJoin(oAuthAccountTable, eq(userTable.id, oAuthAccountTable.userId)).limit(1))[0]
+      .where(ilike(userTable.email, "timootten@icloud.com"))
+      .leftJoin(oAuthAccountTable, eq(userTable.id, oAuthAccountTable.userId))
 
-    const existingUser = currentUser?.user;
+    const existingUser = currentUser[0]?.user;
 
     let userId = existingUser?.id as string;
+    const hasGitHubAccount = !!currentUser.find(row => row?.oauth_account_table?.providerId === "GitHub")
+    // make this a boolean
 
-    if (existingUser && currentUser?.oauth_account_table == null) {
+    console.log(hasGitHubAccount)
+    if (existingUser && !hasGitHubAccount) {
       await db.insert(oAuthAccountTable).values({
-        providerId: "github",
+        providerId: "GitHub",
         providerUserId: githubUser.id,
         userId: existingUser.id
       });
-    } else if (currentUser?.oauth_account_table == null) {
+    } else if (!hasGitHubAccount) {
       userId = generateId(15);
       await db.transaction(async (tx) => {
         await tx.insert(userTable).values({

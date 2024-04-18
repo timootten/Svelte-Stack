@@ -3,14 +3,14 @@ import { userSchema, userTable } from "$lib/server/db/schema";
 import { setError, superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { eq, ilike, or } from "drizzle-orm";
 import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 import { lucia } from "$lib/server/auth/index.js";
-import { setFlash } from "sveltekit-flash-message/server";
+import { redirect, setFlash } from "sveltekit-flash-message/server";
 import crypto from 'crypto';
-import { sendEmailVerificationToken } from "$lib/server/auth/utils.js";
+import { sendVerificationEmail } from "$lib/server/auth/utils.js";
 
 const registerSchema = userSchema.pick({
   username: true,
@@ -59,9 +59,8 @@ export const actions = {
       ...sessionCookie.attributes
     });
 
-    sendEmailVerificationToken(userId, form.data.email, form.data.username);
+    sendVerificationEmail(userId, form.data.email, form.data.username);
 
-    setFlash({ status: "success", text: "You successfully registered. You got an E-Mail, please verify your." }, cookies);
-    return message(form, { status: "success", text: "You successfully registered. You got an E-Mail, please verify your." });
+    redirect("/", { status: "success", text: "You successfully registered. You got an E-Mail, please verify your account." }, cookies);
   }
 };

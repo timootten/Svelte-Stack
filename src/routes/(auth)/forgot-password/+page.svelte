@@ -23,7 +23,6 @@
 			if (!form.message) return;
 			if (form.message.status === 'success') {
 				toast.success(form.message.text);
-				goto('/');
 			} else {
 				toast.error(form.message.text);
 			}
@@ -33,12 +32,11 @@
 
 <Card.Root class="mx-auto my-auto max-w-sm">
 	<Card.Header>
-		<Card.Title class="text-2xl">Login</Card.Title>
-		<Card.Description>Enter your email below to login to your account</Card.Description>
+		<Card.Title class="text-2xl">Forgot password</Card.Title>
+		<Card.Description>Enter your email below to reset your password</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<img src="/img" alt="" />
-		<form class="grid gap-4" action="?/login" method="POST" use:enhanceLogin>
+		<form class="grid gap-4" method="POST" use:enhanceLogin>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
 				<Input
@@ -52,26 +50,10 @@
 				/>
 				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
 			</div>
-			<div class="grid gap-2">
-				<div class="flex items-center">
-					<Label for="password">Password</Label>
-					<a href="/forgot-password" class="ml-auto inline-block text-sm underline">
-						Forgot your password?
-					</a>
-				</div>
-				<Input
-					bind:value={$form.password}
-					name="password"
-					id="password"
-					type="password"
-					autocomplete="password"
-					required
-				/>
-				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
-			</div>
-			<Button type="submit" class="w-full" loading={$delayed}>Login</Button>
+
+			<Button type="submit" class="w-full" loading={$delayed}>Forgot password</Button>
 			<form
-				action="?/github"
+				action="/login?/github"
 				method="POST"
 				use:enhance={() => {
 					githubLoading = true;

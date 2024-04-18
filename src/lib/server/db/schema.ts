@@ -1,7 +1,6 @@
-import { boolean, date, numeric, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, date, numeric, pgEnum, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { generateId } from "lucia";
-import { createDate, TimeSpan } from "oslo";
 
 export const userTable = pgTable("user", {
   id: varchar('id', {
@@ -33,15 +32,15 @@ export const oAuthAccountTable = pgTable("oauth_account_table", {
   }
 });
 
-export const emailVerificationTokenTable = pgTable("email_verification_token", {
-  id: varchar('id', {
-    length: 255
-  }).$defaultFn(() => generateId(40)).primaryKey(),
+export const tokenType = pgEnum('type', ['email_verification', 'password_reset', 'magic_link']);
+
+export const tokenTable = pgTable("token", {
+  id: text('id').$defaultFn(() => generateId(40)).primaryKey(),
   userId: varchar('user_id', {
     length: 255
   }).notNull()
     .references(() => userTable.id),
-  email: varchar("email", { length: 255 }).notNull(),
+  type: tokenType('type').notNull(),
   expiresAt: timestamp("expires_at", { mode: "date" }).notNull(),
   updatedAt: timestamp("updated_at", { mode: "date" }).notNull().defaultNow().$onUpdate(() => new Date()),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
@@ -68,3 +67,6 @@ export const userSchema = createInsertSchema(userTable, {
   username: (schema) => schema.username.min(4).max(16),
   password: (schema) => schema.password.min(8)
 });
+
+
+export const tokenSchema = createInsertSchema(tokenTable);

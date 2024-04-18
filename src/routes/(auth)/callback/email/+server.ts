@@ -1,12 +1,14 @@
 import { github, lucia } from '$lib/server/auth/index.js';
-import { sendEmailVerificationToken } from '$lib/server/auth/utils.js';
+import { sendVerificationEmail } from '$lib/server/auth/utils.js';
 import { db } from '$lib/server/db';
-import { emailVerificationTokenTable, oAuthAccountTable, userTable } from '$lib/server/db/schema.js';
+import { tokenTable, userTable } from '$lib/server/db/schema.js';
 import { redirect } from '@sveltejs/kit';
 import { and, eq, ilike } from 'drizzle-orm';
 import { generateId } from 'lucia';
 import { isWithinExpirationDate } from 'oslo';
 import { setFlash } from "sveltekit-flash-message/server";
+import { sha256 } from "oslo/crypto";
+import { encodeHex } from "oslo/encoding";
 
 
 export async function GET({ url, cookies, locals }) {
@@ -22,7 +24,8 @@ export async function GET({ url, cookies, locals }) {
     });
   }
 
-  const databaseToken = (await db.select().from(emailVerificationTokenTable).where(eq(emailVerificationTokenTable.id, token)))[0];
+  const tokenHash = encodeHex(await sha256(new TextEncoder().encode(token)));
+  const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'email_verification'))))[0];
   if (!databaseToken) {
     setFlash({ status: "error", text: "Invalid token." }, cookies)
     return new Response(null, {
@@ -35,7 +38,7 @@ export async function GET({ url, cookies, locals }) {
 
   if (!isWithinExpirationDate(databaseToken.expiresAt)) {
     const user = (await db.select().from(userTable).where(eq(userTable.id, databaseToken.userId)))[0];
-    sendEmailVerificationToken(user.id, user.email, user.username);
+    sendVerificationEmail(user.id, user.email, user.username);
     setFlash({ status: "error", text: "Your token is expired. Sending a new one..." }, cookies)
     return new Response(null, {
       status: 302,
@@ -46,7 +49,7 @@ export async function GET({ url, cookies, locals }) {
   }
 
   await db.transaction(async (tx) => {
-    await tx.delete(emailVerificationTokenTable).where(eq(emailVerificationTokenTable.id, token));
+    await tx.delete(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'email_verification')));
     await tx.update(userTable).set({ emailVerified: true }).where(eq(userTable.id, databaseToken.userId));
   });
 

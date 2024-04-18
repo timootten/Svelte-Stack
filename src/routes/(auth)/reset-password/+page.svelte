@@ -6,11 +6,8 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import { enhance } from '$app/forms';
 
 	export let data;
-
-	let githubLoading = false;
 
 	const {
 		form,
@@ -33,31 +30,14 @@
 
 <Card.Root class="mx-auto my-auto max-w-sm">
 	<Card.Header>
-		<Card.Title class="text-2xl">Login</Card.Title>
-		<Card.Description>Enter your email below to login to your account</Card.Description>
+		<Card.Title class="text-2xl">Change your Password</Card.Title>
+		<Card.Description>Enter your new password below to change it</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<img src="/img" alt="" />
-		<form class="grid gap-4" action="?/login" method="POST" use:enhanceLogin>
-			<div class="grid gap-2">
-				<Label for="email">Email</Label>
-				<Input
-					bind:value={$form.email}
-					id="email"
-					name="email"
-					type="email"
-					placeholder="timo@example.com"
-					autocomplete="email"
-					required
-				/>
-				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
-			</div>
+		<form class="grid gap-4" method="POST" use:enhanceLogin>
 			<div class="grid gap-2">
 				<div class="flex items-center">
 					<Label for="password">Password</Label>
-					<a href="/forgot-password" class="ml-auto inline-block text-sm underline">
-						Forgot your password?
-					</a>
 				</div>
 				<Input
 					bind:value={$form.password}
@@ -69,22 +49,7 @@
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
-			<Button type="submit" class="w-full" loading={$delayed}>Login</Button>
-			<form
-				action="?/github"
-				method="POST"
-				use:enhance={() => {
-					githubLoading = true;
-				}}
-			>
-				<Button type="submit" variant="outline" class="w-full" loading={githubLoading}
-					>Login with GitHub</Button
-				>
-			</form>
+			<Button type="submit" class="w-full" loading={$delayed}>Change Password</Button>
 		</form>
-		<div class="mt-4 text-center text-sm">
-			Don&apos;t have an account?
-			<a href="/register" class="underline">Sign up</a>
-		</div>
 	</Card.Content>
 </Card.Root>
