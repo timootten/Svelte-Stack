@@ -70,7 +70,6 @@ export async function GET({ url, cookies }) {
     const hasGitHubAccount = !!currentUser.find(row => row?.oauth_account_table?.providerId === "GitHub")
     // make this a boolean
 
-    console.log(hasGitHubAccount)
     if (existingUser && !hasGitHubAccount) {
       await db.insert(oAuthAccountTable).values({
         providerId: "GitHub",

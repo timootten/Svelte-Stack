@@ -30,9 +30,9 @@
 	});
 </script>
 
-<Card.Root class="mx-auto my-auto max-w-sm">
+<Card.Root class="mx-auto my-auto w-full max-w-sm">
 	<Card.Header>
-		<Card.Title class="text-2xl">Forgot password</Card.Title>
+		<Card.Title class="mb-1 text-2xl">Forgot password</Card.Title>
 		<Card.Description>Enter your email below to reset your password</Card.Description>
 	</Card.Header>
 	<Card.Content>
@@ -52,17 +52,6 @@
 			</div>
 
 			<Button type="submit" class="w-full" loading={$delayed}>Forgot password</Button>
-			<form
-				action="/login?/github"
-				method="POST"
-				use:enhance={() => {
-					githubLoading = true;
-				}}
-			>
-				<Button type="submit" variant="outline" class="w-full" loading={githubLoading}
-					>Login with GitHub</Button
-				>
-			</form>
 		</form>
 		<div class="mt-4 text-center text-sm">
 			Don&apos;t have an account?

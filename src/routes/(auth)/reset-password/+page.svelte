@@ -28,7 +28,7 @@
 	});
 </script>
 
-<Card.Root class="mx-auto my-auto max-w-sm">
+<Card.Root class="mx-auto my-auto w-full max-w-sm">
 	<Card.Header>
 		<Card.Title class="text-2xl">Change your Password</Card.Title>
 		<Card.Description>Enter your new password below to change it</Card.Description>
