@@ -10,6 +10,7 @@
 	$: toast.success('Welcome to Svelte-Stack!');
 
 	$: if ($flash) {
+		console.log($flash);
 		const text = $flash.text;
 		if ($flash.status === 'success') {
 			setTimeout(() => {

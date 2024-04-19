@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Head, Html, Preview } from '@react-email/components';
 import { Tailwind } from '@react-email/tailwind';
 import * as React from 'react';
@@ -40,13 +41,13 @@ export default function PasswordResetEmail({ link, username }: { link: string; u
 							</a>
 						</div>
 						<footer className="mt-16 text-center text-gray-400">
-							© 2024 Your Company Name.
+							© 2024 Svelte-Stack
 							<br />
-							<a className="px-2 underline" href="#">
+							<a className="px-2 underline" href={`${process.env.BASE_URL}/imprint`}>
 								Imprint
 							</a>
 							|
-							<a className="px-2 underline" href="#">
+							<a className="px-2 underline" href={`${process.env.BASE_URL}/terms`}>
 								Terms
 							</a>
 						</footer>

@@ -3,11 +3,11 @@ import { Head, Html, Preview } from '@react-email/components';
 import { Tailwind } from '@react-email/tailwind';
 import * as React from 'react';
 
-export default function VerificationEmail({ link, username }: { link: string; username: string }) {
+export default function MagicLinkEmail({ link, username }: { link: string; username: string }) {
 	return (
 		<Html>
 			<Head />
-			<Preview>Verification E-Mail</Preview>
+			<Preview>Magic Link E-Mail</Preview>
 			<Tailwind>
 				<body>
 					<div className="prose prose-sm mx-auto p-4">
@@ -24,9 +24,11 @@ export default function VerificationEmail({ link, username }: { link: string; us
 								}}
 								width="120"
 							/>
-							<h1 className="text-2xl font-bold">Verify your email</h1>
+							<h1 className="text-2xl font-bold">Login with Magic Link</h1>
 							<p className="text-gray-400">Hello {username},</p>
-							<p className="text-gray-400">you're almost there. Your email needs to be verified.</p>
+							<p className="text-gray-400">
+								you're almost there. All you have to do is press the Magic Link.
+							</p>
 						</div>
 						<div className="mx-auto mt-16 block text-center">
 							<a href={link}>
@@ -34,7 +36,7 @@ export default function VerificationEmail({ link, username }: { link: string; us
 									className=" py-auto inline-flex h-12 flex-row items-center justify-center whitespace-nowrap rounded-md bg-black px-8 font-medium text-white ring-offset-background transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 									style={{ lineHeight: '3rem !important', fontSize: '1rem' }}
 								>
-									Verify Email
+									Magic Link
 								</p>
 							</a>
 						</div>

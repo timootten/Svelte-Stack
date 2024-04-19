@@ -7,28 +7,47 @@ import { fail } from '@sveltejs/kit';
 import { eq, ilike, or } from "drizzle-orm";
 import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
-import { github, lucia } from "$lib/server/auth/index.js";
+import { github, google, lucia } from "$lib/server/auth/index.js";
 import { redirect } from "sveltekit-flash-message/server";
 import { dev } from "$app/environment";
-import { generateState } from "arctic";
+import { generateCodeVerifier, generateState } from "arctic";
+import { z } from "zod";
 
 const loginSchema = userSchema.pick({
   email: true,
   password: true,
+}).extend({
+  "cf-turnstile-response": z.string(),
 });
 
 export async function load({ params }) {
   const form = await superValidate(zod(loginSchema));
 
   // Always return { form } in load functions
-  return { form };
+  return { form, CLOUDFLARE_CAPTCHA_SITE_KEY: process.env.CLOUDFLARE_CAPTCHA_SITE_KEY };
 }
 
 export const actions = {
-  login: async ({ request, cookies }) => {
+  login: async ({ request, cookies, fetch }) => {
     const form = await superValidate(request, zod(loginSchema));
-
+    console.log(JSON.stringify(form))
     if (!form.valid) return fail(400, { form });
+
+    const response = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          response: form.data["cf-turnstile-response"],
+          secret: process.env.CLOUDFLARE_CAPTCHA_SECRET_KEY,
+        }),
+      },
+    );
+
+    console.log("XXX", await response.json());
 
     const user = await db.query.userTable.findFirst({
       where: ilike(userTable.email, form.data.email)
@@ -59,6 +78,31 @@ export const actions = {
     });
 
     cookies.set('github_oauth_state', state, {
+      path: '/',
+      secure: !dev,
+      httpOnly: true,
+      maxAge: 60 * 10,
+      sameSite: 'lax'
+    });
+
+    return redirect(302, url.toString());
+  },
+  google: async ({ cookies }) => {
+    const state = generateState();
+    const codeVerifier = generateCodeVerifier();
+    const url = await google.createAuthorizationURL(state, codeVerifier, {
+      scopes: ["profile", "email"]
+    });
+
+    cookies.set('google_oauth_state', state, {
+      path: '/',
+      secure: !dev,
+      httpOnly: true,
+      maxAge: 60 * 10,
+      sameSite: 'lax'
+    });
+
+    cookies.set('google_oauth_verifier', codeVerifier, {
       path: '/',
       secure: !dev,
       httpOnly: true,

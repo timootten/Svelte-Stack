@@ -5,19 +5,10 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
-	import { goto } from '$app/navigation';
-	import { enhance } from '$app/forms';
 
 	export let data;
 
-	let githubLoading = false;
-
-	const {
-		form,
-		enhance: enhanceLogin,
-		errors,
-		delayed
-	} = superForm(data.form, {
+	const { form, enhance, errors, delayed } = superForm(data.form, {
 		delayMs: 0,
 		onUpdated({ form }) {
 			if (!form.message) return;
@@ -35,11 +26,11 @@
 
 <Card.Root class="mx-auto my-auto w-full max-w-sm">
 	<Card.Header>
-		<Card.Title class="mb-1 text-2xl">Forgot password</Card.Title>
-		<Card.Description>Enter your email below to reset your password</Card.Description>
+		<Card.Title class="mb-1 text-2xl">Magic Link</Card.Title>
+		<Card.Description>Enter your email below to get a magic link</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form class="grid gap-4" method="POST" use:enhanceLogin>
+		<form class="grid gap-4" method="POST" use:enhance>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
 				<Input
@@ -54,7 +45,7 @@
 				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
 			</div>
 
-			<Button type="submit" class="w-full" loading={$delayed}>Forgot password</Button>
+			<Button type="submit" class="w-full" loading={$delayed}>Magic Link</Button>
 		</form>
 		<div class="mt-4 text-center text-sm">
 			Don&apos;t have an account?

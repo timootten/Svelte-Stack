@@ -1,6 +1,7 @@
 import { boolean, date, numeric, pgEnum, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { generateId } from "lucia";
+import { z } from "zod";
 
 export const userTable = pgTable("user", {
   id: varchar('id', {
@@ -62,11 +63,10 @@ export const sessionTable = pgTable("session", {
 });
 
 
-export const userSchema = createInsertSchema(userTable, {
+export const userSchema = createSelectSchema(userTable, {
   email: (schema) => schema.email.email(),
   username: (schema) => schema.username.min(4).max(16),
-  password: (schema) => schema.password.min(8)
+  password: z.string().min(8).max(256),
 });
-
 
 export const tokenSchema = createInsertSchema(tokenTable);

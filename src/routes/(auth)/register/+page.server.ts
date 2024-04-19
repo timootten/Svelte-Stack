@@ -11,6 +11,7 @@ import { lucia } from "$lib/server/auth/index.js";
 import { redirect, setFlash } from "sveltekit-flash-message/server";
 import crypto from 'crypto';
 import { sendVerificationEmail } from "$lib/server/auth/utils.js";
+import { zxcvbn } from "@zxcvbn-ts/core";
 
 const registerSchema = userSchema.pick({
   username: true,
@@ -30,6 +31,8 @@ export const actions = {
     const form = await superValidate(request, zod(registerSchema));
 
     if (!form.valid) return fail(400, { form });
+
+    if (zxcvbn(form.data.password || "").score < 3) return setError(form, 'password', 'Your password is too weak.');
 
     const user = await db.query.userTable.findFirst({
       where: or(ilike(userTable.email, form.data.email), ilike(userTable.username, form.data.username))

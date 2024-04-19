@@ -10,10 +10,27 @@ import { sha256 } from "oslo/crypto";
 import { encodeHex } from "oslo/encoding";
 import type { z } from "zod";
 import PasswordResetEmail from './email/password-reset-email';
+import { zxcvbnOptions } from '@zxcvbn-ts/core'
+import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common'
+import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en'
+import * as zxcvbnDePackage from '@zxcvbn-ts/language-de'
+import MagicLinkEmail from './email/magic-link-email';
 
 const transporter = nodemailer.createTransport({
   url: process.env.SMTP_URL
 });
+
+const options = {
+  translations: zxcvbnEnPackage.translations,
+  graphs: zxcvbnCommonPackage.adjacencyGraphs,
+  dictionary: {
+    ...zxcvbnCommonPackage.dictionary,
+    ...zxcvbnEnPackage.dictionary,
+    ...zxcvbnDePackage.dictionary,
+  },
+}
+
+zxcvbnOptions.setOptions(options)
 
 const typeSchema = tokenSchema.pick({ type: true });
 type typeEnum = z.infer<typeof typeSchema>['type']
@@ -64,5 +81,22 @@ export async function sendPasswordResetEmail(userId: string, email: string, user
     to: email,
     subject: "Reset your Password",
     html: render(PasswordResetEmail({ link, username }))
+  });
+};
+
+export async function sendMagicLinkEmail(userId: string, email: string, username: string) {
+  const ENV_BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
+  const token = await createToken(userId, "magic_link");
+
+  const link = `${ENV_BASE_URL}/callback/magic?token=${token}`
+
+  const FROM = process.env.SMTP_FROM;
+
+  transporter.sendMail({
+    from: `Svelte-Stack <${FROM}>`,
+    to: email,
+    subject: "Magic Link",
+    html: render(MagicLinkEmail({ link, username }))
   });
 };

@@ -3,10 +3,13 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import { Progress } from '$lib/components/ui/progress';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import { zxcvbn } from '@zxcvbn-ts/core';
+	import { cn } from '$lib/utils.js';
 
 	export let data;
 
@@ -28,8 +31,13 @@
 			} else {
 				toast.error(form.message.text);
 			}
+		},
+		onError(event) {
+			toast.error(event.result.error.message);
 		}
 	});
+
+	$: passwordScore = zxcvbn($form.password || '').score;
 </script>
 
 <Card.Root class="mx-auto my-auto w-full max-w-sm">
@@ -122,6 +130,25 @@
 					type="password"
 					autocomplete="password"
 					required
+				/>
+				<Progress
+					value={passwordScore * 25}
+					text={passwordScore === 0
+						? 'Very weak'
+						: passwordScore === 1
+							? 'Weak'
+							: passwordScore === 2
+								? 'Medium'
+								: passwordScore === 3
+									? 'Strong'
+									: 'Very strong'}
+					class="h-7 font-bold"
+					classLoader={cn('bg-red-500', null, {
+						'bg-red-500': passwordScore === 1,
+						'bg-yellow-500': passwordScore === 2,
+						'bg-green-500': passwordScore === 3,
+						'bg-emerald-800': passwordScore === 4
+					})}
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>

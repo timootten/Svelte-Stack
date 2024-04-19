@@ -24,6 +24,9 @@
 			} else {
 				toast.error(form.message.text);
 			}
+		},
+		onError(event) {
+			toast.error(event.result.error.message);
 		}
 	});
 </script>

@@ -7,6 +7,7 @@
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import { Turnstile } from 'svelte-turnstile';
 
 	export let data;
 
@@ -28,10 +29,16 @@
 			} else {
 				toast.error(form.message.text);
 			}
+		},
+		onError(event) {
+			toast.error(event.result.error.message);
 		}
 	});
 </script>
 
+<svelte:head>
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</svelte:head>
 <Card.Root class="mx-auto my-auto w-full max-w-sm">
 	<Card.Header>
 		<Card.Title class="mb-1 text-2xl">Login</Card.Title>
@@ -117,6 +124,9 @@
 					required
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
+			</div>
+			<div hidden>
+				<Turnstile siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY || ''} appearance="interaction-only" />
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Login</Button>
 			<Button variant="outline" class="w-full" href="/magic-link">Login with Magic Link</Button>

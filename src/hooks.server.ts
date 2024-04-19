@@ -1,7 +1,25 @@
 import { lucia } from '$lib/server/auth';
 import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
+import { RateLimiter, RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
+
+const postLimier = new RetryAfterRateLimiter({
+  IP: [15, "30s"],
+  IPUA: [10, "15s"],
+});
 
 export const handle: Handle = async ({ event, resolve }) => {
+  if (event.request.method === "POST") {
+    const status = await postLimier.check(event);
+    if (status.limited) {
+      let response = new Response(
+        JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+        {
+          status: 429,
+        }
+      );
+      return response;
+    }
+  }
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {
     event.locals.user = null;
