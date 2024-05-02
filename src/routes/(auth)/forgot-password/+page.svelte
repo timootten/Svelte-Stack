@@ -7,10 +7,11 @@
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import { Turnstile } from 'svelte-turnstile';
 
 	export let data;
 
-	let githubLoading = false;
+	let reset: () => void | undefined;
 
 	const {
 		form,
@@ -24,10 +25,12 @@
 			if (form.message.status === 'success') {
 				toast.success(form.message.text);
 			} else {
+				reset?.();
 				toast.error(form.message.text);
 			}
 		},
 		onError(event) {
+			reset?.();
 			toast.error(event.result.error.message);
 		}
 	});
@@ -53,7 +56,13 @@
 				/>
 				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
 			</div>
-
+			<div class="flex w-full content-center justify-center">
+				<Turnstile
+					bind:reset
+					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
+					appearance="interaction-only"
+				/>
+			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Forgot password</Button>
 		</form>
 		<div class="mt-4 text-center text-sm">

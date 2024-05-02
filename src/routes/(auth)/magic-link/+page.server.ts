@@ -11,10 +11,13 @@ import { github, lucia } from "$lib/server/auth/index.js";
 import { redirect, setFlash } from "sveltekit-flash-message/server";
 import { dev } from "$app/environment";
 import { generateState } from "arctic";
-import { sendMagicLinkEmail, sendPasswordResetEmail } from "$lib/server/auth/utils.js";
+import { sendMagicLinkEmail, sendPasswordResetEmail, validateToken } from "$lib/server/auth/utils.js";
+import { z } from "zod";
 
 const magicLinkSchema = userSchema.pick({
   email: true,
+}).extend({
+  "cf-turnstile-response": z.string(),
 });
 
 export async function load({ params }) {
@@ -29,6 +32,11 @@ export const actions = {
     const form = await superValidate(request, zod(magicLinkSchema));
 
     if (!form.valid) return fail(400, { form });
+
+    const { success, error } = await validateToken(form.data["cf-turnstile-response"]);
+
+    if (error)
+      return message(form, { status: "error", text: "Invalid Captcha, please wait a moment" }, { status: 401 });
 
     const user = await db.query.userTable.findFirst({
       where: ilike(userTable.email, form.data.email),

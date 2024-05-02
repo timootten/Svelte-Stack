@@ -13,6 +13,7 @@
 
 	let githubLoading = false;
 	let googleLoading = false;
+	let reset: () => void | undefined;
 
 	const {
 		form,
@@ -27,10 +28,12 @@
 				toast.success(form.message.text);
 				goto('/');
 			} else {
+				reset?.();
 				toast.error(form.message.text);
 			}
 		},
 		onError(event) {
+			reset?.();
 			toast.error(event.result.error.message);
 		}
 	});
@@ -125,8 +128,12 @@
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 			</div>
-			<div hidden>
-				<Turnstile siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY || ''} appearance="interaction-only" />
+			<div class="flex w-full content-center justify-center">
+				<Turnstile
+					bind:reset
+					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
+					appearance="interaction-only"
+				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Login</Button>
 			<Button variant="outline" class="w-full" href="/magic-link">Login with Magic Link</Button>

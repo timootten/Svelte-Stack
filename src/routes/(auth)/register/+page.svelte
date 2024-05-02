@@ -10,11 +10,13 @@
 	import { enhance } from '$app/forms';
 	import { zxcvbn } from '@zxcvbn-ts/core';
 	import { cn } from '$lib/utils.js';
+	import { Turnstile } from 'svelte-turnstile';
 
 	export let data;
 
 	let githubLoading = false;
 	let googleLoading = false;
+	let reset: () => void | undefined;
 
 	const {
 		form,
@@ -29,10 +31,12 @@
 				toast.success(form.message.text);
 				goto('/');
 			} else {
+				reset?.();
 				toast.error(form.message.text);
 			}
 		},
 		onError(event) {
+			reset?.();
 			toast.error(event.result.error.message);
 		}
 	});
@@ -123,6 +127,7 @@
 				<div class="flex items-center">
 					<Label for="password">Password</Label>
 				</div>
+
 				<Input
 					bind:value={$form.password}
 					name="password"
@@ -130,7 +135,7 @@
 					type="password"
 					autocomplete="password"
 					required
-				/>
+				/>{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 				<Progress
 					value={passwordScore * 25}
 					text={passwordScore === 0
@@ -150,7 +155,13 @@
 						'bg-emerald-800': passwordScore === 4
 					})}
 				/>
-				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
+			</div>
+			<div class="flex w-full content-center justify-center">
+				<Turnstile
+					bind:reset
+					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
+					appearance="interaction-only"
+				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Register</Button>
 			<Button variant="outline" class="w-full" href="/magic-link">Login with Magic Link</Button>

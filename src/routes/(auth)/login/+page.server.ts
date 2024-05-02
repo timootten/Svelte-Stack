@@ -12,6 +12,7 @@ import { redirect } from "sveltekit-flash-message/server";
 import { dev } from "$app/environment";
 import { generateCodeVerifier, generateState } from "arctic";
 import { z } from "zod";
+import { validateToken } from "$lib/server/auth/utils";
 
 const loginSchema = userSchema.pick({
   email: true,
@@ -24,30 +25,19 @@ export async function load({ params }) {
   const form = await superValidate(zod(loginSchema));
 
   // Always return { form } in load functions
-  return { form, CLOUDFLARE_CAPTCHA_SITE_KEY: process.env.CLOUDFLARE_CAPTCHA_SITE_KEY };
+  return { form };
 }
 
 export const actions = {
   login: async ({ request, cookies, fetch }) => {
     const form = await superValidate(request, zod(loginSchema));
-    console.log(JSON.stringify(form))
+
     if (!form.valid) return fail(400, { form });
 
-    const response = await fetch(
-      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          response: form.data["cf-turnstile-response"],
-          secret: process.env.CLOUDFLARE_CAPTCHA_SECRET_KEY,
-        }),
-      },
-    );
+    const { success, error } = await validateToken(form.data["cf-turnstile-response"]);
 
-    console.log("XXX", await response.json());
+    if (error)
+      return message(form, { status: "error", text: "Invalid Captcha, please wait a moment" }, { status: 401 });
 
     const user = await db.query.userTable.findFirst({
       where: ilike(userTable.email, form.data.email)

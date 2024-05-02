@@ -10,13 +10,16 @@ import { Argon2id } from "oslo/password";
 import { lucia } from "$lib/server/auth/index.js";
 import { redirect, setFlash } from "sveltekit-flash-message/server";
 import crypto from 'crypto';
-import { sendVerificationEmail } from "$lib/server/auth/utils.js";
+import { sendVerificationEmail, validateToken } from "$lib/server/auth/utils.js";
 import { zxcvbn } from "@zxcvbn-ts/core";
+import { z } from "zod";
 
 const registerSchema = userSchema.pick({
   username: true,
   email: true,
   password: true,
+}).extend({
+  "cf-turnstile-response": z.string(),
 });
 
 export async function load({ params }) {
@@ -33,6 +36,11 @@ export const actions = {
     if (!form.valid) return fail(400, { form });
 
     if (zxcvbn(form.data.password || "").score < 3) return setError(form, 'password', 'Your password is too weak.');
+
+    const { success, error } = await validateToken(form.data["cf-turnstile-response"]);
+
+    if (error)
+      return message(form, { status: "error", text: "Invalid Captcha, please wait a moment" }, { status: 401 });
 
     const user = await db.query.userTable.findFirst({
       where: or(ilike(userTable.email, form.data.email), ilike(userTable.username, form.data.username))
