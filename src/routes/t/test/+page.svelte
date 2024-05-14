@@ -2,7 +2,11 @@
 	export let data;
 </script>
 
-Users: <br />
+<a href="/t/test">Test</a>
+<a href="/t/test2">Test2</a>
+<br />
+<h1>Test</h1>
+Users:<br />
 {#each data.users as user}
 	{user.id} | {user.email} - {user.balance} €<br />
 {/each}

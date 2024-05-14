@@ -7,6 +7,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const sleep = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
+
 type FlyAndScaleParams = {
   y?: number;
   x?: number;

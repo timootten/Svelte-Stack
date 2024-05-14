@@ -13,6 +13,7 @@ import { dev } from "$app/environment";
 import { generateCodeVerifier, generateState } from "arctic";
 import { z } from "zod";
 import { validateToken } from "$lib/server/auth/utils";
+import { sleep } from "$lib/utils.js";
 
 const loginSchema = userSchema.pick({
   email: true,
@@ -24,6 +25,7 @@ const loginSchema = userSchema.pick({
 export async function load({ params }) {
   const form = await superValidate(zod(loginSchema));
 
+  await sleep(5000);
   // Always return { form } in load functions
   return { form };
 }
