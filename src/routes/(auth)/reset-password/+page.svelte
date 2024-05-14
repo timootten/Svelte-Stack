@@ -6,8 +6,12 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
+	import { mode } from 'mode-watcher';
+	import { Turnstile } from 'svelte-turnstile';
 
 	export let data;
+
+	let reset: () => void | undefined;
 
 	const {
 		form,
@@ -22,10 +26,12 @@
 				toast.success(form.message.text);
 				goto('/');
 			} else {
+				reset?.();
 				toast.error(form.message.text);
 			}
 		},
 		onError(event) {
+			reset?.();
 			toast.error(event.result.error.message);
 		}
 	});
@@ -51,6 +57,14 @@
 					required
 				/>
 				{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
+			</div>
+			<div class="flex w-full content-center justify-center">
+				<Turnstile
+					bind:reset
+					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
+					appearance="interaction-only"
+					theme={$mode}
+				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Change Password</Button>
 		</form>

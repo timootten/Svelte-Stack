@@ -5,9 +5,8 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
-	import { goto } from '$app/navigation';
-	import { enhance } from '$app/forms';
 	import { Turnstile } from 'svelte-turnstile';
+	import { mode } from 'mode-watcher';
 
 	export let data;
 
@@ -61,6 +60,7 @@
 					bind:reset
 					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
 					appearance="interaction-only"
+					theme={$mode}
 				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Forgot password</Button>

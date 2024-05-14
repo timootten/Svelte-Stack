@@ -44,7 +44,7 @@
 	/>
 </svelte:head>
 
-<ModeWatcher />
+<ModeWatcher defaultMode={'dark'} />
 <Toaster richColors position="top-right" />
 
 <div class="relative flex min-h-screen flex-col bg-background" id="page">

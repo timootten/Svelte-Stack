@@ -1,22 +1,22 @@
 import { db } from "$lib/server/db";
 import { tokenTable, userSchema, userTable } from "$lib/server/db/schema";
-import { setError, superValidate } from "sveltekit-superforms";
+import { message, superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
-import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { and, eq, ilike, or } from "drizzle-orm";
-import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
-import { github, lucia } from "$lib/server/auth/index.js";
+import { lucia } from "$lib/server/auth/index.js";
 import { redirect, setFlash } from "sveltekit-flash-message/server";
-import { dev } from "$app/environment";
-import { generateState } from "arctic";
 import { encodeHex } from "oslo/encoding";
 import { sha256 } from "oslo/crypto";
 import { isWithinExpirationDate } from "oslo";
+import { z } from "zod";
+import { validateToken } from "$lib/server/auth/utils.js";
 
 const resetPasswordSchema = userSchema.pick({
   password: true,
+}).extend({
+  "cf-turnstile-response": z.string(),
 });
 
 export async function load({ url, cookies }) {
@@ -52,8 +52,13 @@ export const actions = {
 
 
     if (!token) {
-      redirect("/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
+      redirect("/forgot-password", { status: "error", text: "Invalid token." }, cookies);
     }
+
+    const { success, error } = await validateToken(form.data["cf-turnstile-response"]);
+
+    if (error)
+      return message(form, { status: "error", text: "Invalid Captcha, please wait a moment" }, { status: 401 });
 
     const tokenHash = encodeHex(await sha256(new TextEncoder().encode(token)));
     const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'password_reset'))))[0];
