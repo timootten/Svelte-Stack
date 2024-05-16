@@ -5,7 +5,6 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { eq, ilike, or } from "drizzle-orm";
-import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 import { github, google, lucia } from "$lib/server/auth/index.js";
 import { redirect } from "sveltekit-flash-message/server";
@@ -13,7 +12,6 @@ import { dev } from "$app/environment";
 import { generateCodeVerifier, generateState } from "arctic";
 import { z } from "zod";
 import { validateToken } from "$lib/server/auth/utils";
-import { sleep } from "$lib/utils.js";
 
 const loginSchema = userSchema.pick({
   email: true,
@@ -25,7 +23,6 @@ const loginSchema = userSchema.pick({
 export async function load({ params }) {
   const form = await superValidate(zod(loginSchema));
 
-  await sleep(5000);
   // Always return { form } in load functions
   return { form };
 }
@@ -60,7 +57,7 @@ export const actions = {
       ...sessionCookie.attributes
     });
 
-    redirect("/", { status: "success", text: "You successfully logged in." }, cookies);
+    redirect("/dashboard", { status: "success", text: "You successfully logged in." }, cookies);
     //return message(form, { status: "success", text: "You successfully logged in." });
   },
   github: async ({ cookies }) => {

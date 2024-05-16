@@ -25,18 +25,18 @@ export async function load({ url, cookies }) {
   const token = url.searchParams.get('token');
 
   if (!token) {
-    redirect("/login", { status: "error", text: "Invalid token." }, cookies);
+    redirect("/auth/login", { status: "error", text: "Invalid token." }, cookies);
   }
 
   const tokenHash = encodeHex(await sha256(new TextEncoder().encode(token)));
   const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'password_reset'))))[0];
 
   if (!databaseToken) {
-    redirect("/login", { status: "error", text: "Invalid token." }, cookies);
+    redirect("/auth/login", { status: "error", text: "Invalid token." }, cookies);
   }
 
   if (!isWithinExpirationDate(databaseToken.expiresAt)) {
-    redirect("/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
+    redirect("/auth/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
   }
   // Always return { form } in load functions
   return { form };
@@ -52,7 +52,7 @@ export const actions = {
 
 
     if (!token) {
-      redirect("/forgot-password", { status: "error", text: "Invalid token." }, cookies);
+      redirect("/auth/forgot-password", { status: "error", text: "Invalid token." }, cookies);
     }
 
     const { success, error } = await validateToken(form.data["cf-turnstile-response"]);
@@ -64,11 +64,11 @@ export const actions = {
     const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'password_reset'))))[0];
 
     if (!databaseToken) {
-      redirect("/login", { status: "error", text: "Invalid token." }, cookies);
+      redirect("/auth/login", { status: "error", text: "Invalid token." }, cookies);
     }
 
     if (!isWithinExpirationDate(databaseToken.expiresAt)) {
-      redirect("/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
+      redirect("/auth/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
     }
 
     await db.transaction(async (tx) => {
@@ -89,6 +89,6 @@ export const actions = {
       ...sessionCookie.attributes
     });
 
-    redirect("/", { status: "success", text: "You successfully changed your password." }, cookies);
+    redirect("/dashboard", { status: "success", text: "You successfully changed your password." }, cookies);
   },
 };

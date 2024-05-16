@@ -9,7 +9,7 @@
 <div class="flex justify-between gap-x-2">
 	<form
 		class="w-full"
-		action="/login?/github"
+		action="/auth/login?/github"
 		method="POST"
 		use:enhance={() => {
 			githubLoading = true;
@@ -35,7 +35,7 @@
 	</form>
 	<form
 		class="w-full"
-		action="/login?/google"
+		action="/auth/login?/google"
 		method="POST"
 		use:enhance={() => {
 			googleLoading = true;

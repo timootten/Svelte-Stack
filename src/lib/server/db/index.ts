@@ -1,8 +1,48 @@
-import 'dotenv/config'
-import postgres from 'postgres';
+import 'dotenv/config';
 import * as schema from './schema';
-import { drizzle } from "drizzle-orm/postgres-js";
+import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
+import pg from "pg";
 
-const queryClient = postgres(process.env.DATABASE_URL as string);
+let isConnected = false;
+let connecting = false;
+let db: NodePgDatabase<typeof schema>;
 
-export const db = drizzle(queryClient, { schema });
+const createClient = () => {
+  return new pg.Client({
+    connectionString: process.env.DATABASE_URL,
+    connectionTimeoutMillis: 5000
+  });
+};
+
+const connect = async () => {
+  if (connecting) return;
+  connecting = true;
+
+  const client = createClient();
+
+  client.on('error', (error) => {
+    isConnected = false;
+    console.log("[PostgreSQL] Connection Error", error);
+    if (!connecting) {
+      setTimeout(connect, 5000);
+    }
+  });
+
+  console.log("[PostgreSQL] Connecting to Database");
+  try {
+    await client.connect();
+    isConnected = true;
+    console.log("[PostgreSQL] Connected to Database");
+    db = drizzle(client, { schema });
+  } catch (error) {
+    isConnected = false;
+    console.log("[PostgreSQL] Connection Error", error);
+    setTimeout(connect, 5000);
+  } finally {
+    connecting = false;
+  }
+};
+
+await connect();
+
+export { db, isConnected };

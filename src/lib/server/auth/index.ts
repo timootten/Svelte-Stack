@@ -7,7 +7,7 @@ import { GitHub, Google } from "arctic";
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable);
 export const github = new GitHub(process.env.GITHUB_CLIENT_ID as string, process.env.GITHUB_CLIENT_SECRET as string);
-export const google = new Google(process.env.GOOGLE_CLIENT_ID as string, process.env.GOOGLE_CLIENT_SECRET as string, `${process.env.BASE_URL}/callback/google`);
+export const google = new Google(process.env.GOOGLE_CLIENT_ID as string, process.env.GOOGLE_CLIENT_SECRET as string, `${process.env.BASE_URL}/auth/callback/google`);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {

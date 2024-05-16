@@ -120,11 +120,12 @@
 				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Register</Button>
-			<Button variant="outline" class="w-full" href="/magic-link">Login with Magic Link</Button>
+			<Button variant="outline" class="w-full" href="/auth/magic-link">Login with Magic Link</Button
+			>
 		</form>
 		<div class="mt-4 text-center text-sm">
 			You have an account?
-			<a href="/login" class="underline">Login</a>
+			<a href="/auth/login" class="underline">Login</a>
 		</div>
 	</Card.Content>
 </Card.Root>

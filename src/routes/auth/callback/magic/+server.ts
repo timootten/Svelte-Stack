@@ -19,39 +19,34 @@ export async function GET({ url, cookies, locals }) {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/'
+        Location: '/dashboard'
       }
     });
   }
 
   const tokenHash = encodeHex(await sha256(new TextEncoder().encode(token)));
-  const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'email_verification'))))[0];
+  const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, "magic_link"))))[0];
   if (!databaseToken) {
     setFlash({ status: "error", text: "Invalid token." }, cookies)
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/'
+        Location: '/dashboard'
       }
     });
   }
 
   if (!isWithinExpirationDate(databaseToken.expiresAt)) {
-    const user = (await db.select().from(userTable).where(eq(userTable.id, databaseToken.userId)))[0];
-    sendVerificationEmail(user.id, user.email, user.username);
-    setFlash({ status: "error", text: "Your token is expired. Sending a new one..." }, cookies)
+    setFlash({ status: "error", text: "Your token is expired." }, cookies)
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/'
+        Location: '/dashboard'
       }
     });
   }
 
-  await db.transaction(async (tx) => {
-    await tx.delete(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'email_verification')));
-    await tx.update(userTable).set({ emailVerified: true }).where(eq(userTable.id, databaseToken.userId));
-  });
+  await db.delete(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, "magic_link")));
 
   const user = (await db.select().from(userTable).where(eq(userTable.id, databaseToken.userId)))[0];
   if (!locals.user) {
@@ -63,11 +58,11 @@ export async function GET({ url, cookies, locals }) {
     });
   };
 
-  setFlash({ status: "success", text: "You successfully verified your E-Mail." }, cookies)
+  setFlash({ status: "success", text: "You successfully logged in." }, cookies)
   return new Response(null, {
     status: 302,
     headers: {
-      Location: '/login'
+      Location: '/auth/login'
     }
   });
 }

@@ -1,15 +1,21 @@
 import { lucia } from '$lib/server/auth';
-import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
+import { isConnected } from '$lib/server/db';
+import { error, redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 import { RateLimiter, RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
 
-const postLimier = new RetryAfterRateLimiter({
+const postLimiter = new RetryAfterRateLimiter({
   IP: [15, "30s"],
   IPUA: [10, "15s"],
 });
 
+const getLimiter = new RetryAfterRateLimiter({
+  IP: [30, "30s"],
+  IPUA: [20, "15s"],
+});
+
 export const handle: Handle = async ({ event, resolve }) => {
   if (event.request.method === "POST") {
-    const status = await postLimier.check(event);
+    const status = await postLimiter.check(event);
     if (status.limited) {
       let response = new Response(
         JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
@@ -20,6 +26,21 @@ export const handle: Handle = async ({ event, resolve }) => {
       return response;
     }
   }
+  if (event.request.method === "GET") {
+    const status = await getLimiter.check(event);
+    if (status.limited) {
+      let response = new Response(
+        JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+        {
+          status: 429,
+        }
+      );
+      return response;
+    }
+  }
+  if (!isConnected)
+    error(500, "Database connection error")
+
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {
     event.locals.user = null;
@@ -52,18 +73,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 
 const checkValidPath = async (event: RequestEvent<Partial<Record<string, string>>, string | null>) => {
-  const path = extractRouteParam(event.route.id)?.toLowerCase();
+  const path = extractRouteParam(event.route.id);
   const exactPath = event.route.id?.toLowerCase();
   if (exactPath?.includes("email")) return;
   switch (path) {
     case 'auth':
       if (event.locals.user) {
-        return redirect(302, "/");
+        return redirect(302, "/dashboard");
       }
       break;
     case 'dashboard':
       if (!event.locals.user) {
-        return redirect(302, "/login");
+        return redirect(302, "/auth/login");
       }
       break;
     default:
@@ -72,6 +93,5 @@ const checkValidPath = async (event: RequestEvent<Partial<Record<string, string>
 }
 
 const extractRouteParam = (path: string | null) => {
-  const match = path?.match(/\((\w+)\)/);
-  return match ? match[1] : undefined;
+  return path?.replace(/[()]/g, '').split("/")[1].toLowerCase() ?? undefined;
 };

@@ -13,7 +13,7 @@ export const actions = {
       path: ".",
       ...sessionCookie.attributes
     });
-    redirect("/login", {
+    redirect("/auth/login", {
       status: "success", text: "You have successfully logged out."
     }, event);
   }

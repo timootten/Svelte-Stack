@@ -10,7 +10,6 @@
 	$: toast.success('Welcome to Svelte-Stack!');
 
 	$: if ($flash) {
-		console.log($flash);
 		const text = $flash.text;
 		if ($flash.status === 'success') {
 			setTimeout(() => {
@@ -32,6 +31,10 @@
 			pageName = 'Dashboard';
 		} else if ($page.route.id?.includes('auth')) {
 			pageName = 'Auth';
+		} else if ($page.route.id?.includes('landing')) {
+			pageName = 'Landing';
+		} else {
+			pageName = '404';
 		}
 	}
 </script>

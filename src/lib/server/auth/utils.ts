@@ -55,7 +55,7 @@ export async function sendVerificationEmail(userId: string, email: string, usern
 
   const token = await createToken(userId, "email_verification");
 
-  const link = `${ENV_BASE_URL}/callback/email?token=${token}`
+  const link = `${ENV_BASE_URL}/auth/callback/email?token=${token}`
 
   const FROM = process.env.SMTP_FROM;
 
@@ -72,7 +72,7 @@ export async function sendPasswordResetEmail(userId: string, email: string, user
 
   const token = await createToken(userId, "password_reset");
 
-  const link = `${ENV_BASE_URL}/reset-password?token=${token}`
+  const link = `${ENV_BASE_URL}/auth/reset-password?token=${token}`
 
   const FROM = process.env.SMTP_FROM;
 
@@ -89,7 +89,7 @@ export async function sendMagicLinkEmail(userId: string, email: string, username
 
   const token = await createToken(userId, "magic_link");
 
-  const link = `${ENV_BASE_URL}/callback/magic?token=${token}`
+  const link = `${ENV_BASE_URL}/auth/callback/magic?token=${token}`
 
   const FROM = process.env.SMTP_FROM;
 

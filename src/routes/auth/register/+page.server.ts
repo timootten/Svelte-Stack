@@ -73,6 +73,6 @@ export const actions = {
 
     sendVerificationEmail(userId, form.data.email, form.data.username);
 
-    redirect("/", { status: "success", text: "You successfully registered. You got an E-Mail, please verify your account." }, cookies);
+    redirect("/dashboard", { status: "success", text: "You successfully registered. You got an E-Mail, please verify your account." }, cookies);
   }
 };

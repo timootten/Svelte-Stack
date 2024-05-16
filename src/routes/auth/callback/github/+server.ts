@@ -1,4 +1,4 @@
-import { google, lucia } from '$lib/server/auth/index.js';
+import { github, lucia } from '$lib/server/auth/index.js';
 import { db } from '$lib/server/db';
 import { oAuthAccountTable, userTable } from '$lib/server/db/schema.js';
 import { eq, ilike } from 'drizzle-orm';
@@ -10,10 +10,8 @@ export async function GET({ url, cookies }) {
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
 
-  const storedState = cookies.get('google_oauth_state') ?? null;
-  const storedCodeVerifier = cookies.get('google_oauth_verifier') ?? null;
-
-  if (!code || !state || !storedCodeVerifier || !storedState || state !== storedState) {
+  const storedState = cookies.get('github_oauth_state') ?? null;
+  if (!code || !state || !storedState || state !== storedState) {
     return new Response(null, {
       status: 400
     });
@@ -21,21 +19,40 @@ export async function GET({ url, cookies }) {
 
   try {
 
-    const tokens = await google.validateAuthorizationCode(code, storedCodeVerifier);
+    const tokens = await github.validateAuthorizationCode(code);
 
-    const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
+    const userResponse = await fetch("https://api.github.com/user", {
+      headers: {
+        Authorization: `Bearer ${tokens.accessToken}`,
+        "User-Agent": "my-app", // GitHub requires a User-Agent header
+      }
+    });
+    const githubUser = await userResponse.json();
+
+    const emailsResponse = await fetch("https://api.github.com/user/emails", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`
       }
     });
-    const googleUser = await response.json();
+    const emails = await emailsResponse.json();
 
-    if (!googleUser.email_verified) {
+    const primaryEmail = (emails.find((email: any) => email.primary) ?? null);
+
+    if (!primaryEmail) {
+      setFlash({ status: "error", text: "No primary email address" }, cookies)
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: '/auth/login'
+        }
+      });
+    }
+    if (!primaryEmail.verified) {
       setFlash({ status: "error", text: "Unverified email" }, cookies)
       return new Response(null, {
         status: 302,
         headers: {
-          Location: '/login'
+          Location: '/auth/login'
         }
       });
     }
@@ -43,34 +60,34 @@ export async function GET({ url, cookies }) {
     const currentUser = await db
       .select()
       .from(userTable)
-      .where(ilike(userTable.email, googleUser.email))
+      .where(ilike(userTable.email, primaryEmail.email))
       .leftJoin(oAuthAccountTable, eq(userTable.id, oAuthAccountTable.userId))
 
     const existingUser = currentUser[0]?.user;
 
     let userId = existingUser?.id as string;
-    const hasGoogleAccount = !!currentUser.find(row => row?.oauth_account_table?.providerId === "Google")
+    const hasGitHubAccount = !!currentUser.find(row => row?.oauth_account_table?.providerId === "GitHub")
     // make this a boolean
 
-    if (existingUser && !hasGoogleAccount) {
+    if (existingUser && !hasGitHubAccount) {
       await db.insert(oAuthAccountTable).values({
-        providerId: "Google",
-        providerUserId: googleUser.sub,
+        providerId: "GitHub",
+        providerUserId: githubUser.id,
         userId: existingUser.id
       });
-    } else if (!hasGoogleAccount) {
+    } else if (!hasGitHubAccount) {
       userId = generateId(15);
       await db.transaction(async (tx) => {
         await tx.insert(userTable).values({
           id: userId,
-          email: googleUser.email,
-          username: googleUser.name,
+          email: primaryEmail.email,
+          username: githubUser.login,
           emailVerified: true,
-          avatarUrl: googleUser.picture
+          avatarUrl: githubUser.avatar_url
         });
         await tx.insert(oAuthAccountTable).values({
-          providerId: "Google",
-          providerUserId: googleUser.sub,
+          providerId: "GitHub",
+          providerUserId: githubUser.id,
           userId: userId
         });
       });
@@ -81,7 +98,7 @@ export async function GET({ url, cookies }) {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: '/login'
+          Location: '/auth/login'
         }
       });
     }
@@ -97,7 +114,7 @@ export async function GET({ url, cookies }) {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/'
+        Location: '/dashboard'
       }
     });
   } catch (error: any) {
@@ -106,7 +123,7 @@ export async function GET({ url, cookies }) {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/login'
+        Location: '/auth/login'
       }
     });
   }
