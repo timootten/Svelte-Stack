@@ -2,7 +2,7 @@ import { lucia } from '$lib/server/auth';
 import { isConnected } from '$lib/server/db';
 import { error, redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
-import type { WebSocketHandler } from "svelte-adapter-bun";
+import type { ServerWebSocket, WebSocketHandler } from "svelte-adapter-bun";
 import cookie from 'cookie';
 
 const postLimiter = new RetryAfterRateLimiter({
@@ -103,11 +103,21 @@ const extractRouteParam = (path: string | null) => {
 };
 
 
+const clients: ServerWebSocket<{
+  auth_session: string;
+}>[] = [];
+
 export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
   open(ws) {
+    clients.push(ws);
     ws.send("test");
     ws.subscribe("broadcast")
     console.log("Client connected");
+  },
+  close(ws, code, message) {
+    // add remove clients
+    console.log("Client disconnected");
+    clients.splice(clients.indexOf(ws), 1);
   },
   upgrade(request, upgrade) {
     const url = new URL(request.url);
@@ -134,6 +144,5 @@ export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
     const x = ws.publish("broadcast", "Hello World");
     console.log("XX", x)
     ws.send(message);
-
   },
 };

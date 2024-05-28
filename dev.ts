@@ -3,7 +3,7 @@ import { join } from 'path';
 import { EventEmitter } from 'events';
 import { IncomingMessage, ServerResponse } from 'http';
 import type { Server, WebSocketHandler } from 'bun';
-import { handleWebsocket } from './src/hooks.server';
+
 const fakeServer = new EventEmitter();
 
 const vite = await createServer({
