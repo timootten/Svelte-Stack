@@ -14,29 +14,33 @@ const getLimiter = new RetryAfterRateLimiter({
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
-  if (event.request.method === "POST") {
-    const status = await postLimiter.check(event);
-    if (status.limited) {
-      let response = new Response(
-        JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
-        {
-          status: 429,
-        }
-      );
-      return response;
+  try {
+    if (event.request.method === "POST") {
+      const status = await postLimiter.check(event);
+      if (status.limited) {
+        let response = new Response(
+          JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+          {
+            status: 429,
+          }
+        );
+        return response;
+      }
     }
-  }
-  if (event.request.method === "GET") {
-    const status = await getLimiter.check(event);
-    if (status.limited) {
-      let response = new Response(
-        JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
-        {
-          status: 429,
-        }
-      );
-      return response;
+    if (event.request.method === "GET") {
+      const status = await getLimiter.check(event);
+      if (status.limited) {
+        let response = new Response(
+          JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+          {
+            status: 429,
+          }
+        );
+        return response;
+      }
     }
+  } catch (error) {
+    // event.getClientAdress during prerender is not accessable
   }
   if (!isConnected)
     error(500, "Database connection error")

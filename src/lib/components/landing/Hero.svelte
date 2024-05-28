@@ -26,16 +26,16 @@
 			for
 			<h2 class="inline">
 				<span
-					class="inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] bg-clip-text text-transparent"
+					class="inline bg-gradient-to-r from-[#e29f48] via-[#eec56c] to-[#ec8b0c] bg-clip-text text-transparent"
 				>
-					React
+					Svelte
 				</span>
 				developers
 			</h2>
 		</main>
 
 		<p class="mx-auto text-xl text-muted-foreground md:w-10/12 lg:mx-0">
-			Build your React landing page effortlessly with the required sections to your project.
+			Build your Svelte landing page effortlessly with the required sections to your project.
 		</p>
 
 		<div class="space-y-4 md:space-x-4 md:space-y-0">
@@ -43,12 +43,12 @@
 
 			<Button
 				rel="noreferrer noopener"
-				href="https://github.com/leoMirandaa/shadcn-landing-page.git"
+				href="https://github.com/timootten/Svelte-Stack"
 				target="_blank"
 				class="w-full md:w-1/3"
 				variant="outline"
 			>
-				Github Repository
+				GitHub Repository
 			</Button>
 		</div>
 	</div>

@@ -48,7 +48,7 @@
 		<Card.Description class="mb-4"
 			>Or enter your email below to login to your account</Card.Description
 		>
-		<form class="grid gap-4" action="?/auth/login" method="POST" use:enhanceLogin>
+		<form class="grid gap-4" action="?/login" method="POST" use:enhanceLogin>
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
 				<Input

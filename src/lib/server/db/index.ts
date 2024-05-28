@@ -10,9 +10,12 @@ let db: NodePgDatabase<typeof schema>;
 const createClient = () => {
   return new pg.Client({
     connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 5000
+    connectionTimeoutMillis: 5000,
+    statement_timeout: 5000,
+    query_timeout: 5000,
   });
 };
+
 
 const connect = async () => {
   if (connecting) return;
@@ -44,5 +47,4 @@ const connect = async () => {
 };
 
 await connect();
-
 export { db, isConnected };

@@ -40,7 +40,7 @@ export const actions = {
 
     const user = await db.query.userTable.findFirst({
       where: ilike(userTable.email, form.data.email)
-    })
+    });
 
     if (!user || user.password == null) return message(form, { status: "error", text: "Incorrect email or password." }, { status: 401 });
 

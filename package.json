@@ -47,6 +47,7 @@
     "@zxcvbn-ts/language-en": "^3.0.2",
     "arctic": "^1.5.0",
     "bits-ui": "^0.21.7",
+    "bun": "^1.1.10",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.7",
@@ -69,6 +70,7 @@
   },
   "trustedDependencies": [
     "@sveltejs/kit",
+    "bun",
     "svelte-preprocess"
   ]
 }
