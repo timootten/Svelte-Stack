@@ -2,6 +2,7 @@ import { lucia } from '$lib/server/auth';
 import { isConnected } from '$lib/server/db';
 import { error, redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 import { RateLimiter, RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
+import type { WebSocketHandler } from "svelte-adapter-bun";
 
 const postLimiter = new RetryAfterRateLimiter({
   IP: [15, "30s"],
@@ -98,4 +99,22 @@ const checkValidPath = async (event: RequestEvent<Partial<Record<string, string>
 
 const extractRouteParam = (path: string | null) => {
   return path?.replace(/[()]/g, '').split("/")[1].toLowerCase() ?? undefined;
+};
+
+
+export const handleWebsocket: WebSocketHandler = {
+  open(ws) {
+    ws.send("test");
+    console.log("ws opened");
+  },
+  upgrade(request, upgrade) {
+    const url = request.url
+    console.log(url)
+    console.log(upgrade)
+    return upgrade(request);
+  },
+  message(ws, message) {
+    ws.send(message);
+    console.log("ws message", message);
+  },
 };
