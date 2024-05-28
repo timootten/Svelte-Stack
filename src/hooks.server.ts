@@ -1,8 +1,9 @@
 import { lucia } from '$lib/server/auth';
 import { isConnected } from '$lib/server/db';
 import { error, redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
-import { RateLimiter, RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
+import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
 import type { WebSocketHandler } from "svelte-adapter-bun";
+import cookie from 'cookie';
 
 const postLimiter = new RetryAfterRateLimiter({
   IP: [15, "30s"],
@@ -102,19 +103,37 @@ const extractRouteParam = (path: string | null) => {
 };
 
 
-export const handleWebsocket: WebSocketHandler = {
+export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
   open(ws) {
     ws.send("test");
-    console.log("ws opened");
+    ws.subscribe("broadcast")
+    console.log("Client connected");
   },
   upgrade(request, upgrade) {
-    const url = request.url
-    console.log(url)
-    console.log(upgrade)
-    return upgrade(request);
+    const url = new URL(request.url);
+    if (url.pathname !== "/ws") return false;
+
+    const cookies = request.headers.get('cookie') || '';
+    const parsedCookies = cookie.parse(cookies);
+
+    return upgrade(request, {
+      data: {
+        auth_session: parsedCookies?.auth_session
+      }
+    });
   },
-  message(ws, message) {
+  async message(ws, message) {
+    ws.subscribe("chat")
+    console.log(message)
+    if (message === "user") {
+      console.log(message)
+      const { session, user } = await lucia.validateSession(ws.data.auth_session);
+      ws.send(JSON.stringify(session));
+      ws.send(JSON.stringify(user));
+    }
+    const x = ws.publish("broadcast", "Hello World");
+    console.log("XX", x)
     ws.send(message);
-    console.log("ws message", message);
+
   },
 };

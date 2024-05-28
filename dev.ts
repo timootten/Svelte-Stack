@@ -1,10 +1,9 @@
-// dev.ts
-
 import { createServer } from 'vite';
 import { join } from 'path';
 import { EventEmitter } from 'events';
 import { IncomingMessage, ServerResponse } from 'http';
 import type { Server, WebSocketHandler } from 'bun';
+import { handleWebsocket } from './src/hooks.server';
 const fakeServer = new EventEmitter();
 
 const vite = await createServer({
@@ -27,8 +26,6 @@ let bunternal = (socket: any) => {
   }
 };
 
-
-
 const hooks = (await vite.ssrLoadModule('src/hooks.server.ts')) as any;
 
 Bun.serve({
@@ -43,6 +40,7 @@ Bun.serve({
     function raise(err: any) {
       if (pendingError) return;
       reject?.((pendingError = err));
+
     }
 
     function respond(res: Response) {
@@ -70,11 +68,8 @@ Bun.serve({
         return;
       }
       const hooks = (await vite.ssrLoadModule('src/hooks.server.ts')) as any;
-      /*if ('handleWebsocket' in hooks && hooks.handleWebsocket.upgrade(request, server?.upgrade)) {
-        return;
-      }*/
-      if ('handleWebsocket' in hooks) {
-        server.upgrade(request)
+      const upgradeMethod = server.upgrade.bind(server);
+      if ('handleWebsocket' in hooks && hooks.handleWebsocket.upgrade(request, upgradeMethod)) {
         return;
       }
     }
@@ -92,21 +87,27 @@ Bun.serve({
   // ex: server.upgrade(req, { data: { message(ws, msg) { ... } } });
   websocket: {
     open(ws) {
+      if (ws?.data?.open) return ws.data.open?.(ws);
       return hooks?.handleWebsocket?.open(ws);
     },
     message(ws, message) {
+      if (ws?.data?.message) return ws.data.message(ws, message);
       return hooks?.handleWebsocket?.message(ws, message);
     },
     drain(ws) {
+      if (ws?.data?.drain) return ws.data.drain?.(ws);
       return hooks?.handleWebsocket?.drain?.(ws);
     },
     close(ws, code, reason) {
+      if (ws?.data?.close) return ws.data.close?.(ws, code, reason);
       return hooks?.handleWebsocket?.drain?.(ws, code, reason);
     },
     ping(ws, buffer) {
+      if (ws?.data?.ping) return ws.data.ping?.(ws, buffer);
       return hooks?.handleWebsocket?.ping?.(ws, buffer);
     },
     pong(ws, buffer) {
+      if (ws?.data?.pong) return ws.data.pong?.(ws, buffer);
       return hooks?.handleWebsocket?.pong?.(ws, buffer);
     }
   } as WebSocketHandler<Pick<WebSocketHandler<any>, 'open' | 'message' | 'drain' | 'close' | 'ping' | 'pong'>>
