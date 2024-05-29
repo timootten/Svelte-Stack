@@ -15,18 +15,38 @@ const getLimiter = new RetryAfterRateLimiter({
   IPUA: [20, "15s"],
 });
 
+const pollingLimiter = new RetryAfterRateLimiter({
+  IP: [65, "30s"],
+  IPUA: [35, "15s"],
+});
+
+
 export const handle: Handle = async ({ event, resolve }) => {
   try {
+    const url = new URL(event.request.url)
     if (event.request.method === "POST") {
-      const status = await postLimiter.check(event);
-      if (status.limited) {
-        let response = new Response(
-          JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
-          {
-            status: 429,
-          }
-        );
-        return response;
+      if (/^\?\/[a-zA-Z0-9]*Polling$/.test(url.search)) {
+        const status = await pollingLimiter.check(event);
+        if (status.limited) {
+          let response = new Response(
+            JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+            {
+              status: 429,
+            }
+          );
+          return response;
+        }
+      } else {
+        const status = await postLimiter.check(event);
+        if (status.limited) {
+          let response = new Response(
+            JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+            {
+              status: 429,
+            }
+          );
+          return response;
+        }
       }
     }
     if (event.request.method === "GET") {
