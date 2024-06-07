@@ -6,14 +6,14 @@
 	export let data;
 	export let form;
 
-	const polling = usePolling<ReturnType<typeof actions.timePolling>>({
+	const polling = usePolling<typeof actions.timePolling>({
 		action: 'timePolling',
 		interval: 1000,
-		defaultValue: { time: 'Loading' }
+		defaultValue: { time: data.time }
 	});
 </script>
 
-<p>Data: {data.test}</p>
+<p>Data: {data.time}</p>
 <p>Time: {$polling.time}</p>
 <p>Time2: {form?.time2}</p>
 

@@ -2,8 +2,16 @@ import { deserialize } from "$app/forms";
 import { onMount } from "svelte"
 import { writable, type Writable } from "svelte/store";
 
-const usePolling = <T>({ action, interval, defaultValue }: { action: string, interval: number, defaultValue: Awaited<T> }): Writable<Awaited<T>> => {
-  const result = writable<Awaited<T>>(defaultValue);
+interface UsePollingOptions<T extends (...args: any) => Promise<any>> {
+  action: string;
+  interval: number;
+  defaultValue: Awaited<ReturnType<T>>;
+}
+
+const usePolling = <T extends (...args: any) => Promise<any>>(
+  { action, interval, defaultValue }: UsePollingOptions<T>
+): Writable<Awaited<ReturnType<T>>> => {
+  const result = writable<Awaited<ReturnType<T>>>(defaultValue);
   const poll = async () => {
     let formData = new FormData();
     let response = await fetch(`?/${action}`, { method: 'POST', body: formData });

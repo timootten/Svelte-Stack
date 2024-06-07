@@ -1,8 +1,9 @@
+import { sleep } from "$lib/utils";
 
 
 export async function load({ params }) {
 
-  return { test: "Load" }
+  return { time: new Date().toLocaleString('de-DE') }
 }
 
 export const actions = {

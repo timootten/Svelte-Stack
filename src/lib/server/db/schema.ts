@@ -1,4 +1,4 @@
-import { boolean, date, numeric, pgEnum, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, numeric, pgEnum, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { generateId } from "lucia";
 import { z } from "zod";

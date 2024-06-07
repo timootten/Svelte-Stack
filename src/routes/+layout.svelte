@@ -7,8 +7,6 @@
 
 	const flash = getFlash(page);
 
-	$: toast.success('Welcome to Svelte-Stack!');
-
 	$: if ($flash) {
 		const text = $flash.text;
 		if ($flash.status === 'success') {

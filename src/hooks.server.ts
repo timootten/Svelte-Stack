@@ -145,7 +145,7 @@ export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
 
     const cookies = request.headers.get('cookie') || '';
     const parsedCookies = cookie.parse(cookies);
-
+    console.log("XX", request.headers)
     return upgrade(request, {
       data: {
         auth_session: parsedCookies?.auth_session
