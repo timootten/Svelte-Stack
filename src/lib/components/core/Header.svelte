@@ -76,13 +76,15 @@
 			</Sheet.Trigger>
 			<Sheet.Content side="top" class="md:max-w-xs">
 				<nav class="grid gap-6 text-lg font-medium">
-					<a
-						href="##"
-						class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-					>
-						<Package2 class="h-5 w-5 transition-all group-hover:scale-110" />
-						<span class="sr-only">Acme Inc2</span>
-					</a>
+					<div class="flex flex-row items-center gap-5">
+						<a
+							href="##"
+							class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+						>
+							<img src="/favicon.png" alt="LOGO" class="h-8 w-8" />
+						</a>
+						<span>Svelte-Stack</span>
+					</div>
 					<a
 						href="##"
 						class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"

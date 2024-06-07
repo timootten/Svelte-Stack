@@ -7,13 +7,19 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
 	import HowItWorks from '$lib/components/landing/HowItWorks.svelte';
+	import Newsletter from '$lib/components/landing/Newsletter.svelte';
+	import Pricing from '$lib/components/landing/Pricing.svelte';
 	import Services from '$lib/components/landing/Services.svelte';
 	import Sponsors from '$lib/components/landing/Sponsors.svelte';
+	import Team from '$lib/components/landing/Team.svelte';
+	import FAQ from '$lib/components/landing/FAQ.svelte';
 
 	export let data;
 </script>
 
-<Header user={data.user} />
+<div class="fixed z-50 w-full bg-inherit">
+	<Header user={data.user} />
+</div>
 <Hero />
 <Sponsors />
 <About />
@@ -22,4 +28,8 @@
 <Services />
 <Concepts />
 <Discover />
+<Team />
+<Pricing />
+<Newsletter />
+<FAQ />
 <Footer />
