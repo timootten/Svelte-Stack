@@ -3,6 +3,7 @@
 	import Header from '$lib/components/core/Header.svelte';
 	import About from '$lib/components/landing/About.svelte';
 	import Concepts from '$lib/components/landing/Concepts.svelte';
+	import Discover from '$lib/components/landing/Discover.svelte';
 	import Features from '$lib/components/landing/Features.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
 	import HowItWorks from '$lib/components/landing/HowItWorks.svelte';
@@ -20,4 +21,5 @@
 <Features />
 <Services />
 <Concepts />
+<Discover />
 <Footer />

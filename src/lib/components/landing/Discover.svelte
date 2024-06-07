@@ -1,13 +1,7 @@
 <script>
 	// Import necessary Svelte components
-	import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar.svelte';
-	import {
-		Card,
-		CardContent,
-		CardDescription,
-		CardHeader,
-		CardTitle
-	} from '@/components/ui/card.svelte';
+	import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 	// Define the testimonial data
 	const testimonials = [
