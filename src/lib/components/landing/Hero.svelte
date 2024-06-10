@@ -1,4 +1,5 @@
 <script>
+	import { GitHub } from '../icons';
 	import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 	import { Badge } from '../ui/badge';
 	import { Button } from '../ui/button';
@@ -48,6 +49,7 @@
 				class="w-full md:w-1/3"
 				variant="outline"
 			>
+				<GitHub class="mr-2 h-4 w-4" />
 				GitHub Repository
 			</Button>
 		</div>

@@ -92,12 +92,12 @@
 						<Home class="h-5 w-5" />
 						Dashboard2
 					</a>
-					<a href="##" class="flex items-center gap-4 px-2.5 text-foreground">
+					<a href="/test" class="flex items-center gap-4 px-2.5 text-foreground">
 						<ShoppingCart class="h-5 w-5" />
 						Orders
 					</a>
 					<a
-						href="##"
+						href="/"
 						class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 					>
 						<Package class="h-5 w-5" />

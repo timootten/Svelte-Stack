@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Facebook, Instagram, Linkedin } from '../icons';
 	import { buttonVariants } from '../ui/button';
 	import {
 		Card,
@@ -8,9 +9,6 @@
 		CardHeader,
 		CardTitle
 	} from '../ui/card';
-	import Facebook from 'lucide-svelte/icons/facebook';
-	import Linkedin from 'lucide-svelte/icons/linkedin';
-	import Instagram from 'lucide-svelte/icons/instagram';
 
 	const icons: any = {
 		Facebook: Facebook,
