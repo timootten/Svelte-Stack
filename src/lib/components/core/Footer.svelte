@@ -11,10 +11,10 @@
 				class="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mb-0"
 			>
 				<li>
-					<a href="/imprint" class="me-4 hover:underline md:me-6">Imprint</a>
+					<a href="/rights/imprint" class="me-4 hover:underline md:me-6">Imprint</a>
 				</li>
 				<li>
-					<a href="/terms" class="hover:underline">Terms</a>
+					<a href="/rights/terms" class="hover:underline">Terms</a>
 				</li>
 			</ul>
 		</div>
