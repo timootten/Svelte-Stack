@@ -4,6 +4,7 @@
 	import { Toaster, toast } from 'svelte-sonner';
 	import { getFlash } from 'sveltekit-flash-message';
 	import { page } from '$app/stores';
+	import { onNavigate } from '$app/navigation';
 
 	const flash = getFlash(page);
 
@@ -35,6 +36,14 @@
 			pageName = '404';
 		}
 	}
+
+	onNavigate(() => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((fulfil) => {
+			document.startViewTransition(() =>  new Promise(fulfil));
+		});
+	});
 </script>
 
 <svelte:head>

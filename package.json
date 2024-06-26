@@ -40,6 +40,7 @@
     "@lucia-auth/adapter-drizzle": "^1.0.7",
     "@react-email/components": "^0.0.19",
     "@react-email/tailwind": "^0.0.18",
+    "@types/dom-view-transitions": "^1.0.4",
     "@zxcvbn-ts/core": "^3.0.4",
     "@zxcvbn-ts/language-common": "^3.0.4",
     "@zxcvbn-ts/language-de": "^3.0.2",

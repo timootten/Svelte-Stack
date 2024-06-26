@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Footer from '$lib/components/core/Footer.svelte';
 	import Header from '$lib/components/core/Header.svelte';
-	import ScrollToTop from '$lib/components/core/ScrollToTop.svelte';
+	import ScrollToTop from '$lib/components/landing/ScrollToTop.svelte';
 	import Menu from 'lucide-svelte/icons/menu';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
