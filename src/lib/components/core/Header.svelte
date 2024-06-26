@@ -9,6 +9,10 @@
 	import { toggleMode } from 'mode-watcher';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
+	import { cn } from '$lib/utils';
+	import { onMount } from 'svelte';
+	import { pushState } from '$app/navigation';
 
 	export let user: import('lucia').User | null;
 
@@ -18,6 +22,8 @@
 		{ href: '/#pricing', label: 'Pricing', icon: Package },
 		{ href: '/#faq', label: 'FAQ', icon: UsersRound }
 	];
+
+	$: activePath = $page.url.pathname + $page.url.hash;
 </script>
 
 <header class="z-50 w-full">
@@ -31,7 +37,11 @@
 				{#each navLinks as { href, label, icon }}
 					<a
 						{href}
-						class="flex items-center gap-2 text-foreground/60 transition-colors hover:text-foreground/80"
+						class={cn(
+							'flex items-center gap-2 text-foreground/60 transition-colors hover:text-foreground/80',
+							activePath === href ? 'underline' : ''
+						)}
+						style={activePath === href ? 'view-transition-name: header-navigator;' : ''}
 					>
 						{label}
 					</a>

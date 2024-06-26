@@ -40,10 +40,16 @@
 									{#each navItems as item (item.href)}
 										<a
 											href={item.href}
-											class={cn('flex items-center gap-3 rounded-lg px-3 py-2 transition-all', {
-												'bg-muted text-primary': activePath === item.href,
-												'text-muted-foreground hover:text-primary': activePath !== item.href
-											})}
+											class={cn(
+												'relative z-50 flex items-center gap-3 rounded-lg px-3 py-2 transition-all',
+												{
+													'bg-muted text-primary': activePath === item.href,
+													'text-muted-foreground hover:text-primary': activePath !== item.href
+												}
+											)}
+											style={activePath === item.href
+												? 'view-transition-name: rights-navigator;'
+												: ''}
 										>
 											{item.name}
 										</a>

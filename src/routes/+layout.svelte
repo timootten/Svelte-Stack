@@ -38,10 +38,11 @@
 	}
 
 	onNavigate(() => {
+		console.log('XXX');
 		if (!document.startViewTransition) return;
 
 		return new Promise((fulfil) => {
-			document.startViewTransition(() =>  new Promise(fulfil));
+			document.startViewTransition(() => new Promise(fulfil));
 		});
 	});
 </script>
