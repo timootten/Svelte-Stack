@@ -145,7 +145,6 @@ export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
 
     const cookies = request.headers.get('cookie') || '';
     const parsedCookies = cookie.parse(cookies);
-    console.log("XX", request.headers)
     return upgrade(request, {
       data: {
         auth_session: parsedCookies?.auth_session
@@ -156,13 +155,11 @@ export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
     ws.subscribe("chat")
     console.log(message)
     if (message === "user") {
-      console.log(message)
       const { session, user } = await lucia.validateSession(ws.data.auth_session);
       ws.send(JSON.stringify(session));
       ws.send(JSON.stringify(user));
     }
     const x = ws.publish("broadcast", "Hello World");
-    console.log("XX", x)
     ws.send(message);
   },
 };

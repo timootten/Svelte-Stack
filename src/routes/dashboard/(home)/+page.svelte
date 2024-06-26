@@ -4,7 +4,7 @@
 	import Copy from 'lucide-svelte/icons/copy';
 	import CreditCard from 'lucide-svelte/icons/credit-card';
 	import File from 'lucide-svelte/icons/file';
-	import Home from 'lucide-svelte/icons/home';
+	import { Home } from 'lucide-svelte';
 	import LineChart from 'lucide-svelte/icons/line-chart';
 	import ListFilter from 'lucide-svelte/icons/list-filter';
 	import EllipsisVertical from 'lucide-svelte/icons/ellipsis-vertical';

@@ -37,7 +37,7 @@
 		<div>
 			<h2 class="text-3xl font-bold md:text-4xl">
 				<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-					Client-Centric{' '}
+					Client-Centric
 				</span>
 				Services
 			</h2>

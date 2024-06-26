@@ -1,7 +1,7 @@
 <script>
 	import Footer from '$lib/components/core/Footer.svelte';
 	import Header from '$lib/components/core/Header.svelte';
-	import About from '$lib/components/landing/About.svelte';
+	import About from '$lib/components/core/About.svelte';
 	import Concepts from '$lib/components/landing/Concepts.svelte';
 	import Discover from '$lib/components/landing/Discover.svelte';
 	import Features from '$lib/components/landing/Features.svelte';
