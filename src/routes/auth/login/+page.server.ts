@@ -1,11 +1,11 @@
 import { db } from "$lib/server/db";
 import { userSchema, userTable } from "$lib/server/db/schema";
-import { setError, superValidate } from "sveltekit-superforms";
+import { superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
-import { eq, ilike, or } from "drizzle-orm";
-import { Argon2id } from "oslo/password";
+import { ilike } from "drizzle-orm";
+import argon2 from 'argon2';
 import { github, google, lucia } from "$lib/server/auth/index.js";
 import { redirect } from "sveltekit-flash-message/server";
 import { dev } from "$app/environment";
@@ -46,7 +46,7 @@ export const actions = {
 
     if (!user.emailVerified) return message(form, { status: "error", text: "E-Mail is not verified." }, { status: 401 });
 
-    const validPassword = await new Argon2id().verify(user.password || "", form.data.password || "");
+    const validPassword = await argon2.verify(user.password || "", form.data.password || "")
 
     if (!validPassword) return message(form, { status: "error", text: "Incorrect email or password." }, { status: 401 });
 

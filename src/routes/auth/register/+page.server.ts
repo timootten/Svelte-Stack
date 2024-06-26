@@ -4,11 +4,11 @@ import { setError, superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
-import { eq, ilike, or } from "drizzle-orm";
+import { ilike, or } from "drizzle-orm";
 import { generateId } from "lucia";
-import { Argon2id } from "oslo/password";
+import argon2 from 'argon2';
 import { lucia } from "$lib/server/auth/index.js";
-import { redirect, setFlash } from "sveltekit-flash-message/server";
+import { redirect } from "sveltekit-flash-message/server";
 import crypto from 'crypto';
 import { sendVerificationEmail, validateToken } from "$lib/server/auth/utils.js";
 import { zxcvbn } from "@zxcvbn-ts/core";
@@ -51,7 +51,7 @@ export const actions = {
     if (user && user?.username.toLowerCase() === form.data.username.toLowerCase()) return setError(form, 'username', 'This username is already taken.');
 
     const userId = generateId(15);
-    const hashedPassword = await new Argon2id().hash(form.data?.password || "");
+    const hashedPassword = await argon2.hash(form.data?.password || "");
 
     const emailHash = crypto.createHash('md5').update(form.data.email.toLowerCase()).digest("hex");
 

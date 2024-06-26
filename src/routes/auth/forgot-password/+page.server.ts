@@ -1,16 +1,10 @@
 import { db } from "$lib/server/db";
 import { userSchema, userTable } from "$lib/server/db/schema";
-import { setError, superValidate } from "sveltekit-superforms";
+import { superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { eq, ilike, or } from "drizzle-orm";
-import { generateId } from "lucia";
-import { Argon2id } from "oslo/password";
-import { github, lucia } from "$lib/server/auth/index.js";
-import { redirect, setFlash } from "sveltekit-flash-message/server";
-import { dev } from "$app/environment";
-import { generateState } from "arctic";
 import { sendPasswordResetEmail, validateToken } from "$lib/server/auth/utils.js";
 import { z } from "zod";
 

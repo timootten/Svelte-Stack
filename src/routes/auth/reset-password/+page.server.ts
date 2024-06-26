@@ -3,10 +3,10 @@ import { tokenTable, userSchema, userTable } from "$lib/server/db/schema";
 import { message, superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
-import { and, eq, ilike, or } from "drizzle-orm";
-import { Argon2id } from "oslo/password";
+import { and, eq } from "drizzle-orm";
+import argon2 from 'argon2';
 import { lucia } from "$lib/server/auth/index.js";
-import { redirect, setFlash } from "sveltekit-flash-message/server";
+import { redirect } from "sveltekit-flash-message/server";
 import { encodeHex } from "oslo/encoding";
 import { sha256 } from "oslo/crypto";
 import { isWithinExpirationDate } from "oslo";
@@ -78,7 +78,7 @@ export const actions = {
 
     const user = (await db.select().from(userTable).where(eq(userTable.id, databaseToken.userId)))[0];
 
-    const hashedPassword = await new Argon2id().hash(form.data?.password || "");
+    const hashedPassword = await argon2.hash(form.data?.password || "");
 
     await db.update(userTable).set({ password: hashedPassword }).where(eq(userTable.id, user.id));
 

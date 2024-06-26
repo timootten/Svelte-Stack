@@ -49,6 +49,7 @@
     "@zxcvbn-ts/language-de": "^3.0.2",
     "@zxcvbn-ts/language-en": "^3.0.2",
     "arctic": "^1.9.1",
+    "argon2": "^0.40.3",
     "bits-ui": "^0.21.10",
     "clsx": "^2.1.1",
     "cookie": "^0.6.0",
