@@ -47,4 +47,5 @@ const connect = async () => {
 };
 
 await connect();
+
 export { db, isConnected };

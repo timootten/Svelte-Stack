@@ -11,8 +11,6 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
-	import { onMount } from 'svelte';
-	import { pushState } from '$app/navigation';
 
 	export let user: import('lucia').User | null;
 
@@ -24,6 +22,7 @@
 	];
 
 	$: activePath = $page.url.pathname + $page.url.hash;
+	$: console.log(activePath);
 </script>
 
 <header class="z-50 w-full">

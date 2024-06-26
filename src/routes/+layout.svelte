@@ -32,13 +32,14 @@
 			pageName = 'Auth';
 		} else if ($page.route.id?.includes('landing')) {
 			pageName = 'Landing';
+		} else if ($page.route.id?.includes('rights')) {
+			pageName = 'Rights';
 		} else {
 			pageName = '404';
 		}
 	}
 
 	onNavigate(() => {
-		console.log('XXX');
 		if (!document.startViewTransition) return;
 
 		return new Promise((fulfil) => {

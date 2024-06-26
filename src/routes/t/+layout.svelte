@@ -3,8 +3,6 @@
 	import Loading from '$lib/components/core/Loading.svelte';
 </script>
 
-XXXXXXX
-
 {#if $navigating}
 	<Loading />
 {:else}
