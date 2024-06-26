@@ -8,15 +8,15 @@
 	export let data;
 	export let form;
 
-	const sse = useSSE<TYPE>({
+	const { value, close } = useSSE<TYPE>({
 		defaultValue: {
 			time: data.time
 		}
 	});
-
-	$: console.log($sse);
 </script>
 
 <p>Data: {data.time}</p>
-<p>Time: {$sse.time}</p>
+<p>Time: {$value.time}</p>
 <p>Time2: {form?.time2}</p>
+
+<button on:click={close}>Cancel</button>

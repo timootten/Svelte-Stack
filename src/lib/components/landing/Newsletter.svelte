@@ -5,7 +5,6 @@
 	// Handle form submission
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();
-		console.log('Subscribed!');
 	};
 </script>
 

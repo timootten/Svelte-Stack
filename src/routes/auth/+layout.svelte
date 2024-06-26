@@ -11,6 +11,8 @@
 {#if $navigating}
 	<Loading />
 {:else}
-	<slot />
+	<div class="my-auto py-12">
+		<slot />
+	</div>
 {/if}
 <Footer />

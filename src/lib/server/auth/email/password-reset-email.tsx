@@ -33,7 +33,7 @@ export default function PasswordResetEmail({ link, username }: { link: string; u
 						<div className="mx-auto mt-16 block text-center">
 							<a href={link}>
 								<p
-									className=" py-auto inline-flex h-12 flex-row items-center justify-center whitespace-nowrap rounded-md bg-black px-8 font-medium text-white ring-offset-background transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+									className="py-auto inline-flex h-12 flex-row items-center justify-center whitespace-nowrap rounded-md bg-black px-8 font-medium text-white ring-offset-background transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 									style={{ lineHeight: '3rem !important', fontSize: '1rem' }}
 								>
 									Reset Password
@@ -43,11 +43,11 @@ export default function PasswordResetEmail({ link, username }: { link: string; u
 						<footer className="mt-16 text-center text-gray-400">
 							© 2024 Svelte-Stack
 							<br />
-							<a className="px-2 underline" href={`${process.env.BASE_URL}/imprint`}>
+							<a className="px-2 underline" href={`${process.env.BASE_URL}/rights/imprint`}>
 								Imprint
 							</a>
 							|
-							<a className="px-2 underline" href={`${process.env.BASE_URL}/terms`}>
+							<a className="px-2 underline" href={`${process.env.BASE_URL}/rights/terms`}>
 								Terms
 							</a>
 						</footer>

@@ -22,7 +22,6 @@
 	method="post"
 	use:enhance={() => {
 		return async ({ result }) => {
-			console.log(result);
 			applyAction(result);
 		};
 	}}

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "bunx nodemon --watch dev.ts --watch src/hooks.server.ts --exec 'bun --bun dev.ts'",
+    "dev": "vite dev",
+    "dev-ws": "bunx nodemon --watch dev.ts --watch src/hooks.server.ts --exec 'bun --bun dev.ts'",
     "dev-db": "docker compose -f docker-compose.dev.yml up",
     "build": "vite build",
     "preview": "vite preview",
@@ -49,7 +50,6 @@
     "@zxcvbn-ts/language-en": "^3.0.2",
     "arctic": "^1.9.1",
     "bits-ui": "^0.21.10",
-    "bun": "^1.1.17",
     "clsx": "^2.1.1",
     "cookie": "^0.6.0",
     "dotenv": "^16.4.5",

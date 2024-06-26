@@ -1,6 +1,6 @@
 # use the official Bun image
 # see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM oven/bun:1 as base
+FROM oven/bun:latest as base
 WORKDIR /usr/src/app
 
 ENV DATABASE_URL=$DATABASE_URL
@@ -32,7 +32,7 @@ RUN bun run build
 # copy production dependencies and source code into final image
 FROM base AS release
 COPY --from=prerelease /usr/src/app/build .
-COPY --from=prerelease /usr/src/app/node_modules node_modules
+#COPY --from=prerelease /usr/src/app/node_modules node_modules
 
 RUN apt-get update && apt-get install curl -y
 

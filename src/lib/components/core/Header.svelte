@@ -22,7 +22,6 @@
 	];
 
 	$: activePath = $page.url.pathname + $page.url.hash;
-	$: console.log(activePath);
 </script>
 
 <header class="z-50 w-full">

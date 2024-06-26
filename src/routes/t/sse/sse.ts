@@ -48,17 +48,72 @@ export const createSSE = <T extends Record<string, unknown>>(): SSE<T> => {
   };
 };
 
-export const useSSE = <T extends Record<string, unknown>>({ defaultValue }: { defaultValue: T }) => {
-  const result = writable<T>(defaultValue);
+export const useSSE = <T>({
+  defaultValue,
+  url = '',
+  autoReconnect = true,
+  reconnectInterval = 3000,
+  json = true,
+}: {
+  defaultValue: T,
+  url?: string,
+  autoReconnect?: boolean,
+  reconnectInterval?: number,
+  json?: boolean,
+}) => {
+  const isJson = json;
+  const value = writable<T>(defaultValue);
+  let sse: EventSource;
+  let reconnectTimeout: Timer;
+
+  const connect = () => {
+    sse = new EventSource(url);
+    sse.onmessage = (e) => {
+      const data = isJson ? JSON.parse(e.data) : e.data;
+      value.set(data);
+    };
+    sse.onerror = () => {
+      if (autoReconnect) {
+        scheduleReconnect();
+      }
+    };
+  };
+
+  const close = () => {
+    if (sse) {
+      sse.close();
+    }
+    clearReconnectTimeout();
+  };
+
+  const reconnect = () => {
+    close();
+    connect();
+  };
+
+  const scheduleReconnect = () => {
+    reconnectTimeout = setTimeout(() => {
+      reconnect();
+    }, reconnectInterval);
+  };
+
+  const clearReconnectTimeout = () => {
+    if (reconnectTimeout) {
+      clearTimeout(reconnectTimeout);
+    }
+  };
 
   onMount(() => {
-    const sse = new EventSource('');
-    sse.onmessage = (e) => result.set(JSON.parse(e.data));
-    return () => sse.close();
-  })
+    connect();
+    return () => {
+      close();
+    };
+  });
 
-  return result;
-}
+  return { value, reconnect, close };
+};
+
+
 // createSSE should have this methods and used like this:
 // const sse = createSSE();
 // const interval = setInvertal(() => {
