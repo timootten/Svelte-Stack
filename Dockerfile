@@ -34,7 +34,7 @@ FROM base AS release
 COPY --from=prerelease /usr/src/app/build .
 #COPY --from=prerelease /usr/src/app/node_modules node_modules
 
-RUN apt-get update && apt-get install curl -y
+RUN apt-get update && apt-get install wget curl -y
 
 # run the app
 USER bun

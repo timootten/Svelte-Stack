@@ -39,7 +39,7 @@ const connect = async () => {
     db = drizzle(client, { schema });
   } catch (error) {
     isConnected = false;
-    console.log("[PostgreSQL] Connection Error", error);
+    console.log(`[PostgreSQL] Connection Error: ${process.env.DATABASE_URL}`, error);
     setTimeout(connect, 5000);
   } finally {
     connecting = false;
