@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Check from 'lucide-svelte/icons/check';
 	import {
 		Card,

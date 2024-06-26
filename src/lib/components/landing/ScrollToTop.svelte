@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { Button } from '../ui/button';
-	import { ArrowUpToLine } from 'lucide-svelte';
+	import ArrowUpToLine from 'lucide-svelte/icons/arrow-up-to-line';
 
 	let showTopBtn = false;
 

@@ -4,7 +4,7 @@
 	import Copy from 'lucide-svelte/icons/copy';
 	import CreditCard from 'lucide-svelte/icons/credit-card';
 	import File from 'lucide-svelte/icons/file';
-	import { Home } from 'lucide-svelte';
+	import House from 'lucide-svelte/icons/house';
 	import LineChart from 'lucide-svelte/icons/line-chart';
 	import ListFilter from 'lucide-svelte/icons/list-filter';
 	import EllipsisVertical from 'lucide-svelte/icons/ellipsis-vertical';
@@ -52,7 +52,7 @@
 						use:builder.action
 						{...builder}
 					>
-						<Home class="h-5 w-5" />
+						<House class="h-5 w-5" />
 						<span class="sr-only">Dashboard</span>
 					</a>
 				</Tooltip.Trigger>
@@ -156,7 +156,7 @@
 							href="##"
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 						>
-							<Home class="h-5 w-5" />
+							<House class="h-5 w-5" />
 							Dashboard
 						</a>
 						<a href="##" class="flex items-center gap-4 px-2.5 text-foreground">

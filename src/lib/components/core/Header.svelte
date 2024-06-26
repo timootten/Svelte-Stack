@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
-	import { Home } from 'lucide-svelte';
+	import House from 'lucide-svelte/icons/house';
 	import Package from 'lucide-svelte/icons/package';
 	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
 	import UsersRound from 'lucide-svelte/icons/users-round';
@@ -15,7 +15,7 @@
 	export let user: import('lucia').User | null;
 
 	const navLinks = [
-		{ href: '/#features', label: 'Features', icon: Home },
+		{ href: '/#features', label: 'Features', icon: House },
 		{ href: '/#testimonials', label: 'Testimonials', icon: ShoppingCart },
 		{ href: '/#pricing', label: 'Pricing', icon: Package },
 		{ href: '/#faq', label: 'FAQ', icon: UsersRound }
