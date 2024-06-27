@@ -6,9 +6,9 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import { Turnstile } from 'svelte-turnstile';
 	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
+	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 
 	export let data;
 

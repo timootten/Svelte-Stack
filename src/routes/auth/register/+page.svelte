@@ -9,9 +9,9 @@
 	import { goto } from '$app/navigation';
 	import { zxcvbn } from '@zxcvbn-ts/core';
 	import { cn } from '$lib/utils.js';
-	import { Turnstile } from 'svelte-turnstile';
 	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
+	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 
 	export let data;
 

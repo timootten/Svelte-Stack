@@ -5,8 +5,8 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
-	import { Turnstile } from 'svelte-turnstile';
 	import { mode } from 'mode-watcher';
+	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 
 	export let data;
 

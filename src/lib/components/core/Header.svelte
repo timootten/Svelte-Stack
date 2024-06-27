@@ -12,7 +12,10 @@
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
 
-	export let user: import('lucia').User | null;
+	type Props = {
+		user: import('lucia').User | null;
+	};
+	const { user }: Props = $props();
 
 	const navLinks = [
 		{ href: '/#features', label: 'Features', icon: House },
@@ -21,7 +24,9 @@
 		{ href: '/#faq', label: 'FAQ', icon: UsersRound }
 	];
 
-	$: activePath = $page.url.pathname + $page.url.hash;
+	let activePath = $derived($page.url.pathname + $page.url.hash);
+
+	$inspect(activePath);
 </script>
 
 <header class="z-50 w-full">

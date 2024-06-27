@@ -7,7 +7,7 @@
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { mode } from 'mode-watcher';
-	import { Turnstile } from 'svelte-turnstile';
+	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 
 	export let data;
 
