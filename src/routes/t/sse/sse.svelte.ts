@@ -1,5 +1,4 @@
 import { onMount } from "svelte";
-import { writable } from "svelte/store";
 
 type CancelCallback = () => void;
 
@@ -62,7 +61,7 @@ export const useSSE = <T>({
   json?: boolean,
 }) => {
   const isJson = json;
-  const value = writable<T>(defaultValue);
+  let value = $state<T>(defaultValue);
   let sse: EventSource;
   let reconnectTimeout: Timer;
 
@@ -70,7 +69,7 @@ export const useSSE = <T>({
     sse = new EventSource(url);
     sse.onmessage = (e) => {
       const data = isJson ? JSON.parse(e.data) : e.data;
-      value.set(data);
+      value = data;
     };
     sse.onerror = () => {
       if (autoReconnect) {
