@@ -6,24 +6,28 @@
 	import { page } from '$app/stores';
 	import { onNavigate } from '$app/navigation';
 
+	let { children } = $props();
+
 	const flash = getFlash(page);
 
-	$: if ($flash) {
-		const text = $flash.text;
-		if ($flash.status === 'success') {
-			setTimeout(() => {
-				toast.success(text);
-			}, 250);
-		} else {
-			setTimeout(() => {
-				toast.error(text);
-			}, 250);
+	$effect(() => {
+		if ($flash) {
+			const text = $flash.text;
+			if ($flash.status === 'success') {
+				setTimeout(() => {
+					toast.success(text);
+				}, 250);
+			} else {
+				setTimeout(() => {
+					toast.error(text);
+				}, 250);
+			}
 		}
 		$flash = undefined;
-	}
+	});
 
-	let pageName = '';
-	$: {
+	let pageName = $state('Loading...');
+	$effect(() => {
 		if ($page.route.id?.includes('404')) {
 			pageName = '404';
 		} else if ($page.route.id?.includes('dashboard')) {
@@ -37,7 +41,7 @@
 		} else {
 			pageName = '404';
 		}
-	}
+	});
 
 	onNavigate(() => {
 		if (!document.startViewTransition) return;
@@ -60,5 +64,5 @@
 <Toaster richColors position="top-right" />
 
 <div class="relative flex min-h-screen flex-col bg-background" id="page">
-	<slot />
+	{@render children()}
 </div>

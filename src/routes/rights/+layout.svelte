@@ -9,7 +9,7 @@
 	import { cn } from '$lib/utils.js';
 	import { page } from '$app/stores';
 
-	export let data;
+	let { data, children } = $props();
 
 	let navItems = [
 		{ name: 'Imprint', href: '/rights/imprint' },
@@ -19,7 +19,7 @@
 		{ name: 'Cookie Policy', href: '/rights/cookie' }
 	];
 
-	$: activePath = $page.url.pathname;
+	let activePath = $derived($page.url.pathname);
 </script>
 
 <div class="flex min-h-screen w-full flex-col">
@@ -95,7 +95,7 @@
 							</Sheet.Root>
 						</header>
 						<main class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-							<slot />
+							{@render children()}
 						</main>
 					</div>
 				</div>

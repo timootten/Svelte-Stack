@@ -1,11 +1,19 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	let className: string = '';
-	export { className as class };
-	export let width = 24;
-	export let height = 24;
-	export let fill = 'currentColor';
+	interface Props {
+		class?: string;
+		width?: number;
+		height?: number;
+		fill?: string;
+	}
+
+	let {
+		class: className = undefined,
+		width = 24,
+		height = 24,
+		fill = 'currentColor'
+	}: Props = $props();
 </script>
 
 <svg
