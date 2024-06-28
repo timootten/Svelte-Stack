@@ -25,8 +25,6 @@
 	];
 
 	let activePath = $derived($page.url.pathname + $page.url.hash);
-
-	$inspect(activePath);
 </script>
 
 <header class="z-50 w-full">

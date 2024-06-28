@@ -1,20 +1,39 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
 	import type { actions } from './+page.server';
-	import { usePolling } from './polling';
+	import { onMount } from 'svelte';
+	import { usePolling } from './polling.svelte';
 
-	export let data;
-	export let form;
+	let { data, form } = $props();
 
-	const polling = usePolling<typeof actions.timePolling>({
-		action: 'timePolling',
-		interval: 1000,
-		defaultValue: { time: data.time }
-	});
+	const test = () => {
+		let value = $state('1');
+
+		console.log('1XXX');
+		onMount(() => {
+			console.log('2XXX');
+		});
+
+		return {
+			get value() {
+				return value;
+			}
+		};
+	};
+
+	const { value } = $derived(
+		usePolling<typeof actions.timePolling>({
+			action: 'timePolling',
+			interval: 1000,
+			defaultValue: { time: data.time }
+		})
+	);
+
+	$inspect(value);
 </script>
 
 <p>Data: {data.time}</p>
-<p>Time: {$polling.time}</p>
+<p>Time: {value.time}</p>
 <p>Time2: {form?.time2}</p>
 
 <form

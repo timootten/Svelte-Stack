@@ -52,13 +52,13 @@ export const useSSE = <T>({
   url = '',
   autoReconnect = true,
   reconnectInterval = 3000,
-  json = true,
+  json = true
 }: {
-  defaultValue: T,
-  url?: string,
-  autoReconnect?: boolean,
-  reconnectInterval?: number,
-  json?: boolean,
+  defaultValue: T;
+  url?: string;
+  autoReconnect?: boolean;
+  reconnectInterval?: number;
+  json?: boolean;
 }) => {
   const isJson = json;
   let value = $state<T>(defaultValue);
@@ -109,7 +109,13 @@ export const useSSE = <T>({
     };
   });
 
-  return { value, reconnect, close };
+  return {
+    get value() {
+      return value
+    },
+    reconnect,
+    close
+  };
 };
 
 

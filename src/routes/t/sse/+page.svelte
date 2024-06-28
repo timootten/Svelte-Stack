@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { useSSE } from './sse.svelte';
 	import type { TYPE } from './+server';
+	import { useSSE } from './sse.svelte';
 
 	let { data, form } = $props();
 
-	const { value, close } = useSSE<TYPE>({
-		defaultValue: {
-			time: data.time
-		}
-	});
-	$inspect(value);
+	const { value, close } = $derived(
+		useSSE<TYPE>({
+			defaultValue: {
+				time: data.time
+			}
+		})
+	);
 </script>
 
 <p>Data: {data.time}</p>
