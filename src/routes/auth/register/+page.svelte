@@ -13,9 +13,9 @@
 	import OAuth from '$lib/components/auth/OAuth.svelte';
 	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 
-	export let data;
+	let { data } = $props();
 
-	let reset: () => void | undefined;
+	let reset: (() => void | undefined) | undefined = $state();
 
 	const {
 		form,
@@ -40,7 +40,7 @@
 		}
 	});
 
-	$: passwordScore = zxcvbn($form.password || '').score;
+	let passwordScore = $derived(zxcvbn($form.password || '').score);
 </script>
 
 <Card.Root class="mx-auto my-auto w-full max-w-sm">

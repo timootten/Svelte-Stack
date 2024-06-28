@@ -10,7 +10,7 @@
 	let widgetId: string;
 
 	interface Props {
-		reset: () => void;
+		reset?: () => void;
 		turnstileCallback?: ({ token }: { token: string }) => void;
 		turnstileError?: ({}) => void;
 		turnstileExpired?: ({}) => void;
@@ -128,16 +128,6 @@
 		};
 	};
 </script>
-
-<svelte:head>
-	{#if mounted && !loaded}
-		<script
-			src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-			onload={loadCallback}
-			async
-		></script>
-	{/if}
-</svelte:head>
 
 {#if loaded && mounted}
 	{#key attr}
