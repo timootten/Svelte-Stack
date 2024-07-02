@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.pcss';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster, toast } from 'svelte-sonner';
@@ -26,21 +26,19 @@
 		$flash = undefined;
 	});
 
+	const routeToPageMapping: Record<string, string> = {
+		dashboard: 'Dashboard',
+		auth: 'Auth',
+		landing: 'Landing',
+		rights: 'Rights'
+	};
+
 	let pageName = $state('Loading...');
+
 	$effect(() => {
-		if ($page.route.id?.includes('404')) {
-			pageName = '404';
-		} else if ($page.route.id?.includes('dashboard')) {
-			pageName = 'Dashboard';
-		} else if ($page.route.id?.includes('auth')) {
-			pageName = 'Auth';
-		} else if ($page.route.id?.includes('landing')) {
-			pageName = 'Landing';
-		} else if ($page.route.id?.includes('rights')) {
-			pageName = 'Rights';
-		} else {
-			pageName = '404';
-		}
+		const routeId = $page.route.id || '';
+		const matchingKey = Object.keys(routeToPageMapping).find((key) => routeId.includes(key));
+		pageName = matchingKey ? routeToPageMapping[matchingKey] : '404';
 	});
 
 	onNavigate(() => {

@@ -112,7 +112,9 @@
 		<div class="flex flex-1 items-center justify-end space-x-2">
 			<nav class="flex items-center space-x-2">
 				{#if user}
+         {#if !$page.route.id?.includes('dashboard')}
 					<Button href="/dashboard" variant="outline">Dashboard</Button>
+          {/if}
 					<form action="/dashboard?/logout" method="post" use:enhance>
 						<Button type="submit">Logout</Button>
 					</form>
