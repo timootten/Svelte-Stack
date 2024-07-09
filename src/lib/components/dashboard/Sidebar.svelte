@@ -71,7 +71,7 @@
 		</div>
 	</div>
 	<div class="flex flex-col">
-		<header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4">
+		<header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 md:hidden">
 			<Sheet.Root>
 				<Sheet.Trigger asChild let:builder>
 					<Button variant="outline" size="icon" class="shrink-0 md:hidden" builders={[builder]}>
@@ -125,7 +125,7 @@
 						</a>
 					</nav>
 				</Sheet.Content>
-			</Sheet.Root>
+			</Sheet.Root><!--- 
 			<div class="w-full flex-1">
 				<form>
 					<div class="relative">
@@ -137,7 +137,7 @@
 						/>
 					</div>
 				</form>
-			</div>
+			</div>-->
 		</header>
 		{@render children?.()}
 	</div>

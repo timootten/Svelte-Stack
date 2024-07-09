@@ -38,7 +38,7 @@
 <footer id="footer">
 	<hr class="mx-auto w-11/12" />
 
-	<section class="container grid grid-cols-2 gap-x-12 gap-y-8 py-20 md:grid-cols-4 xl:grid-cols-6">
+	<section class="container grid grid-cols-2 gap-x-12 gap-y-8 py-10 md:grid-cols-4 xl:grid-cols-6">
 		<div class="col-span-full xl:col-span-2">
 			<a rel="noreferrer noopener" href="/" class="flex text-xl font-bold">
 				<img src="/favicon.png" class="mr-2 h-8" alt="Logo" />
@@ -58,7 +58,7 @@
 		{/each}
 	</section>
 
-	<section class="container pb-14 text-center">
+	<section class="container pb-8 text-center">
 		<h3>&copy; 2024 Svelte-Stack</h3>
 	</section>
 </footer>
