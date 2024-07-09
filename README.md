@@ -1,39 +1,62 @@
-# create-svelte
+TODO:
+Profile:
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-# Svelte-Stack
+General Information
+-Username
+-E-Mail
+-First Name
+-Last Name
+-Date of Birth
+-Phone Number
+-Profile Picture (Upload)
+-Password (Change)
+Address Information
+-Street Address
+-City
+-State/Province
+-Zip/Postal Code
+-Country
+Account Preferences
+-Language Preference
+-Time Zone
+-Currency Preference
+-Communication Preferences (Email, SMS, Push Notifications)
+-Two-Factor Authentication (Enable/Disable)
+Payment Information
+-Credit/Debit Card Number
+-Expiration Date
+-CVV
+-Billing Address (Separate from General Address if needed)
+-PayPal Account (Optional)
+Security Settings
+-Security Questions and Answers
+-Login History (List of recent logins)
+-Authorized Devices (List of devices that have logged in)
+Subscription & Membership
+-Subscription Plan (Details of current plan)
+-Renewal Date
+-Payment History
+-Upgrade/Downgrade Subscription Options
+Notifications
+-Email Notifications (On/Off)
+-SMS Notifications (On/Off)
+-Push Notifications (On/Off)
+-Newsletter Subscription (Subscribe/Unsubscribe)
+Activity Log
+-Recent Activities (Log of recent actions on the account)
+-Downloads History
+-Purchases History
+Support
+-Support Tickets (List of submitted support tickets)
+-Chat History with Support
+-Frequently Asked Questions (FAQs)
+Privacy Settings
+-Profile Visibility (Public/Private)
+-Data Sharing Preferences
+-Ad Preferences
+-Account Deactivation (Option to deactivate or delete account)
+Additional Information
+-Biography (Short bio or personal description)
+-Interests & Hobbies
+-Skills & Expertise
+-Website/Blog URL
