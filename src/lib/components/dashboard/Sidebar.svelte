@@ -4,15 +4,46 @@
 	import Home from 'lucide-svelte/icons/house';
 	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
 	import Menu from 'lucide-svelte/icons/menu';
-	import Search from 'lucide-svelte/icons/search';
 	import Users from 'lucide-svelte/icons/users';
 
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
+	import { page } from '$app/stores';
+	import { cn } from '$lib/utils';
 
 	let { children }: { children?: any } = $props();
+
+	let navItems = [
+		{
+			icon: Home,
+			title: 'Dashboard',
+			href: '/dashboard'
+		},
+		{
+			icon: Package,
+			title: 'Products',
+			href: '/dashboard/products'
+		},
+		{
+			icon: ShoppingCart,
+			title: 'Orders',
+			href: '/dashboard/todo',
+			badge: 6
+		},
+		{
+			icon: Users,
+			title: 'Customers',
+			href: '/dashboard/todo'
+		},
+		{
+			icon: LineChart,
+			title: 'Analytics',
+			href: '/dashboard/todo'
+		}
+	];
+
+	let activePath = $derived($page.url.pathname);
 </script>
 
 <div class="grid w-full">
@@ -28,44 +59,25 @@
 			</div>
 			<div class="flex-1">
 				<nav class="grid items-start px-2 text-sm font-medium">
-					<a
-						href="##"
-						class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-					>
-						<Home class="h-4 w-4" />
-						Dashboard
-					</a>
-					<a
-						href="##"
-						class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-					>
-						<ShoppingCart class="h-4 w-4" />
-						Orders
-						<Badge class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-							6
-						</Badge>
-					</a>
-					<a
-						href="##"
-						class="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-					>
-						<Package class="h-4 w-4" />
-						Products
-					</a>
-					<a
-						href="##"
-						class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-					>
-						<Users class="h-4 w-4" />
-						Customers
-					</a>
-					<a
-						href="##"
-						class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-					>
-						<LineChart class="h-4 w-4" />
-						Analytics
-					</a>
+					{#each navItems as item}
+						<a
+							href={item.href}
+							class={cn(
+								'flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary',
+								{ 'bg-muted text-primary': activePath === item.href }
+							)}
+						>
+							<svelte:component this={item.icon} class="h-5 w-5" />
+							{item.title}
+							{#if item.badge}
+								<Badge
+									class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+								>
+									{item.badge}
+								</Badge>
+							{/if}
+						</a>
+					{/each}
 				</nav>
 			</div>
 		</div>

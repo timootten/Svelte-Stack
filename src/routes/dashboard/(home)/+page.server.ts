@@ -2,6 +2,10 @@ import { lucia } from '$lib/server/auth';
 import { fail } from '@sveltejs/kit';
 import { redirect } from 'sveltekit-flash-message/server';
 
+export function load() {
+  throw redirect(307, '/dashboard/products');
+}
+
 export const actions = {
   logout: async (event) => {
     if (!event.locals.session) {
