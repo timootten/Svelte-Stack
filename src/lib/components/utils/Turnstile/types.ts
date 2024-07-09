@@ -286,8 +286,8 @@ declare global {
 }
 
 
-export type Option<Key extends keyof TurnstileOptions> = Exclude<
-  TurnstileOptions[Key],
+export type Option<Key extends keyof RenderParameters> = Exclude<
+  RenderParameters[Key],
   undefined
 >;
 

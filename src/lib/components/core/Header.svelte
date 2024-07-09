@@ -11,11 +11,13 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
+	import Avatar from './Avatar.svelte';
 
 	type Props = {
 		user: import('lucia').User | null;
+		showLogo?: boolean;
 	};
-	const { user }: Props = $props();
+	const { user, showLogo = true }: Props = $props();
 
 	const navLinks = [
 		{ href: '/#features', label: 'Features', icon: House },
@@ -30,10 +32,12 @@
 <header class="z-50 w-full">
 	<div class="flex h-14 items-center px-6">
 		<div class="mr-4 hidden md:flex">
-			<a href="/" class="mr-6 flex items-center space-x-2">
-				<img src="/favicon.png" alt="LOGO" class="h-8 w-8" />
-				<span class="hidden font-bold sm:inline-block">Svelte-Stack</span>
-			</a>
+			{#if showLogo}
+				<a href="/" class="mr-6 flex items-center space-x-2">
+					<img src="/favicon.png" alt="LOGO" class="h-8 w-8" />
+					<span class="hidden font-bold sm:inline-block">Svelte-Stack</span>
+				</a>
+			{/if}
 			<nav class="flex items-center gap-6 text-sm">
 				{#each navLinks as { href, label, icon }}
 					<a
@@ -112,12 +116,9 @@
 		<div class="flex flex-1 items-center justify-end space-x-2">
 			<nav class="flex items-center space-x-2">
 				{#if user}
-         {#if !$page.route.id?.includes('dashboard')}
-					<Button href="/dashboard" variant="outline">Dashboard</Button>
-          {/if}
-					<form action="/dashboard?/logout" method="post" use:enhance>
-						<Button type="submit">Logout</Button>
-					</form>
+					{#if !$page.route.id?.includes('dashboard')}
+						<Button href="/dashboard" variant="outline">Dashboard</Button>
+					{/if}
 				{:else}
 					<Button href="/auth/login" variant="outline">Login</Button>
 					<Button href="/auth/register">Register</Button>
@@ -131,6 +132,9 @@
 					/>
 					<span class="sr-only">Toggle theme</span>
 				</Button>
+				{#if user}
+					<Avatar avatarUrl={user.avatarUrl} />
+				{/if}
 			</nav>
 		</div>
 	</div>

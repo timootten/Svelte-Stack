@@ -59,7 +59,7 @@
 				<Turnstile
 					bind:reset
 					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
-					appearance="interaction-only"
+					appearance="always"
 					theme={$mode}
 				/>
 			</div>

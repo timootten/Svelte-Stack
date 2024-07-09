@@ -58,7 +58,7 @@
 		if (!loaded) {
 			let script = document.createElement('script');
 			script.type = 'text/javascript';
-			script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+			script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
 			script.async = true;
 			script.addEventListener('load', loadCallback);
 			document.head.appendChild(script);

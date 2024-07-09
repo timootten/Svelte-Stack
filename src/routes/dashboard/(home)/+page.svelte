@@ -241,7 +241,7 @@
 			class="grid flex-1 items-start gap-4 p-4 md:gap-8 md:px-6 md:py-0 lg:grid-cols-3 xl:grid-cols-3"
 		>
 			<div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-				<div class="grid gap-4 md:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+				<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
 					<Card.Root class="md:col-span-2">
 						<Card.Header class="pb-3">
 							<Card.Title>Your Orders</Card.Title>
