@@ -10,7 +10,7 @@ export const userTable = pgTable("user", {
   email: varchar("email", { length: 255 }).notNull(),
   emailVerified: boolean("email_verified").notNull().default(false),
   username: varchar('username', {
-    length: 32
+    length: 16
   }).notNull(),
   password: text('password'),
   avatarUrl: text('avatar_url'),
