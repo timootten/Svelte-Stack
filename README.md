@@ -5,6 +5,10 @@ Add Confirm Password Register
 Add for all forms client validators
 Add Email resend and info in settings if verified (Make Button 1/4 on the button right, resend or success icon if verified)
 
+Later:
+
+Change React Email to Svelte Email (Check for Tailwind or use a large css script tag)
+
 Profile:
 
 General Information
