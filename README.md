@@ -9,6 +9,8 @@ Later:
 
 Change React Email to Svelte Email (Check for Tailwind or use a large css script tag)
 
+Website GitHub button and Get Started are not same height
+
 Profile:
 
 General Information
