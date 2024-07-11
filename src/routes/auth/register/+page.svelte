@@ -3,15 +3,14 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
-	import { Progress } from '$lib/components/ui/progress';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { zxcvbn } from '@zxcvbn-ts/core';
-	import { cn } from '$lib/utils.js';
 	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
 	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
+	import PasswordScore from '$lib/components/dashboard/PasswordScore.svelte';
 
 	let { data } = $props();
 
@@ -91,25 +90,7 @@
 					autocomplete="password"
 					required
 				/>{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
-				<Progress
-					value={passwordScore * 25}
-					text={passwordScore === 0
-						? 'Very weak'
-						: passwordScore === 1
-							? 'Weak'
-							: passwordScore === 2
-								? 'Medium'
-								: passwordScore === 3
-									? 'Strong'
-									: 'Very strong'}
-					class="h-7 font-bold"
-					classLoader={cn('bg-red-500', null, {
-						'bg-red-500': passwordScore === 1,
-						'bg-yellow-500': passwordScore === 2,
-						'bg-green-500': passwordScore === 3,
-						'bg-emerald-800': passwordScore === 4
-					})}
-				/>
+				<PasswordScore score={passwordScore} />
 			</div>
 			<div class="flex w-full content-center justify-center">
 				<Turnstile
