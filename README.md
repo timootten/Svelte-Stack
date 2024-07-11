@@ -15,6 +15,8 @@ Add Footer links and change about to Links or something like that
 
 Settings disable button when nothing was changed.
 
+Add cooldown for verify email
+
 Profile:
 
 General Information

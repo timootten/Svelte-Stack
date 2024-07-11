@@ -19,10 +19,10 @@
 	{builders}
 	class={cn(buttonVariants({ variant, size, className }))}
 	type="button"
-	{...$$restProps}
 	on:click
 	on:keydown
 	disabled={loading}
+	{...$$restProps}
 >
 	{#if loading}
 		<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />

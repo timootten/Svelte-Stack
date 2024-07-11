@@ -9,6 +9,8 @@
 	import PasswordScore from '$lib/components/dashboard/PasswordScore.svelte';
 	import { zod } from 'sveltekit-superforms/adapters';
 	import { generalSchema } from './schema.js';
+	import Check from 'lucide-svelte/icons/check';
+	import Send from 'lucide-svelte/icons/send';
 
 	let { data } = $props();
 
@@ -77,15 +79,29 @@
 					</div>
 					<div class="flex flex-col space-y-1.5">
 						<Label for="email">Email</Label>
-						<Input
-							placeholder="timo@example.com"
-							bind:value={$form.email}
-							{...$constraints.email}
-							name="email"
-							autocomplete="email"
-							id="email"
-							required
-						/>
+						<div class="flex">
+							<Input
+								class="rounded-r-none"
+								placeholder="timo@example.com"
+								bind:value={$form.email}
+								{...$constraints.email}
+								name="email"
+								autocomplete="email"
+								id="email"
+								required
+							/>
+							{#if data.user?.emailVerified}
+								<Button class="rounded-l-none bg-green-700 !opacity-100" disabled>
+									<span class="pr-2">Verified</span>
+									<Check class="h-4 w-4" />
+								</Button>
+							{:else}
+								<Button class="rounded-l-none">
+									<span class="pr-2">Verify E-Mail</span>
+									<Send class="h-4 w-4" />
+								</Button>
+							{/if}
+						</div>
 						{#if $errors.email}
 							<p class="text-xs text-red-500">{$errors.email[0]}</p>
 						{/if}
