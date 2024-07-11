@@ -11,6 +11,8 @@ Change React Email to Svelte Email (Check for Tailwind or use a large css script
 
 Website GitHub button and Get Started are not same height
 
+Add Footer links and change about to Links or something like that
+
 Settings disable button when nothing was changed.
 
 Profile:
