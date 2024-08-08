@@ -5,7 +5,8 @@
 	import { getFlash } from 'sveltekit-flash-message';
 	import { page } from '$app/stores';
 	import { onNavigate } from '$app/navigation';
-
+ import { navigating } from '$app/stores';
+	
 	let { children } = $props();
 
 	const flash = getFlash(page);
@@ -63,7 +64,7 @@
 
 <div class="relative flex min-h-screen flex-col bg-background" id="page">
 {#if $navigating}
-	<Loading />
+	<Loading /> 
 {:else}
 	{@render children()}
 {/if}
