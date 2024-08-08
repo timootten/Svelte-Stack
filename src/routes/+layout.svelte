@@ -6,7 +6,8 @@
 	import { page } from '$app/stores';
 	import { onNavigate } from '$app/navigation';
  import { navigating } from '$app/stores';
-	
+	import Loading from '$lib/components/core/Loading.svelte';
+
 	let { children } = $props();
 
 	const flash = getFlash(page);
