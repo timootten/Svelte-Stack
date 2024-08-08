@@ -100,6 +100,7 @@
 						<span>Svelte-Stack</span>
 					</div>
 					{#each navLinks as { href, label, icon }}
+						<Drawer.Close>
 						<a
 							{href}
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
@@ -109,6 +110,7 @@
 							{/if}
 							{label}
 						</a>
+					 </Drawer.Close> 
 					{/each}
 				</nav>
 			</Sheet.Content>
