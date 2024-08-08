@@ -63,9 +63,7 @@
 <Toaster richColors position="top-right" />
 
 <div class="relative flex min-h-screen flex-col bg-background" id="page">
-{#if $navigating}
+
 	<Loading /> 
-{:else}
-	{@render children()}
-{/if}
+
 </div>
