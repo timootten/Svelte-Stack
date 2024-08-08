@@ -104,8 +104,8 @@ import { goto } from '$app/navigation';
 					</div>
 					{#each navLinks as { href, label, icon }}
 						
-						<a
-							{href}
+						<button
+							
 							onclick={() => {
 								open = false;
 								goto(href);
@@ -116,7 +116,7 @@ import { goto } from '$app/navigation';
 								<svelte:component this={icon} class="h-5 w-5" />
 							{/if}
 							{label}
-						</a>
+						</button>
 					{/each}
 				</nav>
 			</Sheet.Content>
