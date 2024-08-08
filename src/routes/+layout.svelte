@@ -67,6 +67,6 @@
 {#if $navigating}
 	<Loading />
 {:else}
-	{@render children.?()}
+	{@render children()}
 {/if}
 </div>
