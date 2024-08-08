@@ -17,7 +17,7 @@
 	export let data;
 </script>
 
-<div class="fixed z-50 w-full bg-background">
+<div class="sticky z-50 w-full bg-background">
 	<Header user={data.user} />
 </div>
 <Hero />
