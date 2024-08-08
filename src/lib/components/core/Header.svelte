@@ -27,6 +27,8 @@
 	];
 
 	let activePath = $derived($page.url.pathname + $page.url.hash);
+
+ let open = $state(false);
 </script>
 
 <header class="z-50 w-full">
@@ -53,7 +55,7 @@
 				{/each}
 			</nav>
 		</div>
-		<Sheet.Root>
+		<Sheet.Root bind:open>
 			<Sheet.Trigger asChild let:builder>
 				<a href="##" class="h-5 w-5 md:hidden" use:builder.action {...builder}>
 					<svg
@@ -100,9 +102,10 @@
 						<span>Svelte-Stack</span>
 					</div>
 					{#each navLinks as { href, label, icon }}
-						<Drawer.Close>
+						
 						<a
 							{href}
+							onclick={() => open = false }
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 						>
 							{#if icon}
@@ -110,7 +113,6 @@
 							{/if}
 							{label}
 						</a>
-					 </Drawer.Close> 
 					{/each}
 				</nav>
 			</Sheet.Content>
