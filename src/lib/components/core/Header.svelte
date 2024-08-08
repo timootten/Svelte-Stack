@@ -12,6 +12,7 @@
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
 	import Avatar from './Avatar.svelte';
+import { goto } from '$app/navigation';
 
 	type Props = {
 		user: import('lucia').User | null;
@@ -105,7 +106,10 @@
 						
 						<a
 							{href}
-							onclick={() => open = false }
+							onclick={() => {
+								open = false;
+								goto(href);
+							}}
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 						>
 							{#if icon}
