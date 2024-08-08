@@ -5,7 +5,7 @@
 	import { getFlash } from 'sveltekit-flash-message';
 	import { page } from '$app/stores';
 	import { onNavigate } from '$app/navigation';
- import { navigating } from '$app/stores';
+	import { navigating } from '$app/stores';
 	import Loading from '$lib/components/core/Loading.svelte';
 
 	let { children } = $props();
@@ -64,7 +64,9 @@
 <Toaster richColors position="top-right" />
 
 <div class="relative flex min-h-screen flex-col bg-background" id="page">
-
-	<Loading /> 
-
+{#if $navigating}
+	<Loading />
+{:else}
+	{children.?()}
+{/if}
 </div>
