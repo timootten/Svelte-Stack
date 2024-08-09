@@ -7,6 +7,9 @@ interface UsePollingOptions<T extends (...args: any) => Promise<any>> {
   defaultValue: Awaited<ReturnType<T>>;
 }
 
+// Todo: Remove action and use the function name
+// And make a copy and make a useAction
+
 export const usePolling = <T extends (...args: any) => Promise<any>>(
   { action, interval, defaultValue }: UsePollingOptions<T>
 ) => {
