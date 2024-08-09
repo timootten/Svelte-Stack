@@ -13,6 +13,8 @@ export async function load({ locals }) {
 
   return {
     users,
-    takesLong: takesLong()
+    x: {
+       takesLong: takesLong()
+    }
   };
 }
