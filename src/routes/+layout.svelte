@@ -43,6 +43,7 @@
 		pageName = matchingKey ? routeToPageMapping[matchingKey] : '404';
 	});
 
+// try crossfade https://svelte.dev/repl/0ad58a0d830f4001b91409e40164aa24?version=3.44.1
 	onNavigate(() => {
 		if (!document.startViewTransition) return;
 
