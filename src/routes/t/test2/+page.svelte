@@ -7,7 +7,7 @@
 <br />
 <h1>Test2</h1>
 
-{#await data.takesLong}
+{#await data.x.takesLong}
 	Loading...
 {:then value}
 	<p>Value: {value.done}</p>
