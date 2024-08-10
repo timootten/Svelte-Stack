@@ -10,8 +10,8 @@
         if(data.directHit) {
             //alert("xxx");
             //invalidate();
-            invalidate($page.url.pathname + $page.url.hash);
-            //goto($page.url.pathname + $page.url.hash);
+            //invalidate($page.url.pathname + $page.url.hash);
+            goto($page.url.pathname + $page.url.hash);
         }
     });
 </script>
