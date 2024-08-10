@@ -3,7 +3,7 @@
     import { browser } from '$app/environment';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
-    import { invalidate } from '$app/navigation';
+    
     export let data;
 
     onMount(() => {
