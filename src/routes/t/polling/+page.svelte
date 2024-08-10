@@ -2,9 +2,15 @@
 	import { applyAction, enhance } from '$app/forms';
 	import type { actions } from './+page.server';
 	import { usePolling } from './polling.svelte';
+ import { goto } from '$app/navigation';
+ import { onMount } from 'svelte';
 
-	let { data, form } = $props();
+ onMount(() => {
+    goto('/t/test2');
+ });
 
+ let { data, form } = $props();
+	
 	const { value } = $derived(
 		usePolling<typeof actions.timePolling>({
 			action: 'timePolling',
@@ -12,6 +18,8 @@
 			defaultValue: { time: data.time }
 		})
 	);
+
+
 </script>
 
 <p>Data: {data.time}</p>
