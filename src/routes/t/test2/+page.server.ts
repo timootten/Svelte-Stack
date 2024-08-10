@@ -5,7 +5,8 @@ import { redirect } from '@sveltejs/kit';
 
 //export const ssr = false;
 
-export async function load({ locals, request, setHeaders }) {
+export async function load({ locals, request, setHeaders, depends }) {
+  depends('x');
   console.log(request.headers);
   const secFetchSite = request.headers.get("sec-fetch-site");
   console.log(secFetchSite);
