@@ -1,18 +1,10 @@
-import { db } from "$lib/server/db";
-import { userTable } from "$lib/server/db/schema";
 import { sleep } from "$lib/utils";
-import { redirect } from '@sveltejs/kit';
-
-//export const ssr = false;
 
 export async function load({ locals, request, setHeaders, depends }) {
-  depends('x');
-  console.log(request.headers);
   const secFetchSite = request.headers.get("sec-fetch-site");
-  console.log(secFetchSite);
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
-  console.log(directHit);
-const takesLon = async () => {
+  
+  const takesShort = async () => {
     await sleep(10)
     return { done: 'Xx' }
   };
@@ -20,12 +12,13 @@ if(directHit) return {
     directHit,
     clock: new Date().toLocaleString('de-de'),
     x: {
-			takesLong: takesLon()
+			takesLong: takesShort()
     }
   }
 
   const takesLong = async () => {
     await sleep(5000)
+     // expensive function
     return { done: new Date().toLocaleString('de-de') }
   };
 
