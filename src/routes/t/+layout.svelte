@@ -6,14 +6,17 @@
     import { invalidate } from '$app/navigation';
     export let data;
 
-    onMount(() => {
-        if(data.directHit) {
-            invalidateAll();
+	let directHit = data.directHit;
+
+    onMount(async () => {
+        if(directHit) {
+            await invalidateAll();
+            directHit = false
         }
     });
 </script>
 
-{#if $navigating || data.directHit}
+{#if $navigating || directHit}
 	<Loading />
 {:else}
 	<slot />
