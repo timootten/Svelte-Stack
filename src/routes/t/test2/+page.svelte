@@ -1,10 +1,19 @@
 <script lang="ts">
   	import { invalidate } from '$app/navigation';
     import { browser } from '$app/environment';
+    import { page } from '$app/stores';  
+    import { onMount } from 'svelte';
+    import { invalidate } from '$app/navigation';
+    export let data;
 
-	export let data;
-
-    
+    onMount(() => {
+        if(data.directHit) {
+            //alert("xxx");
+            invalidate();
+            //invalidate($page.url.pathname + $page.url.hash);
+            //goto($page.url.pathname + $page.url.hash);
+        }
+    });
 </script>
 
 <a href="/t/test">Test</a>
