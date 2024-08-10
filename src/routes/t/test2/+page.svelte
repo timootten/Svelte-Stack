@@ -8,12 +8,12 @@
 
     onMount(() => {
         if(data.directHit) {
-            //alert("xxx");
+            alert("xxx");
             //invalidate();
 						setTimeout(() => {
               alert($page.url.pathname + $page.url.hash);
             invalidate($page.url.pathname + $page.url.hash);
-            });
+            }, 200);
             //goto($page.url.pathname + $page.url.hash);
         }
     });
