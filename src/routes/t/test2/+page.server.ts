@@ -9,13 +9,15 @@ export async function load({ locals, request }) {
   console.log(directHit);
   console.log(Math.random());
 
+  if(directHit) redirect(302, '/t/test2');
+
   const takesLong = async () => {
     await sleep(5000)
     return { done: true }
   };
 
   return {
-    directHit,
+    directHit: false,
     x: {
        takesLong: takesLong()
     }
