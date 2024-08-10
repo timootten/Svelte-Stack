@@ -12,6 +12,17 @@ export async function load({ locals, request, setHeaders, depends }) {
   console.log(secFetchSite);
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
   console.log(directHit);
+const takesLon = async () => {
+    await sleep(10)
+    return { done: 'Xx' }
+  };
+if(directHit) return {
+    directHit,
+    clock: new Date().toLocaleString('de-de'),
+    x: {
+			takesLong: takesLon()
+    }
+  }
 
   const takesLong = async () => {
     await sleep(5000)
