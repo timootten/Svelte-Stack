@@ -3,7 +3,7 @@
 	import Loading from '$lib/components/core/Loading.svelte';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
-    import { invalidate } from '$app/navigation';
+    import { invalidateAll } from '$app/navigation';
     export let data;
 
 	let directHit = data.directHit;
