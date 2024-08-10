@@ -30,3 +30,8 @@
 {:then value}
 	<p>Value: {value.done}</p>
 {/await}
+
+<button on:click={() => {
+console.log('Inv');
+invalidate($page.url.pathname + $page.url.hash);
+}}> Invalidate </button>
