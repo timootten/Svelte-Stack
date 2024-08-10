@@ -12,7 +12,7 @@
             //invalidate();
 						setTimeout(() => {
               alert($page.url.pathname + $page.url.hash);
-            invalidate($page.url.pathname + $page.url.hash);
+            invalidate('x');
             }, 200);
             //goto($page.url.pathname + $page.url.hash);
         }
@@ -33,5 +33,5 @@
 
 <button on:click={() => {
 console.log('Inv');
-invalidate($page.url.pathname + $page.url.hash);
+invalidate('x');
 }}> Invalidate </button>
