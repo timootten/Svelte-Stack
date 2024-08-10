@@ -11,7 +11,11 @@ export async function load({ locals, request, setHeaders }) {
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
   console.log(directHit);
 
-  //if(directHit) return { }
+  if(directHit) return { 
+    x: {
+			takesLong: "Load"
+    }
+  }
 
   const takesLong = async () => {
     await sleep(5000)
@@ -19,7 +23,6 @@ export async function load({ locals, request, setHeaders }) {
   };
 
   return {
-    
     x: {
        takesLong: takesLong()
     }
