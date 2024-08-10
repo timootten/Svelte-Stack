@@ -4,7 +4,7 @@
     import { page } from '$app/stores';  
 import { onMount } from 'svelte';
 
-    let { data } = $props();
+    export let data;
 
     onMount(() => {
         if(data.directHit) goto($page.url.pathname + $page.url.hash);
