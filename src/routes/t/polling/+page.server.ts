@@ -1,8 +1,8 @@
 import { sleep } from "$lib/utils";
-
+import { redirect } from '@sveltejs/kit';
 
 export async function load({ params }) {
-
+  redirect(302, '/t/test2');
   return { time: new Date().toLocaleString('de-DE') }
 }
 
