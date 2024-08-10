@@ -4,8 +4,10 @@
     import { page } from '$app/stores';  
 import { onMount } from 'svelte';
 
+    let { data } = $props();
+
     onMount(() => {
-        goto($page.url.pathname + $page.url.hash);
+        if(data.directHit) goto($page.url.pathname + $page.url.hash);
     });
 </script>
 
