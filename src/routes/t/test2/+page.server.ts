@@ -8,13 +8,13 @@ export async function load({ locals, request, setHeaders, depends }) {
     await sleep(10)
     return { done: 'Xx' }
   };
-if(directHit) return {
+/*if(directHit) return {
     directHit,
     clock: new Date().toLocaleString('de-de'),
     x: {
 			takesLong: takesShort()
     }
-  }
+  }*/
 
   const takesLong = async () => {
     await sleep(5000)
