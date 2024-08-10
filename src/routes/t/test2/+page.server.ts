@@ -9,7 +9,8 @@ export async function load({ locals, request, setHeaders }) {
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
   console.log(directHit);
 
-  if(directHit) return { }
+  //if(directHit) return { }
+
   const takesLong = async () => {
     await sleep(5000)
     return { done: true }
