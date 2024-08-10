@@ -1,6 +1,6 @@
 
 
-export const load = async ({ locals, cookies }) => {
+export const load = async ({ request, locals, cookies }) => {
   const secFetchSite = request.headers.get("sec-fetch-site");
   console.log(secFetchSite);
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
