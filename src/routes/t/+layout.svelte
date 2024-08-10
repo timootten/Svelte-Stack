@@ -16,7 +16,7 @@
     });
 </script>
 
-{#if $navigating}
+{#if $navigating || directHit}
 	<Loading />
 {:else}
 	<slot />
