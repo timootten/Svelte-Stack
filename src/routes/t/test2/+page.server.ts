@@ -13,6 +13,11 @@ export async function load({ locals, request, setHeaders, depends }) {
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
   console.log(directHit);
 
+  const takesLong = async () => {
+    await sleep(5000)
+    return { done: new Date().toLocaleString('de-de') }
+  };
+
   return {
 directHit,
 clock: new Date().toLocaleString('de-de'),
