@@ -1,5 +1,5 @@
 <script lang="ts">
-  	import { invalidate } from '$app/navigation';
+  	import { invalidateAll } from '$app/navigation';
     import { browser } from '$app/environment';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
@@ -12,7 +12,7 @@
             //invalidate();
 						setTimeout(() => {
               alert($page.url.pathname + $page.url.hash);
-            invalidate('x');
+            invalidateAll();
             }, 200);
             //goto($page.url.pathname + $page.url.hash);
         }
@@ -33,5 +33,5 @@
 {data.clock}
 <button on:click={() => {
 console.log('Inv');
-invalidate('x');
+invalidateAll();
 }}> Invalidate </button>
