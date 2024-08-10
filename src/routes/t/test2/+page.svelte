@@ -30,7 +30,7 @@
 {:then value}
 	<p>Value: {value.done}</p>
 {/await}
-
+{data.clock}
 <button on:click={() => {
 console.log('Inv');
 invalidate('x');
