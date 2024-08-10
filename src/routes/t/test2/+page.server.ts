@@ -29,6 +29,7 @@ export async function load({ locals, request, setHeaders }) {
   };
 
   return {
+directHit,
     x: {
        takesLong: takesLong()
     }
