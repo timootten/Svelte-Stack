@@ -14,7 +14,7 @@ export async function load({ locals, request, setHeaders }) {
 		'sec-fetch-site': 'same-origin'
 	});
 
-  if(directHit) redirect(302, '/t/test2');
+  //if(directHit) redirect(302, '/t/test2');
 
   const takesLong = async () => {
     await sleep(5000)
