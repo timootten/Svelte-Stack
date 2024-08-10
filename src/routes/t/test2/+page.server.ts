@@ -3,7 +3,7 @@ import { userTable } from "$lib/server/db/schema";
 import { sleep } from "$lib/utils";
 import { redirect } from '@sveltejs/kit';
 
-export const ssr = false;
+//export const ssr = false;
 
 export async function load({ locals, request, setHeaders }) {
  const secFetchSite = request.headers.get("sec-fetch-site");
