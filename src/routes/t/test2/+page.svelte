@@ -1,9 +1,10 @@
 <script lang="ts">
   	import { invalidate } from '$app/navigation';
-    
+    import { browser } from '$app/environment';
+
 	export let data;
 
-    if(data.directHit) {
+    if(browser && data.directHit) {
     	invalidate();
     }
 </script>
