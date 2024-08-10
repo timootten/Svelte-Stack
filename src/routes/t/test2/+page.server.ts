@@ -26,7 +26,7 @@ export async function load({ locals, request, setHeaders }) {
 
   const takesLong = async () => {
     await sleep(5000)
-    return { done: true }
+    return { done: new Date().toLocaleString('de-de'); }
   };
 
   return {
