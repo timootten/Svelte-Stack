@@ -8,13 +8,7 @@
 
     onMount(() => {
         if(data.directHit) {
-            alert("xxx");
-            //invalidate();
-						setTimeout(() => {
-              alert($page.url.pathname + $page.url.hash);
             invalidateAll();
-            }, 200);
-            //goto($page.url.pathname + $page.url.hash);
         }
     });
 </script>
