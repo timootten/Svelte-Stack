@@ -3,8 +3,10 @@ import { userTable } from "$lib/server/db/schema";
 import { sleep } from "$lib/utils";
 
 export async function load({ locals, request }) {
-  const users = await db.select().from(userTable);
-  console.log(request.headers);
+  const secFetchSite = request.headers.get("sec-fetch-site");
+  console.log(secFetchSite);
+  let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
+  console.log(directHit);
   console.log(Math.random());
 
   const takesLong = async () => {
@@ -13,7 +15,7 @@ export async function load({ locals, request }) {
   };
 
   return {
-    users,
+    directHit,
     x: {
        takesLong: takesLong()
     }
