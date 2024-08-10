@@ -2,12 +2,15 @@
 	import { navigating } from '$app/stores';
 	import Loading from '$lib/components/core/Loading.svelte';
     import { page } from '$app/stores';  
-import { onMount } from 'svelte';
+    import { onMount } from 'svelte';
 
     export let data;
 
     onMount(() => {
-        if(data.directHit) goto($page.url.pathname + $page.url.hash);
+        if(data.directHit) {
+            alert("xxx");
+            goto($page.url.pathname + $page.url.hash);
+        }
     });
 </script>
 
