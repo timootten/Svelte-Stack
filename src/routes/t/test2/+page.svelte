@@ -6,11 +6,11 @@
     
     export let data;
 
-    onMount(() => {
+    /*onMount(() => {
         if(data.directHit) {
             invalidateAll();
         }
-    });
+    });*/
 </script>
 
 <a href="/t/test">Test</a>
