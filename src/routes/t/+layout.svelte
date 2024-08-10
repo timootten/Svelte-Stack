@@ -4,7 +4,7 @@
     import { page } from '$app/stores';  
 
     onMount(() => {
-        goto($page.url.pathname);
+        goto($page.url.pathname + $page.url.hash);
     });
 </script>
 
