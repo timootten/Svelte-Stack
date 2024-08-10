@@ -20,7 +20,7 @@
 
 {data.directHit}
 {#await data.x.takesLong}
-	Loading...
+	<p>Loading...</p>
 {:then value}
 	<p>Value: {value.done}</p>
 {/await}
