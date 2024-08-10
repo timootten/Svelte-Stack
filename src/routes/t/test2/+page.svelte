@@ -4,9 +4,7 @@
 
 	export let data;
 
-    if(browser && data.directHit) {
-    	invalidate();
-    }
+    
 </script>
 
 <a href="/t/test">Test</a>
