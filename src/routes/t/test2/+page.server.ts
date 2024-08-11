@@ -2,9 +2,10 @@ import { sleep } from "$lib/utils";
 
 export async function load({ locals, request, setHeaders, depends }) {
   const secFetchSite = request.headers.get("sec-fetch-site");
-  let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
+
+  let directHit = secFetchSite === "none" || secFetchSite === "cross-site" || secFetchSite === undefined;
   
-	console.log(request);
+	console.log(secFetchSite, request);
 
   console.log("Called page");
 
