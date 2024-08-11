@@ -13,7 +13,8 @@
         if(directHit) {
             alert("x");
             await invalidate("/t/test2");
-            directHit = false
+            directHit = false;
+            data.directHit = false;
             alert(directHit);
         }
     });
