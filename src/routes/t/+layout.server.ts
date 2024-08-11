@@ -8,6 +8,6 @@ export const load = async ({ request, locals, cookies }) => {
   console.log("Called layout", directHit);
 
   return {
-     directHit,
+     directHit: locals.directHit
   }
 };
