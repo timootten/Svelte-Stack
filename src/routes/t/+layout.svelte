@@ -19,6 +19,7 @@
         }
     });
 </script>
+<p> Local DirectHir {directHit} </p>
 <p>{direct}</p>
 {#if $navigating || direct}
     <Loading />
