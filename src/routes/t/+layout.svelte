@@ -13,7 +13,9 @@
         if(direct) {
             await invalidateAll();
             //await invalidate((url) => true);
-            direct = false;
+			setTimeout(() => {
+            	direct = false;
+            }, 500);
         }
     });
 </script>
