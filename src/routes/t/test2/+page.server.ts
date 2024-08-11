@@ -13,7 +13,7 @@ export async function load({ locals, request, setHeaders, depends }) {
 
   const takesLong = async () => {
     console.log("Expensive Starting")
-    await sleep(5000)
+    //await sleep(5000)
      // expensive function
     console.log("Expensive");
     await sleep(5000)
