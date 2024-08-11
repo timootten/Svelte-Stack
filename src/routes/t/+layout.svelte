@@ -7,7 +7,7 @@
 
     let { children, data } = $props();
 
-	let directHit = $state(data.directHit);
+	let directHit = $state(true);
 
     onMount(async () => {
         if(directHit) {
