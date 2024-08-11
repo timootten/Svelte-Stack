@@ -19,7 +19,7 @@
 
 {direct}
 {data.directHit}
-{#if $navigating}
+{#if $navigating || direct}
 	<Loading />
 {:else}
 
