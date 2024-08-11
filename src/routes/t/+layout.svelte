@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
     import { navigating } from '$app/stores';
     import Loading from '$lib/components/core/Loading.svelte';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
     import { invalidate } from '$app/navigation';
 
-    let { children, data } = $props();
+    let { children } = $props();
 
-	let direct = $state(true);
+    let direct = $state(true);
 
     onMount(async () => {
         if(direct) {
@@ -17,10 +17,10 @@
     });
 </script>
 
-{direct}
-{data.directHit}
-{#if !$navigating && !direct}
-{@render children?.()}
-{:else}	
+<p>{direct}</p>
+
+{#if $navigating || direct}
     <Loading />
+{:else}	
+    {@render children?.()}
 {/if}
