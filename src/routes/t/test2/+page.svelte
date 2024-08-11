@@ -4,7 +4,7 @@
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
     
-    export let data;
+    let { data } = $props();
 
     /*onMount(() => {
         if(data.directHit) {
@@ -25,7 +25,7 @@
 	<p>Value: {value.done}</p>
 {/await}
 {data.clock}
-<button on:click={() => {
+<button onclick={() => {
 console.log('Inv');
 invalidateAll();
 }}> Invalidate </button>
