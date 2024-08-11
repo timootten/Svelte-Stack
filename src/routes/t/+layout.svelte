@@ -3,7 +3,7 @@
     import Loading from '$lib/components/core/Loading.svelte';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
-    import { invalidate } from '$app/navigation';
+    import { invalidate, invalidateAll } from '$app/navigation';
 
     let { children } = $props();
 
@@ -11,7 +11,8 @@
 
     onMount(async () => {
         if(direct) {
-            //await invalidate("/t/test2");
+            //await invalidate();
+            await invalidateAll();
             direct = false;
         }
     });
