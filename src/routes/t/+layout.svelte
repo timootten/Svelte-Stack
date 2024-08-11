@@ -3,21 +3,23 @@
 	import Loading from '$lib/components/core/Loading.svelte';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
-    import { invalidate } from '$app/navigation';
-    export let data;
+    import { invalidateAll } from '$app/navigation';
 
-	let directHit = data.directHit;
+     let { children, data } = $props();
+
+	let directHit = $state(data.directHit);
 
     onMount(async () => {
         if(directHit) {
-            await invalidate("/t/test2");
+            await invalidateAll();
             directHit = false
         }
     });
 </script>
 
+{directHit}
 {#if $navigating || directHit}
 	<Loading />
 {:else}
-	<slot />
+	{@render children()}
 {/if}
