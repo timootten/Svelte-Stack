@@ -12,7 +12,7 @@
     onMount(async () => {
         if(data.directHit) {
             //await invalidate();
-            await invalidateAll();
+            await invalidate((url) => true);
             direct = false;
         }
     });
