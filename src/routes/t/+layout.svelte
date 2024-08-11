@@ -17,7 +17,7 @@
     });
 </script>
 
-{directHit}
+{direct}
 {data.directHit}
 {#if $navigating}
 	<Loading />
