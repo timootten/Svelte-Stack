@@ -4,6 +4,8 @@ export async function load({ locals, request, setHeaders, depends }) {
   const secFetchSite = request.headers.get("sec-fetch-site");
   let directHit = secFetchSite === "none" || secFetchSite === "cross-site";
   
+	console.log(request);
+
   console.log("Called page");
 
   const takesShort = async () => {
