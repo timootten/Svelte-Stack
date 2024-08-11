@@ -22,7 +22,7 @@ const pollingLimiter = new RetryAfterRateLimiter({
 
 
 export const handle: Handle = async ({ event, resolve }) => {
-	console.log("Server hook");
+	console.log("Server hook", event.request.url);
   try {
     const url = new URL(event.request.url)
     if (event.request.method === "POST") {
