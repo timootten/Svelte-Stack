@@ -5,9 +5,9 @@
     import { onMount } from 'svelte';
     import { invalidate, invalidateAll } from '$app/navigation';
 
-    let { children } = $props();
+    let { children, data } = $props();
 
-    let direct = $state(true);
+    let direct = $state(data.directHit);
 
     onMount(async () => {
         if(direct) {
