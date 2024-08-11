@@ -7,19 +7,19 @@
 
     let { children, data } = $props();
 
-	let directHit = $state(true);
+	let direct = $state(true);
 
     onMount(async () => {
-        if(directHit) {
+        if(direct) {
             //await invalidate("/t/test2");
-            directHit = false;
+            direct = false;
         }
     });
 </script>
 
 {directHit}
 {data.directHit}
-{#if $navigating || directHit}
+{#if $navigating}
 	<Loading />
 {:else}
 	{@render children()}
