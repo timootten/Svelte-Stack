@@ -12,7 +12,7 @@
     onMount(async () => {
         if(direct) {
             //await invalidate();
-            //await invalidateAll();
+            await invalidateAll();
             direct = false;
         }
     });
