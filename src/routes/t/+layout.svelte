@@ -13,14 +13,14 @@
         if(direct) {
             await invalidateAll();
             //await invalidate((url) => true);
-			setTimeout(() => {
+			      setTimeout(() => {
             	direct = false;
             }, 500);
         }
     });
 </script>
 <p>{direct}</p>
-{#if $navigating || direct}
+{#if $navigating || data.directHit}
     <Loading />
 {:else}	
     {@render children?.()}
