@@ -6,17 +6,20 @@ export async function load({ locals, request, setHeaders, depends }) {
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
 
 	//console.log(secFetchSite, request);
-	//console.log(secFetchSite, request);
   console.log("Called page", directHit);
 
-   if(directHit) return {}
+  const takesShort = async () => {
+    return { done: 'Xx' }
+  };
+
+   
+  
 
   const takesLong = async () => {
     console.log("Expensive Starting")
     await sleep(5000)
      // expensive function
     console.log("Expensive");
-    await sleep(5000)
     return { done: new Date().toLocaleString('de-de') }
   };
 
@@ -24,7 +27,7 @@ export async function load({ locals, request, setHeaders, depends }) {
 directHit,
 clock: new Date().toLocaleString('de-de'),
     x: {
-       takesLong: takesLong()
+       takesLong: { done: new Date().toLocaleString('de-de')}
     }
   };
 }

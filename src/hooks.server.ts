@@ -64,8 +64,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   } catch (error) {
     // event.getClientAdress during prerender is not accessable
   }
-  if (!isConnected)
-    error(500, "Database connection error")
+  //if (!isConnected)
+    //error(500, "Database connection error")
 
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {
