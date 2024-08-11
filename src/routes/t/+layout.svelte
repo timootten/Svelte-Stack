@@ -11,8 +11,10 @@
 
     onMount(async () => {
         if(directHit) {
+            alert("x");
             await invalidate("/t/test2");
             directHit = false
+            alert(directHit);
         }
     });
 </script>
