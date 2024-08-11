@@ -10,7 +10,7 @@
     let direct = $state(data.directHit);
 
     onMount(async () => {
-        if(direct) {
+        if(data.directHit) {
             //await invalidate();
             await invalidateAll();
             direct = false;
