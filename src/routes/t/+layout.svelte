@@ -11,8 +11,8 @@
 
     onMount(async () => {
         if(direct) {
-            await invalidateAll();
-            //await invalidate((url) => true);
+            //await invalidateAll();
+            await invalidate((url) => true);
 			      setTimeout(() => {
             	direct = false;
             }, 500);
