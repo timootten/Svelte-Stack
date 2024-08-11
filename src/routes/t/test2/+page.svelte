@@ -26,6 +26,10 @@
 {/await}
 {data.clock}
 <button onclick={() => {
-console.log('Inv');
+console.log('InvAll');
 invalidateAll();
+}}> InvalidateAll </button>
+<button onclick={() => {
+console.log('Inv');
+invalidate((url) => true);
 }}> Invalidate </button>
