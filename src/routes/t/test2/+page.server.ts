@@ -3,7 +3,7 @@ import { sleep } from "$lib/utils";
 export async function load({ locals, request, setHeaders, depends }) {
   const secFetchSite = request.headers.get("sec-fetch-site");
 
-  let directHit = secFetchSite === "none" || secFetchSite === "cross-site" || secFetchSite === undefined;
+  let directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
   
 	console.log(secFetchSite, request);
 
