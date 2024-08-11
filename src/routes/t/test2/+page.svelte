@@ -1,5 +1,5 @@
 <script lang="ts">
-  	import { invalidateAll } from '$app/navigation';
+  	import { invalidate, invalidateAll } from '$app/navigation';
     import { browser } from '$app/environment';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
