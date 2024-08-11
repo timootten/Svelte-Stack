@@ -10,7 +10,7 @@
     let direct = $state(data.directHit);
 
     onMount(async () => {
-        if(data.directHit) {
+        if(direct) {
             //await invalidate();
             await invalidate((url) => true);
             direct = false;
@@ -18,7 +18,7 @@
     });
 </script>
 <p>{direct}</p>
-{#if $navigating || data.directHit}
+{#if $navigating || direct}
     <Loading />
 {:else}	
     {@render children?.()}
