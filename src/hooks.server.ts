@@ -22,7 +22,7 @@ const pollingLimiter = new RetryAfterRateLimiter({
 
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const secFetchSite = request.headers.get("sec-fetch-site");
+	const secFetchSite = event.request.headers.get("sec-fetch-site");
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
 	console.log("Server hook", event.request.url);
 	console.log("hook direct", directHit);
