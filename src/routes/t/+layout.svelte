@@ -22,5 +22,5 @@
 {#if $navigating || direct}
 	<Loading />
 {:else}
-
+	{@render children()}
 {/if}
