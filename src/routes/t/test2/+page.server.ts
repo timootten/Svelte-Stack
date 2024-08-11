@@ -21,7 +21,7 @@ export async function load({ locals, request, setHeaders, depends }) {
   };
 
   return {
-directHit,
+directHit: locals.directHit,
 clock: new Date().toLocaleString('de-de'),
     x: {
        takesLong: takesLong()
