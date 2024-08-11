@@ -21,6 +21,7 @@
 </script>
 
 {directHit}
+{data.directHit}
 {#if $navigating || directHit}
 	<Loading />
 {:else}
