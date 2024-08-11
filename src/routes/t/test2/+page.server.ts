@@ -7,7 +7,7 @@ export async function load({ locals, request, setHeaders, depends }) {
   
 	console.log(secFetchSite, request);
 
-  console.log("Called page");
+  console.log("Called page", directHit);
 
   const takesShort = async () => {
     return { done: 'Xx' }
