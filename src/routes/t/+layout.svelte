@@ -18,9 +18,7 @@
     });
 </script>
 
-<p>{direct}</p>
-
-{#if $navigating || direct}
+{#if $navigating || data.directHit}
     <Loading />
 {:else}	
     {@render children?.()}
