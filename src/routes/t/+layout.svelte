@@ -1,17 +1,17 @@
 <script>
-	import { navigating } from '$app/stores';
-	import Loading from '$lib/components/core/Loading.svelte';
+    import { navigating } from '$app/stores';
+    import Loading from '$lib/components/core/Loading.svelte';
     import { page } from '$app/stores';  
     import { onMount } from 'svelte';
-    import { invalidateAll } from '$app/navigation';
+    import { invalidate } from '$app/navigation';
 
-     let { children, data } = $props();
+    let { children, data } = $props();
 
 	let directHit = $state(data.directHit);
 
     onMount(async () => {
         if(directHit) {
-            await invalidateAll();
+            await invalidate("/t/test2");
             directHit = false
         }
     });
