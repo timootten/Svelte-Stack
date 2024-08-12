@@ -1,7 +1,7 @@
 import { sleep } from "$lib/utils";
 
 export async function load({ locals, request, setHeaders, depends }) {
-  //depends("this")
+  depends("this")
   const secFetchSite = request.headers.get("sec-fetch-site");
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
 
