@@ -1,7 +1,7 @@
 
 
 export async function load({ locals, request, setHeaders, depends }) {
-  depends("x:x")
+  depends("x")
 
   console.log("Called page");
 
