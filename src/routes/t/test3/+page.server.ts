@@ -6,7 +6,7 @@ export async function load({ locals, request, setHeaders, depends }) {
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
 
 	
-	console.log("handle", event.url.searchParams.toString());
+	console.log("handle xa", event.url.searchParams.toString());
 	const isInvalidating = event.url.searchParams.get("x-sveltekit-invalidated");
 	console.log("xa", isInvalidating);
 
