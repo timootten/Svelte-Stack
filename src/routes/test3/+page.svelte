@@ -28,5 +28,5 @@ invalidate((url) => {
 }}> Invalidate </button>
 <button onclick={() => {
 console.log('Inv X');
-invalidate("x:x");
+invalidate("x");
 }}> Invalidate X </button>
