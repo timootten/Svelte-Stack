@@ -9,10 +9,10 @@ export async function load({ locals, request, setHeaders, depends }) {
 	//console.log(secFetchSite, request);
 	console.log("Page", locals.directHit);
   console.log("Called page", directHit);
-	console.log("url", JSON.stringify(request));
+	console.log("url", request);
 	//console.log("XXX", request.headers);
 
-   if(directHit) return {}
+   if(locals.directHit) return {}
 
   const takesLong = async () => {
     console.log("Expensive Starting")
