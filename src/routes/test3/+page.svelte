@@ -26,3 +26,5 @@ invalidate((url) => {
     return true
 } );
 }}> Invalidate </button>
+invalidate("x:x");
+}}> Invalidate X</button>
