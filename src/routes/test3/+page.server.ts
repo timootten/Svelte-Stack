@@ -1,9 +1,9 @@
 
 
 export async function load({ locals, request, setHeaders, depends }) {
-  depends("x")
+  depends("current:page")
 
-  console.log("Called page");
+  console.log("Called page test3");
 
   return {
 clock: new Date().toLocaleString('de-de'),
