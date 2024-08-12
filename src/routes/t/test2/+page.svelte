@@ -33,3 +33,7 @@ invalidateAll();
 console.log('Inv');
 invalidate((url) => true);
 }}> Invalidate </button>
+<button onclick={() => {
+console.log('Inv');
+invalidate("current:page");
+}}> Invalidate Current</button>
