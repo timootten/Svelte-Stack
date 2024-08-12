@@ -26,5 +26,7 @@ invalidate((url) => {
     return true
 } );
 }}> Invalidate </button>
+<button onclick={() => {
+console.log('Inv X');
 invalidate("x:x");
-}}> Invalidate X</button>
+}}> Invalidate X </button>
