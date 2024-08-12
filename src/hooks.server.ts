@@ -22,9 +22,12 @@ const pollingLimiter = new RetryAfterRateLimiter({
 
 
 export const handle: Handle = async ({ event, resolve }) => {
+	const isInvalidating = event.url.searchParams.get("x-sveltekit-invalidated");
 	const secFetchSite = event.request.headers.get("sec-fetch-site");
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
 	console.log("Server hook", event.request.url);
+
+  console.log("Server hook invalidate", isInvalidating);
 	console.log("hook direct", directHit);
 	event.locals.directHit = directHit;
 
