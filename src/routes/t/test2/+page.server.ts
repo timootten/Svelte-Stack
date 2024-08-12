@@ -7,6 +7,11 @@ export async function load({ locals, request, setHeaders, depends }) {
 
 	//console.log(secFetchSite, request);
 	//console.log(secFetchSite, request);
+
+	console.log("handle xa", event.url.searchParams.toString());
+	const isInvalidating = event.url.searchParams.get("x-sveltekit-invalidated");
+	console.log("xa", isInvalidating);
+
 	console.log("Page", locals.directHit);
   console.log("Called page", directHit);
 	//console.log("url", request);
