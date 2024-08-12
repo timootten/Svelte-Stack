@@ -9,7 +9,8 @@ export async function load({ locals, request, setHeaders, depends }) {
 	//console.log(secFetchSite, request);
 	console.log("Page", locals.directHit);
   console.log("Called page", directHit);
-	console.log("XXX", request.headers);
+	console.log("url", JSON.stringify(request));
+	//console.log("XXX", request.headers);
 
    if(directHit) return {}
 
