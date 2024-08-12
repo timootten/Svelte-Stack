@@ -23,7 +23,7 @@ const pollingLimiter = new RetryAfterRateLimiter({
 
 export const handle: Handle = async ({ event, resolve }) => {
 	console.log("handle", event.url.toString());
-	console.log("handle", event.url.searchParams);
+	console.log("handle", event.url.searchParams.toString());
 	const isInvalidating = event.url.searchParams.get("x-sveltekit-invalidated");
 	const secFetchSite = event.request.headers.get("sec-fetch-site");
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
