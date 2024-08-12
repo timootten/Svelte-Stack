@@ -5,6 +5,11 @@ export async function load({ locals, request, setHeaders, depends }) {
   const secFetchSite = request.headers.get("sec-fetch-site");
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
 
+	
+	console.log("handle", event.url.searchParams.toString());
+	const isInvalidating = event.url.searchParams.get("x-sveltekit-invalidated");
+	console.log("xa", isInvalidating);
+
 	//console.log(secFetchSite, request);
   console.log("Called page", directHit);
 
