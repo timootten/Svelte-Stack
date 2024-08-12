@@ -1,6 +1,6 @@
 import { sleep } from "$lib/utils";
 
-export async function load({ locals, request, setHeaders, depends }) {
+export async function load({ locals, request, setHeaders, depends. url}) {
   depends("current:page")
   const secFetchSite = request.headers.get("sec-fetch-site");
   const directHit = !secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site";
@@ -8,8 +8,8 @@ export async function load({ locals, request, setHeaders, depends }) {
 	//console.log(secFetchSite, request);
 	//console.log(secFetchSite, request);
 
-	console.log("handle xa", event.url.searchParams.toString());
-	const isInvalidating = event.url.searchParams.get("x-sveltekit-invalidated");
+	console.log("handle xa", url.searchParams.toString());
+	const isInvalidating = url.searchParams.get("x-sveltekit-invalidated");
 	console.log("xa", isInvalidating);
 
 	console.log("Page", locals.directHit);
