@@ -12,8 +12,9 @@
     onMount(async () => {
         if(direct) {
             //await invalidateAll();
-            await invalidate((url) => true);
-			      direct = false;
+            //await invalidate((url) => true);
+			await invalidate("current:page");
+			direct = false;
         }
     });
 </script>
