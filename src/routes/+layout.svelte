@@ -35,12 +35,21 @@
 		rights: 'Rights'
 	};
 
-	let pageName = $state('Loading...');
+	/*let pageName = $state('Loading...');
 
 	$effect(() => {
 		const routeId = $page.route.id || '';
 		const matchingKey = Object.keys(routeToPageMapping).find((key) => routeId.includes(key));
 		pageName = matchingKey ? routeToPageMapping[matchingKey] : '404';
+	});*/
+
+	
+
+let pageName =	$derived.by(() => {
+		const routeId = $page.route.id || '';
+		const matchingKey = Object.keys(routeToPageMapping).find((key) => routeId.includes(key));
+		pageName = matchingKey ? routeToPageMapping[matchingKey] : '404';
+		return pageName;
 	});
 
 // try crossfade https://svelte.dev/repl/0ad58a0d830f4001b91409e40164aa24?version=3.44.1
