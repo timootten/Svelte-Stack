@@ -7,12 +7,12 @@
 
     let { children, data } = $props();
 
-		console.log("Data From Layout", JSON.stringify(data));
+		console.log("Data From Layout: " +JSON.stringify(data));
 
     let direct = $state(data.directHit);
 
     onMount(async () => {
-        alert("Data", JSON.stringify(data));
+        alert("Data: " + JSON.stringify(data));
         if(direct) {
             //await invalidateAll();
             //await invalidate((url) => true);
