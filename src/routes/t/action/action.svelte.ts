@@ -2,7 +2,7 @@ import { deserialize } from "$app/forms";
 import { onMount } from "svelte"
 
 export const useAction = <T extends (...args: any) => Promise<any>>(action: string) => {
-  let value = $state<ReturnType<T>>(new Promise((resolve, reject) => { } ) as any)
+  let value = $state<ReturnType<T>>(new Promise(() => { }) as any)
 
   const callAction = async () => {
     let formData = new FormData();
@@ -12,9 +12,7 @@ export const useAction = <T extends (...args: any) => Promise<any>>(action: stri
   }
 
   onMount(() => {
-    (async () => {
       value = callAction() as any
-    })();
   });
 
   
