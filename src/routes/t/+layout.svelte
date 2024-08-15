@@ -9,10 +9,10 @@
 
 		console.log("Data From Layout: " +JSON.stringify(data));
 
-    let direct = $state(data.directHit);
+    let direct = $state(false);
 
     onMount(async () => {
-        alert("Data: " + JSON.stringify(data));
+      //  alert("Data: " + JSON.stringify(data));
         if(direct) {
             //await invalidateAll();
             //await invalidate((url) => true);

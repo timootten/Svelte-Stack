@@ -6,7 +6,7 @@
  import { onMount } from 'svelte';
 
  onMount(() => {
-    goto('/t/test2');
+   // goto('/t/test2');
  });
 
  let { data, form } = $props();
