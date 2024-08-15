@@ -17,16 +17,3 @@
 {:then value}
 	<p>Value: {value.time}</p>
 {/await}
-<p>Time2: {form?.time2}</p>
-
-<form
-	action="?/time"
-	method="post"
-	use:enhance={() => {
-		return async ({ result }) => {
-			applyAction(result);
-		};
-	}}
->
-	<button type="submit">Time2</button>
-</form>
