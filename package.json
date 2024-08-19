@@ -41,7 +41,7 @@
 	"type": "module",
 	"dependencies": {
 		"drizzle-kit": "^0.22.8",
-		"@lucia-auth/adapter-drizzle": "^1.1.0",
+		"@lucia-auth/adapter-drizzle": "^1.0.7",
 		"@react-email/components": "^0.0.19",
 		"@react-email/tailwind": "^0.0.18",
 		"@sveltejs/enhanced-img": "^0.3.3",
