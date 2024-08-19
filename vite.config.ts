@@ -12,7 +12,7 @@ export default defineConfig({
       filename: "stats.html",
     }),
   ],
-  build: { minify: false },
+  //build: { minify: false },
   ssr: {
     noExternal: ['oslo']
   }
