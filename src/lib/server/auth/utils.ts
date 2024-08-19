@@ -15,6 +15,8 @@ import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common'
 import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en'
 import * as zxcvbnDePackage from '@zxcvbn-ts/language-de'
 import MagicLinkEmail from './email/magic-link-email';
+// Dont delete this, this is needed for the emails
+import ReactDOMServer from 'react-dom/server';
 
 const transporter = nodemailer.createTransport({
   url: process.env.SMTP_URL
