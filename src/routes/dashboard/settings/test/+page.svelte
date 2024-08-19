@@ -2,7 +2,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
+	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { Label } from '$lib/components/ui/label';
 
@@ -62,4 +62,3 @@
 		</Card.Footer>
 	</Card.Root>
 </form>
-<SuperDebug data={$form} />

@@ -3,7 +3,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
+	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
@@ -74,5 +74,3 @@
 		</div>
 	</Card.Content>
 </Card.Root>
-
-<SuperDebug data={$form} />

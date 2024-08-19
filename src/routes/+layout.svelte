@@ -5,8 +5,6 @@
 	import { getFlash } from 'sveltekit-flash-message';
 	import { page } from '$app/stores';
 	import { onNavigate } from '$app/navigation';
-	import { navigating } from '$app/stores';
-	import Loading from '$lib/components/core/Loading.svelte';
 
 	let { children } = $props();
 
@@ -43,16 +41,14 @@
 		pageName = matchingKey ? routeToPageMapping[matchingKey] : '404';
 	});*/
 
-	
-
-let pageName =	$derived.by(() => {
+	let pageName = $derived.by(() => {
 		const routeId = $page.route.id || '';
 		const matchingKey = Object.keys(routeToPageMapping).find((key) => routeId.includes(key));
 		const currentPageName = matchingKey ? routeToPageMapping[matchingKey] : '404';
 		return currentPageName;
 	});
 
-// try crossfade https://svelte.dev/repl/0ad58a0d830f4001b91409e40164aa24?version=3.44.1
+	// try crossfade https://svelte.dev/repl/0ad58a0d830f4001b91409e40164aa24?version=3.44.1
 	onNavigate(() => {
 		if (!document.startViewTransition) return;
 

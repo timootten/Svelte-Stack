@@ -8,11 +8,9 @@
 	import { Button } from '$lib/components/ui/button';
 	import { toggleMode } from 'mode-watcher';
 	import * as Sheet from '$lib/components/ui/sheet';
-	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
 	import Avatar from './Avatar.svelte';
-	import { goto } from '$app/navigation';
 
 	type Props = {
 		user: import('lucia').User | null;
@@ -30,6 +28,32 @@
 	let activePath = $derived($page.url.pathname + $page.url.hash);
 
 	let open = $state(false);
+
+	const onMobileClick = async (
+		event: MouseEvent & {
+			currentTarget: EventTarget & HTMLAnchorElement;
+		}
+	) => {
+		event.preventDefault();
+		open = false;
+		const link = event.currentTarget;
+		const anchorId = new URL(link.href).hash.replace('#', '');
+		const anchor = document.getElementById(anchorId);
+		setTimeout(() => {
+			if (anchorId === '') {
+				window.scroll({
+					top: 0,
+					left: 0,
+					behavior: 'smooth'
+				});
+			} else {
+				window.scrollTo({
+					top: anchor?.offsetTop,
+					behavior: 'smooth'
+				});
+			}
+		}, 500);
+	};
 </script>
 
 <header class="z-50 w-full">
@@ -91,11 +115,10 @@
 					<span class="sr-only">Dashboard</span>
 				</a>
 			</Sheet.Trigger>
-			<Sheet.Content side="top" class="md:max-w-xs">
+			<Sheet.Content side="left" class="md:max-w-xs">
 				<nav class="grid gap-6 text-lg font-medium">
-					<div class="flex flex-row items-center gap-5">
-						<a
-							href="##"
+					<a href="/" onclick={onMobileClick} class="flex flex-row items-center gap-5">
+						<div
 							class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
 						>
 							<enhanced:img
@@ -103,22 +126,21 @@
 								alt="LOGO"
 								class="h-8 w-8"
 							/>
-						</a>
+						</div>
 						<span>Svelte-Stack</span>
-					</div>
+					</a>
 					{#each navLinks as { href, label, icon }}
-						<button
-							onclick={() => {
-								open = false;
-								goto(href);
-							}}
+						<a
+							rel="noreferrer noopener"
+							{href}
+							onclick={onMobileClick}
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 						>
 							{#if icon}
-								<icon class="h-5 w-5"></icon>
+								<svelte:component this={icon} class="h-5 w-5" />
 							{/if}
 							{label}
-						</button>
+						</a>
 					{/each}
 				</nav>
 			</Sheet.Content>

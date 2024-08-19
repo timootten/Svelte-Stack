@@ -5,11 +5,14 @@ import { visualizer } from "rollup-plugin-visualizer";
 import Inspect from 'vite-plugin-inspect';
 
 export default defineConfig({
-  plugins: [Inspect(), enhancedImages(), sveltekit(),
-  visualizer({
-    emitFile: true,
-    filename: "stats.html",
-  }),],
+  plugins: [
+    Inspect(), enhancedImages(), sveltekit(),
+    visualizer({
+      emitFile: true,
+      filename: "stats.html",
+    }),
+  ],
+  build: { minify: false },
   ssr: {
     noExternal: ['oslo']
   }
