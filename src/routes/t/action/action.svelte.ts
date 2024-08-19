@@ -12,13 +12,9 @@ export const useAction = <T extends (...args: any) => Promise<any>>(action: stri
   }
 
   onMount(() => {
-      value = callAction() as any
+    value = callAction() as any
   });
 
-  
-  return {
-    get value() {
-      return value;
-    }
-  }
+
+  return () => value
 }

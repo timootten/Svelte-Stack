@@ -3,44 +3,46 @@
 	import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
+	import placeHolder50 from '$img/placeholder/50.png?enhanced';
+
 	// Define the testimonial data
 	const testimonials = [
 		{
-			image: 'https://github.com/shadcn.png',
+			image: placeHolder50,
 			name: 'John Doe Svelte',
 			userName: '@john_Doe',
 			comment: 'This landing page is awesome!'
 		},
 		{
-			image: 'https://github.com/shadcn.png',
+			image: placeHolder50,
 			name: 'John Doe Svelte',
 			userName: '@john_Doe1',
 			comment:
 				'Lorem ipsum dolor sit amet,empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'
 		},
 		{
-			image: 'https://github.com/shadcn.png',
+			image: placeHolder50,
 			name: 'John Doe Svelte',
 			userName: '@john_Doe2',
 			comment:
 				'Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.'
 		},
 		{
-			image: 'https://github.com/shadcn.png',
+			image: placeHolder50,
 			name: 'John Doe Svelte',
 			userName: '@john_Doe3',
 			comment:
 				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
 		},
 		{
-			image: 'https://github.com/shadcn.png',
+			image: placeHolder50,
 			name: 'John Doe Svelte',
 			userName: '@john_Doe4',
 			comment:
 				'Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud.'
 		},
 		{
-			image: 'https://github.com/shadcn.png',
+			image: placeHolder50,
 			name: 'John Doe Svelte',
 			userName: '@john_Doe5',
 			comment:
@@ -71,8 +73,7 @@
 			<Card class="max-w-md overflow-hidden md:break-inside-avoid">
 				<CardHeader class="flex flex-row items-center gap-4 pb-2">
 					<Avatar>
-						<AvatarImage alt="" src={image} />
-						<AvatarFallback>OM</AvatarFallback>
+						<enhanced:img alt="John Doe" src={image} />
 					</Avatar>
 
 					<div class="flex flex-col">

@@ -1,38 +1,35 @@
 <script lang="ts">
 	import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 	// Replace these imports with links to stock images
-	const MedalIcon = 'https://via.placeholder.com/50';
-	const MapIcon = 'https://via.placeholder.com/50';
-	const PlaneIcon = 'https://via.placeholder.com/50';
-	const GiftIcon = 'https://via.placeholder.com/50';
+	import placeHolder50 from '$img/placeholder/50.png?enhanced';
 
 	interface FeatureProps {
-		icon: string; // Change type to string
+		icon: any; // Change type to string
 		title: string;
 		description: string;
 	}
 
 	const features: FeatureProps[] = [
 		{
-			icon: MedalIcon,
+			icon: placeHolder50,
 			title: 'Accessibility',
 			description:
 				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum'
 		},
 		{
-			icon: MapIcon,
+			icon: placeHolder50,
 			title: 'Community',
 			description:
 				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum'
 		},
 		{
-			icon: PlaneIcon,
+			icon: placeHolder50,
 			title: 'Scalability',
 			description:
 				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum'
 		},
 		{
-			icon: GiftIcon,
+			icon: placeHolder50,
 			title: 'Gamification',
 			description:
 				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum'
@@ -57,7 +54,7 @@
 			<Card class="bg-muted/50">
 				<CardHeader>
 					<CardTitle class="grid place-items-center gap-4">
-						<img src={icon} alt={title} />
+						<enhanced:img src={icon} alt={title} />
 						{title}
 					</CardTitle>
 				</CardHeader>

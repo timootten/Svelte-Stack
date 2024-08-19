@@ -39,7 +39,7 @@
 	<section class="container grid grid-cols-2 gap-x-12 gap-y-8 py-10 md:grid-cols-4 xl:grid-cols-6">
 		<div class="col-span-full xl:col-span-2">
 			<a rel="noreferrer noopener" href="/" class="flex text-xl font-bold">
-				<img src="/favicon.png" class="mr-2 h-8" alt="Logo" />
+				<enhanced:img src="$static/favicon.png?w=32&h=32&enhanced" class="mr-2 h-8" alt="Logo" />
 				Svelte-Stack
 			</a>
 		</div>

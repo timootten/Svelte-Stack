@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { Badge } from '../ui/badge';
 	import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
-	const image = 'https://via.placeholder.com/200';
-	const image3 = 'https://via.placeholder.com/200';
-	const image4 = 'https://via.placeholder.com/200';
+	import placeHolder200 from '$img/placeholder/200.png?enhanced';
 
 	interface FeatureProps {
 		title: string;
 		description: string;
-		image: string;
+		image: any;
 	}
 
 	const features: FeatureProps[] = [
@@ -16,19 +14,19 @@
 			title: 'Responsive Design',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			image: image4
+			image: placeHolder200
 		},
 		{
 			title: 'Intuitive user interface',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			image: image3
+			image: placeHolder200
 		},
 		{
 			title: 'AI-Powered insights',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			image: image
+			image: placeHolder200
 		}
 	];
 
@@ -71,7 +69,9 @@
 				<CardContent>{description}</CardContent>
 
 				<CardFooter>
-					<img src={image} alt="About feature" class="mx-auto w-[200px] lg:w-[300px]" />
+					<div class="mx-auto">
+						<enhanced:img src={image} alt="About feature" />
+					</div>
 				</CardFooter>
 			</Card>
 		{/each}

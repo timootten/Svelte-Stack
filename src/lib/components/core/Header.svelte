@@ -12,7 +12,7 @@
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
 	import Avatar from './Avatar.svelte';
-import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	type Props = {
 		user: import('lucia').User | null;
@@ -29,7 +29,7 @@ import { goto } from '$app/navigation';
 
 	let activePath = $derived($page.url.pathname + $page.url.hash);
 
- let open = $state(false);
+	let open = $state(false);
 </script>
 
 <header class="z-50 w-full">
@@ -37,7 +37,7 @@ import { goto } from '$app/navigation';
 		<div class="mr-4 hidden md:flex">
 			{#if showLogo}
 				<a href="/" class="mr-6 flex items-center space-x-2">
-					<img src="/favicon.png" alt="LOGO" class="h-8 w-8" />
+					<enhanced:img src="$static/favicon.png?w=32&h=32&enhanced" alt="LOGO" class="h-8 w-8" />
 					<span class="hidden font-bold sm:inline-block">Svelte-Stack</span>
 				</a>
 			{/if}
@@ -98,14 +98,16 @@ import { goto } from '$app/navigation';
 							href="##"
 							class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
 						>
-							<img src="/favicon.png" alt="LOGO" class="h-8 w-8" />
+							<enhanced:img
+								src="$static/favicon.png?w=32&h=32&enhanced"
+								alt="LOGO"
+								class="h-8 w-8"
+							/>
 						</a>
 						<span>Svelte-Stack</span>
 					</div>
 					{#each navLinks as { href, label, icon }}
-						
 						<button
-							
 							onclick={() => {
 								open = false;
 								goto(href);
@@ -113,7 +115,7 @@ import { goto } from '$app/navigation';
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 						>
 							{#if icon}
-								<svelte:component this={icon} class="h-5 w-5" />
+								<icon class="h-5 w-5"></icon>
 							{/if}
 							{label}
 						</button>

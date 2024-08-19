@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
-	const MagnifierIcon = 'https://via.placeholder.com/50';
-	const WalletIcon = 'https://via.placeholder.com/50';
-	const ChartIcon = 'https://via.placeholder.com/50';
+	import placeHolder50 from '$img/placeholder/50.png?enhanced';
+	import placeHolder500 from '$img/placeholder/500.png?enhanced';
 
 	interface ServiceProps {
 		title: string;
 		description: string;
-		icon: string;
+		icon: any;
 	}
 
 	const serviceList: ServiceProps[] = [
@@ -15,19 +14,19 @@
 			title: 'Code Collaboration',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			icon: MagnifierIcon
+			icon: placeHolder50
 		},
 		{
 			title: 'Project Management',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			icon: WalletIcon
+			icon: placeHolder50
 		},
 		{
 			title: 'Task Automation',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			icon: ChartIcon
+			icon: placeHolder50
 		}
 	];
 </script>
@@ -51,7 +50,7 @@
 					<Card>
 						<CardHeader class="flex items-start justify-start gap-4 space-y-1 md:flex-row">
 							<div class="mt-1 rounded-2xl bg-primary/20 p-1">
-								<img src={icon} alt={title} />
+								<enhanced:img src={icon} alt={title} />
 							</div>
 							<div>
 								<CardTitle>{title}</CardTitle>
@@ -65,8 +64,8 @@
 			</div>
 		</div>
 
-		<img
-			src={ChartIcon}
+		<enhanced:img
+			src={placeHolder500}
 			class="w-[300px] object-contain md:w-[500px] lg:w-[600px]"
 			alt="About services"
 		/>

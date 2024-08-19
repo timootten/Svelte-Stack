@@ -1,6 +1,5 @@
 import { lucia } from '$lib/server/auth';
-import { isConnected } from '$lib/server/db';
-import { error, redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
+import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
 import type { ServerWebSocket, WebSocketHandler } from "svelte-adapter-bun";
 import cookie from 'cookie';
@@ -22,15 +21,9 @@ const pollingLimiter = new RetryAfterRateLimiter({
 
 
 export const handle: Handle = async ({ event, resolve }) => {
-	console.log("handle 2", new URL(event.request.url).searchParams.toString());
-	const isInvalidating = new URL(event.request.url).searchParams.get("x-sveltekit-invalidated") ? true : false;
-	const secFetchSite = event.request.headers.get("sec-fetch-site");
-	const directHit = !isInvalidating && (!secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site");
-	console.log("Server hook", event.request.url);
-
-	console.log("Server hook invalidate", isInvalidating);
-	console.log("hook direct", directHit);
-	event.locals.directHit = directHit;
+  //const isInvalidating = new URL(event.request.url).searchParams.get("x-sveltekit-invalidated") ? true : false;
+  //const secFetchSite = event.request.headers.get("sec-fetch-site");
+  //const directHit = !isInvalidating && (!secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site");
 
   try {
     const url = new URL(event.request.url)
@@ -38,8 +31,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       if (/^\?\/[a-zA-Z0-9]*Polling$/.test(url.search)) {
         const status = await pollingLimiter.check(event);
         if (status.limited) {
-          let response = new Response(
-            JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+          let response = new Response(`You are sending too many requests. Please try after ${status.retryAfter} seconds.`,
             {
               status: 429,
             }
@@ -49,8 +41,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       } else {
         const status = await postLimiter.check(event);
         if (status.limited) {
-          let response = new Response(
-            JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+          let response = new Response(`You are sending too many requests. Please try after ${status.retryAfter} seconds.`,
             {
               status: 429,
             }
@@ -62,8 +53,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (event.request.method === "GET") {
       const status = await getLimiter.check(event);
       if (status.limited) {
-        let response = new Response(
-          JSON.stringify({ message: `You are sending too many requests. Please try after ${status.retryAfter} seconds.` }),
+        let response = new Response(`You are sending too many requests. Please try after ${status.retryAfter} seconds.`,
           {
             status: 429,
           }
@@ -75,7 +65,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     // event.getClientAdress during prerender is not accessable
   }
   //if (!isConnected)
-    //error(500, "Database connection error")
+  //error(500, "Database connection error")
 
   const sessionId = event.cookies.get(lucia.sessionCookieName);
   if (!sessionId) {

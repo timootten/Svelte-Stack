@@ -11,6 +11,9 @@
 		CardHeader,
 		CardTitle
 	} from '../ui/card';
+
+	import placeHolder100 from '$img/placeholder/100.png?enhanced';
+	import Check from 'lucide-svelte/icons/check';
 </script>
 
 <section class="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
@@ -62,8 +65,7 @@
 			>
 				<CardHeader class="flex flex-row items-center gap-4 pb-2">
 					<Avatar>
-						<AvatarImage alt="" src="https://github.com/shadcn.png" />
-						<AvatarFallback>SH</AvatarFallback>
+						<enhanced:img src={placeHolder100} alt="John Doe" />
 					</Avatar>
 
 					<div class="flex flex-col">
@@ -79,8 +81,8 @@
 				class="absolute right-[20px] top-4 flex w-80 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
 				<CardHeader class="mt-8 flex items-center justify-center pb-2">
-					<img
-						src="https://i.pravatar.cc/150?img=58"
+					<enhanced:img
+						src={placeHolder100}
 						alt="user avatar"
 						class="absolute -top-12 aspect-square h-24 w-24 rounded-full object-cover grayscale-[0%]"
 					/>
@@ -169,7 +171,7 @@
 					<div class="space-y-4">
 						{#each ['4 Team member', '4 GB Storage', 'Upto 6 pages'] as benefit}
 							<span class="flex">
-								Icon
+								<Check class="text-green-500" />
 								<h3 class="ml-2">{benefit}</h3>
 							</span>
 						{/each}
@@ -181,7 +183,9 @@
 				class="absolute -right-[10px] bottom-[35px] w-[350px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
 				<CardHeader class="flex items-start justify-start gap-4 space-y-1 md:flex-row">
-					<div class="mt-1 rounded-2xl bg-primary/20 p-1">Icon</div>
+					<div class="mt-1 rounded-2xl bg-primary/20 p-1">
+						<enhanced:img src={placeHolder100} alt="icon" />
+					</div>
 					<div>
 						<CardTitle>Light & dark mode</CardTitle>
 						<CardDescription class="text-md mt-2">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	const pilot = 'https://via.placeholder.com/200';
+	import placeHolder200 from '$img/placeholder/200.png?enhanced';
 
 	interface statsProps {
 		quantity: string;
@@ -29,7 +29,9 @@
 <section id="about" class="container py-24 sm:py-32">
 	<div class="rounded-lg border bg-muted/50 py-12">
 		<div class="flex flex-col-reverse gap-8 px-6 md:flex-row md:gap-12">
-			<img src={pilot} alt="" class="w-[300px] rounded-lg object-contain" />
+			<div class="mx-auto w-[300px]">
+				<enhanced:img src={placeHolder200} alt="" class="w-[300px] rounded-lg object-contain" />
+			</div>
 			<div class="bg-green-0 flex flex-col justify-between">
 				<div class="pb-6">
 					<h2 class="text-3xl font-bold md:text-4xl">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	const Radar = 'https://via.placeholder.com/50';
+	import placeHolder50 from '$img/placeholder/50.png?enhanced';
 
 	interface SponsorProps {
 		icon: any;
@@ -9,32 +9,32 @@
 
 	const sponsors: SponsorProps[] = [
 		{
-			icon: Radar,
+			icon: placeHolder50,
 			size: 34,
 			name: 'Sponsor 1'
 		},
 		{
-			icon: Radar,
+			icon: placeHolder50,
 			size: 34,
 			name: 'Sponsor 2'
 		},
 		{
-			icon: Radar,
+			icon: placeHolder50,
 			size: 34,
 			name: 'Sponsor 3'
 		},
 		{
-			icon: Radar,
+			icon: placeHolder50,
 			size: 34,
 			name: 'Sponsor 4'
 		},
 		{
-			icon: Radar,
+			icon: placeHolder50,
 			size: 34,
 			name: 'Sponsor 5'
 		},
 		{
-			icon: Radar,
+			icon: placeHolder50,
 			size: 34,
 			name: 'Sponsor 6'
 		}
@@ -47,7 +47,7 @@
 	<div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
 		{#each sponsors as { icon, name, size }}
 			<div class="flex items-center gap-1 text-muted-foreground/60">
-				<span><img src={icon} alt={name} /></span>
+				<span><enhanced:img src={icon} alt={name} /></span>
 				<h3 class="text-xl font-bold">{name}</h3>
 			</div>
 		{/each}

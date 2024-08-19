@@ -16,10 +16,12 @@
 		Instagram: Instagram
 	};
 
+	import placeHolder100 from '$img/placeholder/100.png?enhanced';
+
 	// Team data
 	const teamList = [
 		{
-			imageUrl: 'https://i.pravatar.cc/150?img=35',
+			imageUrl: placeHolder100,
 			name: 'Emma Smith',
 			position: 'Product Manager',
 			socialNetworks: [
@@ -29,7 +31,7 @@
 			]
 		},
 		{
-			imageUrl: 'https://i.pravatar.cc/150?img=60',
+			imageUrl: placeHolder100,
 			name: 'John Doe',
 			position: 'Tech Lead',
 			socialNetworks: [
@@ -39,7 +41,7 @@
 			]
 		},
 		{
-			imageUrl: 'https://i.pravatar.cc/150?img=36',
+			imageUrl: placeHolder100,
 			name: 'Ashley Ross',
 			position: 'Frontend Developer',
 			socialNetworks: [
@@ -48,7 +50,7 @@
 			]
 		},
 		{
-			imageUrl: 'https://i.pravatar.cc/150?img=17',
+			imageUrl: placeHolder100,
 			name: 'Bruce Rogers',
 			position: 'Backend Developer',
 			socialNetworks: [
@@ -74,11 +76,13 @@
 		{#each teamList as { imageUrl, name, position, socialNetworks }}
 			<Card class="relative mt-8 flex flex-col items-center justify-center bg-muted/50">
 				<CardHeader class="mt-8 flex items-center justify-center pb-2">
-					<img
-						src={imageUrl}
-						alt="{name} {position}"
-						class="absolute -top-12 aspect-square h-24 w-24 rounded-full object-cover"
-					/>
+					<div class="absolute -top-12 h-24 w-24">
+						<enhanced:img
+							src={imageUrl}
+							alt="{name} {position}"
+							class="aspect-square rounded-full object-cover"
+						/>
+					</div>
 					<CardTitle class="text-center">{name}</CardTitle>
 					<CardDescription class="text-primary">{position}</CardDescription>
 				</CardHeader>
