@@ -6,10 +6,10 @@ WORKDIR /usr/src/app
 # Stage 2: Install dependencies
 FROM base AS install
 COPY package.json bun.lockb ./
-RUN bun install --frozen-lockfile && \
+RUN bun install && \
     mkdir -p /temp/dev && cp -r node_modules /temp/dev/
 
-RUN bun install --frozen-lockfile --production && \
+RUN bun install --production && \
     mkdir -p /temp/prod && cp -r node_modules /temp/prod/
 
 # Stage 3: Prepare the release
