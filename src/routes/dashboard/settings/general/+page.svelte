@@ -7,15 +7,15 @@
 	import { Label } from '$lib/components/ui/label';
 	import { zxcvbn } from '@zxcvbn-ts/core';
 	import PasswordScore from '$lib/components/dashboard/PasswordScore.svelte';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import { generalSchema } from './schema.js';
+	//import { zodClient } from 'sveltekit-superforms/adapters';
+	//import { generalSchema } from './schema.js';
 	import Check from 'lucide-svelte/icons/check';
 	import Send from 'lucide-svelte/icons/send';
 
 	let { data } = $props();
 
 	const { form, enhance, errors, constraints } = superForm(data.generalForm, {
-		validators: zod(generalSchema),
+		//validators: zodClient(generalSchema),
 		resetForm: false,
 		delayMs: 0,
 		onUpdated({ form }) {
