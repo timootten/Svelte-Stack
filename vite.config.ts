@@ -6,7 +6,8 @@ import { visualizer } from "rollup-plugin-visualizer";
 import Inspect from 'vite-plugin-inspect';
 
 export default defineConfig({
-  plugins: [paraglide({ project: './project.inlang', outdir: './src/lib/paraglide' }),
+  plugins: [
+    paraglide({ project: './project.inlang', outdir: './src/lib/paraglide' }),
     Inspect(), enhancedImages(), sveltekit(),
     visualizer({
       emitFile: true,
