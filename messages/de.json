@@ -1,3 +1,5 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format"
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "companyName": "Svelte-Stack",
+    "slogan": "Erstellen Sie mühelos Ihre Svelte-Landingpage mit den für Ihr Projekt erforderlichen Abschnitten."
 }
