@@ -34,6 +34,6 @@ FROM base AS release
 COPY --from=prerelease /usr/src/app/build .
 RUN apk add --no-cache wget libstdc++
 
-USER bun
+USER node
 EXPOSE 3000/tcp
 ENTRYPOINT ["bun", "run", "start"]
