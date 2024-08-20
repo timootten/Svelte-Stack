@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LineChart from 'lucide-svelte/icons/line-chart';
+	import LineChart from 'lucide-svelte/icons/chart-area';
 	import Package from 'lucide-svelte/icons/package';
 	import Home from 'lucide-svelte/icons/house';
 	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';

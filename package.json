@@ -13,7 +13,8 @@
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
 		"db:push": "drizzle-kit push:pg --config=drizzle.config.ts",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"translate": "bunx @inlang/cli machine translate --project 'C:\\Users\\timoo\\Desktop\\Projekte\\Svelte-Stack\\project.inlang'"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.5.24",
@@ -32,7 +33,7 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.6",
-		"svelte": "^5.0.0-next.227",
+		"svelte": "^5.0.0-next.228",
 		"svelte-check": "^3.8.5",
 		"tailwindcss": "^3.4.10",
 		"tslib": "^2.6.3",
@@ -61,7 +62,7 @@
 		"drizzle-orm": "^0.31.4",
 		"drizzle-zod": "^0.5.1",
 		"lucia": "^3.2.0",
-		"lucide-svelte": "^0.407.0",
+		"lucide-svelte": "^0.428.0",
 		"mode-watcher": "^0.3.1",
 		"nodemailer": "^6.9.14",
 		"oslo": "^1.2.1",
@@ -72,13 +73,14 @@
 		"server": "react-dom/server",
 		"shadcn-svelte": "^0.10.7",
 		"svelte-adapter-bun": "^0.5.2",
+		"svelte-flag-icons": "^1.0.3",
 		"svelte-sonner": "^0.3.27",
 		"sveltekit-flash-message": "^2.4.4",
 		"sveltekit-rate-limiter": "^0.5.2",
 		"sveltekit-superforms": "^2.17.0",
 		"tailwind-merge": "^2.5.2",
 		"tailwind-variants": "^0.2.1",
-		"vite": "^5.4.1",
+		"vite": "^5.4.2",
 		"zod": "^3.23.8"
 	},
 	"trustedDependencies": [

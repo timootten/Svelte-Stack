@@ -11,6 +11,14 @@
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
 	import Avatar from './Avatar.svelte';
+	import * as Popover from '$lib/components/ui/popover/index.js';
+	import * as Select from '$lib/components/ui/select';
+	import Settings from 'lucide-svelte/icons/settings';
+	import { getLanguageFlag, getLanguageName, i18n } from '$lib/i18n';
+	import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime.js';
+	import { Label } from '../ui/label';
+	import { goto } from '$app/navigation';
+	import * as m from '$lib/paraglide/messages';
 
 	type Props = {
 		user: import('lucia').User | null;
@@ -19,13 +27,13 @@
 	const { user, showLogo = true }: Props = $props();
 
 	const navLinks = [
-		{ href: '/#features', label: 'Features', icon: House },
-		{ href: '/#testimonials', label: 'Testimonials', icon: ShoppingCart },
-		{ href: '/#pricing', label: 'Pricing', icon: Package },
-		{ href: '/#faq', label: 'FAQ', icon: UsersRound }
+		{ href: '/#features', label: m.features(), icon: House },
+		{ href: '/#testimonials', label: m.testimonials(), icon: ShoppingCart },
+		{ href: '/#pricing', label: m.pricing(), icon: Package },
+		{ href: '/#faq', label: m.faq(), icon: UsersRound }
 	];
 
-	let activePath = $derived($page.url.pathname + $page.url.hash);
+	let activePath = $derived(i18n.route($page.url.pathname) + $page.url.hash);
 
 	let open = $state(false);
 
@@ -54,6 +62,8 @@
 			}
 		}, 500);
 	};
+
+	let language = $state(languageTag());
 </script>
 
 <header class="z-50 w-full">
@@ -66,14 +76,13 @@
 				</a>
 			{/if}
 			<nav class="flex items-center gap-6 text-sm">
-				{#each navLinks as { href, label, icon }}
+				{#each navLinks as { href, label }}
 					<a
 						{href}
 						class={cn(
 							'flex items-center gap-2 text-foreground/60 transition-colors hover:text-foreground/80',
 							activePath === href ? 'underline' : ''
 						)}
-						style={activePath === href ? 'view-transition-name: header-navigator;' : ''}
 					>
 						{label}
 					</a>
@@ -155,15 +164,66 @@
 					<Button href="/auth/login" variant="outline">Login</Button>
 					<Button href="/auth/register">Register</Button>
 				{/if}
-				<Button on:click={toggleMode} variant="outline" size="icon">
-					<Sun
-						class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-					/>
-					<Moon
-						class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-					/>
-					<span class="sr-only">Toggle theme</span>
-				</Button>
+				<Popover.Root portal={null}>
+					<Popover.Trigger asChild let:builder>
+						<Button builders={[builder]} variant="outline" size="icon">
+							<Settings class="h-[1.2rem] w-[1.2rem]" />
+						</Button>
+					</Popover.Trigger>
+					<Popover.Content class="w-auto">
+						<div class="grid gap-4">
+							<div class="space-y-2">
+								<h4 class="font-medium leading-none">{m.settings()}</h4>
+							</div>
+							<div class="flex gap-2">
+								<div class="flex flex-col gap-y-2">
+									<Label>{m.language()}</Label>
+									<Select.Root
+										selected={{ value: languageTag(), label: getLanguageName(languageTag()) }}
+										onSelectedChange={(selected) => {
+											if (selected) {
+												language = selected.value;
+												const route = i18n.route($page.url.pathname);
+												goto(i18n.resolveRoute(route, selected.value));
+											}
+										}}
+									>
+										<Select.Trigger class="w-[180px]">
+											<div class="flex h-full content-center gap-x-2">
+												<svelte:component this={getLanguageFlag(language)} />
+												<Select.Value class="pt-0.5" placeholder="Language" />
+											</div>
+										</Select.Trigger>
+										<Select.Content>
+											{#each availableLanguageTags as lang}
+												<Select.Item
+													value={lang}
+													aria-current={lang === languageTag() ? 'page' : undefined}
+													class="gap-x-2"
+												>
+													<svelte:component this={getLanguageFlag(lang)} />
+													{getLanguageName(lang)}
+												</Select.Item>
+											{/each}
+										</Select.Content>
+									</Select.Root>
+								</div>
+								<div class="flex flex-col gap-y-2">
+									<Label>{m.theme()}</Label>
+									<Button on:click={toggleMode} variant="outline" size="icon">
+										<Sun
+											class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+										/>
+										<Moon
+											class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+										/>
+										<span class="sr-only">Toggle theme</span>
+									</Button>
+								</div>
+							</div>
+						</div>
+					</Popover.Content>
+				</Popover.Root>
 				{#if user}
 					<Avatar avatarUrl={user.avatarUrl} />
 				{/if}

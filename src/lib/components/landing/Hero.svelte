@@ -15,6 +15,7 @@
 	import placeHolder100 from '$img/placeholder/100.png?enhanced';
 	import Check from 'lucide-svelte/icons/check';
 	import * as m from '$lib/paraglide/messages';
+	import { languageTag } from '$lib/paraglide/runtime';
 </script>
 
 <section class="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
@@ -26,16 +27,15 @@
 				>
 					{m.companyName()}
 				</span>
-				landing page
 			</h1>
-			for
+			{m.landingPageFor()}
 			<h2 class="inline">
 				<span
 					class="inline bg-gradient-to-r from-[#e29f48] via-[#eec56c] to-[#ec8b0c] bg-clip-text text-transparent"
 				>
 					Svelte
 				</span>
-				developers
+				{m.developers()}
 			</h2>
 		</main>
 
@@ -70,30 +70,34 @@
 					</Avatar>
 
 					<div class="flex flex-col">
-						<CardTitle class="text-lg">John Doe React</CardTitle>
+						<CardTitle class="text-lg">John Doe</CardTitle>
 						<CardDescription>@john_doe</CardDescription>
 					</div>
 				</CardHeader>
 
-				<CardContent>This landing page is awesome!</CardContent>
+				<CardContent>{m.exampleTestimonial()}</CardContent>
 			</Card>
 
 			<Card
 				class="absolute right-[20px] top-4 flex w-80 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
 				<CardHeader class="mt-8 flex items-center justify-center pb-2">
-					<enhanced:img
-						src={placeHolder100}
-						alt="user avatar"
-						class="absolute -top-12 aspect-square h-24 w-24 rounded-full object-cover grayscale-[0%]"
-					/>
-					<CardTitle class="text-center">Leo Miranda</CardTitle>
-					<CardDescription class="font-normal text-primary">Frontend Developer</CardDescription>
+					<div class="absolute -top-12">
+						<enhanced:img
+							src={placeHolder100}
+							alt="user avatar"
+							class="aspect-square h-24 w-24 rounded-full object-cover grayscale-[0%]"
+						/>
+					</div>
+					<CardTitle class="text-center">Timo Otten</CardTitle>
+					<CardDescription class="font-normal text-primary"
+						>Full Stack {m.developer()}</CardDescription
+					>
 				</CardHeader>
 
 				<CardContent class="pb-2 text-center">
 					<p>
-						I really enjoy transforming ideas into functional software that exceeds expectations
+						{m.meText()}
 					</p>
 				</CardContent>
 
@@ -101,44 +105,13 @@
 					<div>
 						<Button
 							rel="noreferrer noopener"
-							href="https://github.com/leoMirandaa"
+							href="https://github.com/timootten/Svelte-Stack"
 							target="_blank"
-							variant="ghost"
-							size="sm"
+							variant="outline"
+							size="icon"
 						>
-							<span class="sr-only">Github icon</span>
-							Icon
-						</Button>
-						<Button
-							rel="noreferrer noopener"
-							href="https://twitter.com/leo_mirand4"
-							target="_blank"
-							variant="ghost"
-							size="sm"
-						>
-							<span class="sr-only">X icon</span>
-							<svg
-								role="img"
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-5 w-5 fill-foreground"
-							>
-								<title>X</title>
-								<path
-									d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-								/>
-							</svg>
-						</Button>
-
-						<Button
-							rel="noreferrer noopener"
-							href="https://www.linkedin.com/"
-							target="_blank"
-							variant="ghost"
-							size="sm"
-						>
-							<span class="sr-only">Linkedin icon</span>
-							Icon
+							<span class="sr-only">GitHub</span>
+							<GitHub />
 						</Button>
 					</div>
 				</CardFooter>
@@ -149,16 +122,24 @@
 			>
 				<CardHeader>
 					<CardTitle class="item-center flex justify-between">
-						Free
-						<Badge variant="secondary" class="text-sm text-primary">Most popular</Badge>
+						{m.free()}
+						<Badge variant="secondary" class="text-sm text-primary">{m.popular()}</Badge>
 					</CardTitle>
 					<div>
-						<span class="text-3xl font-bold">$0</span>
-						<span class="text-muted-foreground"> /month</span>
+						<span class="text-3xl font-bold">
+							{#if true}
+								{@const price = 0}
+								{price.toLocaleString(languageTag(), {
+									style: 'currency',
+									currency: m.currency()
+								})}
+							{/if}
+						</span>
+						<span class="text-muted-foreground"> / {m.month()}</span>
 					</div>
 
 					<CardDescription>
-						Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.
+						{m.productDescription()}
 					</CardDescription>
 				</CardHeader>
 
@@ -170,7 +151,7 @@
 
 				<CardFooter class="flex">
 					<div class="space-y-4">
-						{#each ['4 Team member', '4 GB Storage', 'Upto 6 pages'] as benefit}
+						{#each ['Drizzle', 'Lucia Auth', 'Paraglide JS'] as benefit}
 							<span class="flex">
 								<Check class="text-green-500" />
 								<h3 class="ml-2">{benefit}</h3>
@@ -181,16 +162,13 @@
 			</Card>
 
 			<Card
-				class="absolute -right-[10px] bottom-[35px] w-[350px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+				class="absolute -bottom-[30px] -right-[10px] w-[350px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
 				<CardHeader class="flex items-start justify-start gap-4 space-y-1 md:flex-row">
-					<div class="mt-1 rounded-2xl bg-primary/20 p-1">
-						<enhanced:img src={placeHolder100} alt="icon" />
-					</div>
 					<div>
-						<CardTitle>Light & dark mode</CardTitle>
+						<CardTitle>{m.features()}</CardTitle>
 						<CardDescription class="text-md mt-2">
-							Lorem ipsum dolor sit amet consect adipisicing elit. Consectetur natusm.
+							{m.featuresDescriptionSmall()}
 						</CardDescription>
 					</div>
 				</CardHeader>
