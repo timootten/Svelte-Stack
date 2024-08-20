@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  postgres:
+  postgres_dev:
     restart: unless-stopped
     image: postgres
     ports:
