@@ -11,6 +11,7 @@
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
+	import { i18n } from '$lib/i18n';
 
 	let { children }: { children?: any } = $props();
 
@@ -43,7 +44,7 @@
 		}
 	];
 
-	let activePath = $derived($page.url.pathname);
+	let activePath = $derived(i18n.route($page.url.pathname));
 </script>
 
 <div class="grid w-full">

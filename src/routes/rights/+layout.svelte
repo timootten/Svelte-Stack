@@ -8,6 +8,7 @@
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import { cn } from '$lib/utils.js';
 	import { page } from '$app/stores';
+	import { i18n } from '$lib/i18n.js';
 
 	let { data, children } = $props();
 
@@ -19,7 +20,7 @@
 		{ name: 'Cookie Policy', href: '/rights/cookie' }
 	];
 
-	let activePath = $derived($page.url.pathname);
+	let activePath = $derived(i18n.route($page.url.pathname));
 </script>
 
 <div class="flex min-h-screen w-full flex-col">

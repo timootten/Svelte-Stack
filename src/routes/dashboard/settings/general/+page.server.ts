@@ -4,7 +4,7 @@ import { setError, superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
-import { eq } from "drizzle-orm";
+import { eq, ilike, or } from "drizzle-orm";
 import argon2 from "argon2";
 import { z } from "zod";
 import { zxcvbn } from "@zxcvbn-ts/core";
@@ -37,6 +37,14 @@ export const actions = {
     if (!form.valid) return fail(400, { form });
 
     try {
+      const currentUser = await db.query.userTable.findFirst({
+        where: or(ilike(userTable.email, form.data.email), ilike(userTable.username, form.data.username))
+      })
+
+      if (currentUser && form.data.email.toLowerCase() !== user.email.toLowerCase() && currentUser?.email.toLowerCase() === form.data.email.toLowerCase()) return setError(form, 'email', 'Your email address has already been used.');
+
+      if (currentUser && form.data.username.toLowerCase() !== user.username.toLowerCase() && currentUser?.username.toLowerCase() === form.data.username.toLowerCase()) return setError(form, 'username', 'This username is already taken.');
+
       await db.update(userTable).set({
         username: form.data.username,
         email: form.data.email,
@@ -44,7 +52,7 @@ export const actions = {
       }).where(eq(userTable.id, user!.id)).execute();
 
     } catch (error) {
-      console.log(error)
+
       return message(form, { status: "error", text: "An error occurred while updating your user information." });
     }
     return message(form, { status: "success", text: "You have successfully updated your user information." });

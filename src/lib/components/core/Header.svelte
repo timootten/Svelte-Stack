@@ -158,11 +158,11 @@
 			<nav class="flex items-center space-x-2">
 				{#if user}
 					{#if !$page.route.id?.includes('dashboard')}
-						<Button href="/dashboard" variant="outline">Dashboard</Button>
+						<Button href="/dashboard" variant="outline">{m.dashboard()}</Button>
 					{/if}
 				{:else}
-					<Button href="/auth/login" variant="outline">Login</Button>
-					<Button href="/auth/register">Register</Button>
+					<Button href="/auth/login" variant="outline">{m.login()}</Button>
+					<Button href="/auth/register">{m.register()}</Button>
 				{/if}
 				<Popover.Root portal={null}>
 					<Popover.Trigger asChild let:builder>

@@ -7,11 +7,11 @@ export const userTable = pgTable("user", {
   id: varchar('id', {
     length: 255
   }).$defaultFn(() => generateId(15)).primaryKey(),
-  email: varchar("email", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).unique().notNull(),
   emailVerified: boolean("email_verified").notNull().default(false),
   username: varchar('username', {
     length: 16
-  }).notNull(),
+  }).unique().notNull(),
   password: text('password'),
   avatarUrl: text('avatar_url'),
   balance: numeric('balance', { precision: 15, scale: 2 }).notNull().default("0.00"),

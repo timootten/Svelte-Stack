@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Button } from '../ui/button';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		avatarUrl: string;
@@ -17,13 +18,15 @@
 		</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content align="end">
-		<DropdownMenu.Label>My Account</DropdownMenu.Label>
+		<DropdownMenu.Label>{m.myAccount()}</DropdownMenu.Label>
 		<DropdownMenu.Separator />
-		<DropdownMenu.Item href="/dashboard/settings">Settings</DropdownMenu.Item>
+		<DropdownMenu.Item href="/dashboard/settings/general">{m.settings()}</DropdownMenu.Item>
 		<DropdownMenu.Item>Support</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<form action="/dashboard?/logout" method="post" use:enhance>
-			<button type="submit" class="w-full"><DropdownMenu.Item>Logout</DropdownMenu.Item></button>
+			<button type="submit" class="w-full"
+				><DropdownMenu.Item>{m.logout()}</DropdownMenu.Item></button
+			>
 		</form>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

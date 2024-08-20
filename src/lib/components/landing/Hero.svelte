@@ -43,19 +43,21 @@
 			{m.slogan()}
 		</p>
 
-		<div class="space-y-4 md:space-x-4 md:space-y-0">
-			<Button class="w-full md:w-1/3">Get Started</Button>
+		<div class="flex space-y-4 md:space-x-4 md:space-y-0">
+			<Button class=" w-full md:w-1/3">{m.getStarted()}</Button>
 
-			<Button
-				rel="noreferrer noopener"
-				href="https://github.com/timootten/Svelte-Stack"
-				target="_blank"
-				class="w-full md:w-1/3"
-				variant="outline"
-			>
-				<GitHub class="mr-2 h-4 w-4" />
-				GitHub Repository
-			</Button>
+			<div class="w-full md:w-1/3">
+				<Button
+					rel="noreferrer noopener"
+					href="https://github.com/timootten/Svelte-Stack"
+					target="_blank"
+					class="w-full"
+					variant="outline"
+				>
+					<GitHub class="mr-2 h-4 w-4" />
+					GitHub
+				</Button>
+			</div>
 		</div>
 	</div>
 
