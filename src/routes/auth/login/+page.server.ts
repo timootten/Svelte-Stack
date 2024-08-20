@@ -12,6 +12,7 @@ import { dev } from "$app/environment";
 import { generateCodeVerifier, generateState } from "arctic";
 import { z } from "zod";
 import { validateToken } from "$lib/server/auth/utils";
+import { i18n } from "$lib/i18n";
 
 const loginSchema = userSchema.pick({
   email: true,
@@ -57,7 +58,7 @@ export const actions = {
       ...sessionCookie.attributes
     });
 
-    redirect("/dashboard", { status: "success", text: "You successfully logged in." }, cookies);
+    redirect(i18n.resolveRoute("/dashboard"), { status: "success", text: "You successfully logged in." }, cookies);
     //return message(form, { status: "success", text: "You successfully logged in." });
   },
   github: async ({ cookies }) => {

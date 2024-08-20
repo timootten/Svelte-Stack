@@ -1,3 +1,5 @@
+import { i18n } from '$lib/i18n'
+import { sequence } from '@sveltejs/kit/hooks'
 import { lucia } from '$lib/server/auth';
 import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
 import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
@@ -20,7 +22,7 @@ const pollingLimiter = new RetryAfterRateLimiter({
 });
 
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const limiter: Handle = async ({ event, resolve }) => {
   //const isInvalidating = new URL(event.request.url).searchParams.get("x-sveltekit-invalidated") ? true : false;
   //const secFetchSite = event.request.headers.get("sec-fetch-site");
   //const directHit = !isInvalidating && (!secFetchSite || secFetchSite === "none" || secFetchSite === "cross-site");
@@ -105,12 +107,12 @@ const checkValidPath = async (event: RequestEvent<Partial<Record<string, string>
   switch (path) {
     case 'auth':
       if (event.locals.user) {
-        return redirect(302, "/dashboard");
+        return redirect(302, i18n.resolveRoute("/dashboard"));
       }
       break;
     case 'dashboard':
       if (!event.locals.user) {
-        return redirect(302, "/auth/login");
+        return redirect(302, i18n.resolveRoute("/auth/login"));
       }
       break;
     default:
@@ -163,3 +165,5 @@ export const handleWebsocket: WebSocketHandler<{ auth_session: string }> = {
     ws.send(message);
   },
 };
+
+export const handle = sequence(i18n.handle(), limiter)

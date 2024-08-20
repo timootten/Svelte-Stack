@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
+	import { i18n } from '$lib/i18n';
+
 	import '../app.pcss';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster, toast } from 'svelte-sonner';
@@ -66,9 +69,11 @@
 	/>
 </svelte:head>
 
-<ModeWatcher defaultMode={'dark'} />
-<Toaster richColors position="top-right" />
+<ParaglideJS {i18n}>
+	<ModeWatcher defaultMode={'dark'} />
+	<Toaster richColors position="top-right" />
 
-<div class="relative flex min-h-screen flex-col bg-background" id="page">
-	{@render children()}
-</div>
+	<div class="relative flex min-h-screen flex-col bg-background" id="page">
+		{@render children()}
+	</div>
+</ParaglideJS>

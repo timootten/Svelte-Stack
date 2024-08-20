@@ -12,6 +12,7 @@ import { sha256 } from "oslo/crypto";
 import { isWithinExpirationDate } from "oslo";
 import { z } from "zod";
 import { validateToken } from "$lib/server/auth/utils.js";
+import { i18n } from "$lib/i18n";
 
 const resetPasswordSchema = userSchema.pick({
   password: true,
@@ -25,18 +26,18 @@ export async function load({ url, cookies }) {
   const token = url.searchParams.get('token');
 
   if (!token) {
-    redirect("/auth/login", { status: "error", text: "Invalid token." }, cookies);
+    redirect(i18n.resolveRoute("/auth/login"), { status: "error", text: "Invalid token." }, cookies);
   }
 
   const tokenHash = encodeHex(await sha256(new TextEncoder().encode(token)));
   const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'password_reset'))))[0];
 
   if (!databaseToken) {
-    redirect("/auth/login", { status: "error", text: "Invalid token." }, cookies);
+    redirect(i18n.resolveRoute("/auth/login"), { status: "error", text: "Invalid token." }, cookies);
   }
 
   if (!isWithinExpirationDate(databaseToken.expiresAt)) {
-    redirect("/auth/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
+    redirect(i18n.resolveRoute("/auth/forgot-password"), { status: "error", text: "Your token is expired." }, cookies);
   }
   // Always return { form } in load functions
   return { form };
@@ -52,7 +53,7 @@ export const actions = {
 
 
     if (!token) {
-      redirect("/auth/forgot-password", { status: "error", text: "Invalid token." }, cookies);
+      redirect(i18n.resolveRoute("/auth/forgot-password"), { status: "error", text: "Invalid token." }, cookies);
     }
 
     const { success, error } = await validateToken(form.data["cf-turnstile-response"]);
@@ -64,11 +65,11 @@ export const actions = {
     const databaseToken = (await db.select().from(tokenTable).where(and(eq(tokenTable.id, tokenHash), eq(tokenTable.type, 'password_reset'))))[0];
 
     if (!databaseToken) {
-      redirect("/auth/login", { status: "error", text: "Invalid token." }, cookies);
+      redirect(i18n.resolveRoute("/auth/login"), { status: "error", text: "Invalid token." }, cookies);
     }
 
     if (!isWithinExpirationDate(databaseToken.expiresAt)) {
-      redirect("/auth/forgot-password", { status: "error", text: "Your token is expired." }, cookies);
+      redirect(i18n.resolveRoute("/auth/forgot-password"), { status: "error", text: "Your token is expired." }, cookies);
     }
 
     await db.transaction(async (tx) => {
@@ -89,6 +90,6 @@ export const actions = {
       ...sessionCookie.attributes
     });
 
-    redirect("/dashboard", { status: "success", text: "You successfully changed your password." }, cookies);
+    redirect(i18n.resolveRoute("/dashboard"), { status: "success", text: "You successfully changed your password." }, cookies);
   },
 };

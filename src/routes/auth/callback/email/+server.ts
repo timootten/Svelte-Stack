@@ -1,10 +1,8 @@
-import { github, lucia } from '$lib/server/auth/index.js';
+import { lucia } from '$lib/server/auth/index.js';
 import { sendVerificationEmail } from '$lib/server/auth/utils.js';
 import { db } from '$lib/server/db';
 import { tokenTable, userTable } from '$lib/server/db/schema.js';
-import { redirect } from '@sveltejs/kit';
-import { and, eq, ilike } from 'drizzle-orm';
-import { generateId } from 'lucia';
+import { and, eq } from 'drizzle-orm';
 import { isWithinExpirationDate } from 'oslo';
 import { setFlash } from "sveltekit-flash-message/server";
 import { sha256 } from "oslo/crypto";

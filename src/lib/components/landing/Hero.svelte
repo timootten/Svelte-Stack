@@ -14,6 +14,7 @@
 
 	import placeHolder100 from '$img/placeholder/100.png?enhanced';
 	import Check from 'lucide-svelte/icons/check';
+	import * as m from '$lib/paraglide/messages';
 </script>
 
 <section class="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
@@ -23,7 +24,7 @@
 				<span
 					class="inline bg-gradient-to-r from-[#F596D3] to-[#D247BF] bg-clip-text text-transparent"
 				>
-					Svelte-Stack
+					{m.companyName()}
 				</span>
 				landing page
 			</h1>
@@ -39,7 +40,7 @@
 		</main>
 
 		<p class="mx-auto text-xl text-muted-foreground md:w-10/12 lg:mx-0">
-			Build your Svelte landing page effortlessly with the required sections to your project.
+			{m.slogan()}
 		</p>
 
 		<div class="space-y-4 md:space-x-4 md:space-y-0">

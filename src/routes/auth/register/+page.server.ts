@@ -13,6 +13,7 @@ import crypto from 'crypto';
 import { sendVerificationEmail, validateToken } from "$lib/server/auth/utils.js";
 import { zxcvbn } from "@zxcvbn-ts/core";
 import { z } from "zod";
+import { i18n } from "$lib/i18n";
 
 const registerSchema = userSchema.pick({
   username: true,
@@ -73,6 +74,6 @@ export const actions = {
 
     sendVerificationEmail(userId, form.data.email, form.data.username);
 
-    redirect("/dashboard", { status: "success", text: "You successfully registered. You got an E-Mail, please verify your account." }, cookies);
+    redirect(i18n.resolveRoute("/dashboard"), { status: "success", text: "You successfully registered. You got an E-Mail, please verify your account." }, cookies);
   }
 };
