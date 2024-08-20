@@ -184,7 +184,9 @@
 											if (selected) {
 												language = selected.value;
 												const route = i18n.route($page.url.pathname);
-												goto(i18n.resolveRoute(route, selected.value));
+												goto(i18n.resolveRoute(route, selected.value), {
+													noScroll: true
+												});
 											}
 										}}
 									>
