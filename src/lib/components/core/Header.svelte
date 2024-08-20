@@ -184,7 +184,7 @@
 											if (selected) {
 												language = selected.value;
 												const route = i18n.route($page.url.pathname);
-												goto(i18n.resolveRoute(route, selected.value) + $page.url.hash);
+												goto(i18n.resolveRoute(route, selected.value));
 											}
 										}}
 									>
