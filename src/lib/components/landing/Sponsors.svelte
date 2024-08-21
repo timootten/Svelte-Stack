@@ -47,7 +47,7 @@
 	<div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
 		{#each sponsors as { icon, name, size }}
 			<div class="flex items-center gap-1 text-muted-foreground/60">
-				<enhanced:img src={icon} width="50" height="50" alt={name} />
+				<enhanced:img src={icon} alt={name} />
 				<h3 class="text-xl font-bold">{name}</h3>
 			</div>
 		{/each}
