@@ -6,6 +6,7 @@
 </script>
 
 <Progress
+	aria-label="Password score"
 	value={score * 25}
 	text={score === 0
 		? 'Very weak'
