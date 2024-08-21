@@ -58,7 +58,7 @@
 				/>
 				{#if $errors.email}<p class="px-1 text-sm text-red-500">{$errors.email[0]}</p>{/if}
 			</div>
-			<div class="flex w-full content-center justify-center">
+			<div class="flex h-[65px] w-full content-center justify-center">
 				<Turnstile
 					bind:reset
 					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}

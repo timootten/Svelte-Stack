@@ -14,7 +14,7 @@
 	import Team from '$lib/components/landing/Team.svelte';
 	import FAQ from '$lib/components/landing/FAQ.svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <div class="sticky top-0 z-50 w-full bg-background">

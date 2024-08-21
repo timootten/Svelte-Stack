@@ -4,16 +4,17 @@
 	import Loading from '$lib/components/core/Loading.svelte';
 	import { navigating } from '$app/stores';
 
-
-    export let data;
+	export let data;
 </script>
 
 <Header user={data.user} />
+<!-- 
 {#if $navigating}
 	<Loading /> (Auth)
 {:else}
-	<div class="my-auto py-12">
-		<slot />
-	</div>
-{/if}
+-->
+<div class="my-auto py-12">
+	<slot />
+</div>
+<!-- {/if} -->
 <Footer />

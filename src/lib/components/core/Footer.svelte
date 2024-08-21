@@ -19,9 +19,9 @@
 		{
 			title: 'About',
 			links: [
-				{ href: '#', label: 'Features' },
-				{ href: '#', label: 'Pricing' },
-				{ href: '#', label: 'FAQ' }
+				{ href: '/#features', label: 'Features' },
+				{ href: '/#pricing', label: 'Pricing' },
+				{ href: '/#faq', label: 'FAQ' }
 			]
 		},
 		{

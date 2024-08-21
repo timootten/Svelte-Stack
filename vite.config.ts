@@ -8,15 +8,15 @@ import Inspect from 'vite-plugin-inspect';
 export default defineConfig({
   plugins: [
     paraglide({ project: './project.inlang', outdir: './src/lib/paraglide' }),
-    Inspect(),
+    //Inspect(),
     enhancedImages(),
     sveltekit(),
-    visualizer({
+    /*visualizer({
       emitFile: true,
       filename: "stats.html",
-    }),
+    }),*/
   ],
-  build: { minify: false },
+  //build: { minify: false },
   ssr: {
     noExternal: ['oslo']
   }

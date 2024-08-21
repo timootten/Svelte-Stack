@@ -6,11 +6,12 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import { zxcvbn } from '@zxcvbn-ts/core';
 	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
 	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 	import PasswordScore from '$lib/components/dashboard/PasswordScore.svelte';
+	import { onMount } from 'svelte';
+	import type { zxcvbn as zxcvbnType } from '@zxcvbn-ts/core';
 
 	let { data } = $props();
 
@@ -39,7 +40,13 @@
 		}
 	});
 
-	let passwordScore = $derived(zxcvbn($form.password || '').score);
+	let zxcvbn: typeof zxcvbnType | undefined = $state<typeof zxcvbnType | undefined>(undefined);
+
+	onMount(async () => {
+		zxcvbn = (await import('@zxcvbn-ts/core')).zxcvbn;
+	});
+
+	let passwordScore = $derived(zxcvbn ? zxcvbn($form.password || '').score : 0);
 </script>
 
 <Card.Root class="mx-auto my-auto w-full max-w-sm">
@@ -92,7 +99,7 @@
 				/>{#if $errors.password}<p class="px-1 text-sm text-red-500">{$errors.password[0]}</p>{/if}
 				<PasswordScore score={passwordScore} />
 			</div>
-			<div class="flex w-full content-center justify-center">
+			<div class="flex h-[65px] w-full content-center justify-center">
 				<Turnstile
 					bind:reset
 					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}

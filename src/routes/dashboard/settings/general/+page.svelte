@@ -5,12 +5,13 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { Label } from '$lib/components/ui/label';
-	import { zxcvbn } from '@zxcvbn-ts/core';
 	import PasswordScore from '$lib/components/dashboard/PasswordScore.svelte';
 	//import { zodClient } from 'sveltekit-superforms/adapters';
 	//import { generalSchema } from './schema.js';
 	import Check from 'lucide-svelte/icons/check';
 	import Send from 'lucide-svelte/icons/send';
+	import type { zxcvbn as zxcvbnType } from '@zxcvbn-ts/core';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
 
@@ -51,7 +52,13 @@
 		}
 	});
 
-	let passwordScore = $derived(zxcvbn($passwordForm.password || '').score);
+	let zxcvbn: typeof zxcvbnType | undefined = $state<typeof zxcvbnType | undefined>(undefined);
+
+	onMount(async () => {
+		zxcvbn = (await import('@zxcvbn-ts/core')).zxcvbn;
+	});
+
+	let passwordScore = $derived(zxcvbn ? zxcvbn($passwordForm.password || '').score : 0);
 </script>
 
 <div class="flex h-full w-full flex-col gap-8 pr-0 2xl:pr-96">

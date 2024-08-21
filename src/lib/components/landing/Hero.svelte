@@ -43,8 +43,10 @@
 			{m.slogan()}
 		</p>
 
-		<div class="flex space-y-4 md:space-x-4 md:space-y-0">
-			<Button class=" w-full md:w-1/3">{m.getStarted()}</Button>
+		<div
+			class="flex flex-col justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0 lg:justify-normal"
+		>
+			<Button class="w-full md:w-1/3">{m.getStarted()}</Button>
 
 			<div class="w-full md:w-1/3">
 				<Button

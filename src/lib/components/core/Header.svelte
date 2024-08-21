@@ -163,6 +163,7 @@
 					<Popover.Trigger asChild let:builder>
 						<Button builders={[builder]} variant="outline" size="icon">
 							<Settings class="h-[1.2rem] w-[1.2rem]" />
+							<span class="sr-only">{m.settings()}</span>
 						</Button>
 					</Popover.Trigger>
 					<Popover.Content class="w-auto">
@@ -218,7 +219,7 @@
 										<Moon
 											class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
 										/>
-										<span class="sr-only">Toggle theme</span>
+										<span class="sr-only">{m.theme()}</span>
 									</Button>
 								</div>
 							</div>
