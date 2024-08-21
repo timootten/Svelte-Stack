@@ -13,8 +13,7 @@ const config = {
     // See https://kit.svelte.dev/docs/adapters for more information about adapters.
     adapter: adapter(),
     alias: {
-      "$static": "./static/",
-      "$img": "./static/img/",
+      "$img": "./src/lib/assets/images/",
     },
     csrf: {
       checkOrigin: false

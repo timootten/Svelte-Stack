@@ -32,7 +32,7 @@
 			<div class="my-auto w-full lg:w-1/2">
 				<enhanced:img
 					src={placeHolder300}
-					alt="About Image"
+					alt="About"
 					class="mx-auto w-[300px] rounded-lg object-contain"
 				/>
 			</div>

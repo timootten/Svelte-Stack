@@ -54,7 +54,7 @@
 		<div class=" flex h-full max-h-screen flex-col gap-2">
 			<div class="flex w-full items-center justify-center border-b py-3">
 				<a href="/" class="mr-6 flex items-center justify-center space-x-2">
-					<enhanced:img src="$static/favicon.png?w=32&h=32&enhanced" alt="LOGO" class="h-8 w-8" />
+					<enhanced:img src="$img/favicon.png?w=32&h=32&enhanced" alt="LOGO" class="h-8 w-8" />
 					<span class="hidden font-bold sm:inline-block">Svelte-Stack</span>
 				</a>
 			</div>
@@ -96,11 +96,7 @@
 				<Sheet.Content side="left" class="flex flex-col">
 					<nav class="grid gap-2 text-lg font-medium">
 						<a href="##" class="flex items-center gap-2 text-lg font-semibold">
-							<enhanced:img
-								src="$static/favicon.png?w=32&h=32&enhanced"
-								alt="LOGO"
-								class="h-8 w-8"
-							/>
+							<enhanced:img src="$img/favicon.png?w=32&h=32&enhanced" alt="LOGO" class="h-8 w-8" />
 							<span class="hidden bg-red-500 font-bold sm:inline-block">Svelte-Stack</span>
 						</a>
 						<a
