@@ -61,6 +61,7 @@
 			<div class="flex-1">
 				<nav class="grid items-start px-2 text-sm font-medium">
 					{#each navItems as item}
+						{@const Icon = item.icon}
 						<a
 							href={item.href}
 							class={cn(
@@ -68,7 +69,7 @@
 								{ 'bg-muted text-primary': activePath === item.href }
 							)}
 						>
-							<svelte:component this={item.icon} class="h-5 w-5" />
+							<Icon />
 							{item.title}
 							{#if item.badge}
 								<Badge

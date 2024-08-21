@@ -91,7 +91,7 @@
 		</div>
 		<Sheet.Root bind:open>
 			<Sheet.Trigger asChild let:builder>
-				<a href="##" class="h-5 w-5 md:hidden" use:builder.action {...builder}>
+				<Button class="h-5 w-5 md:hidden" size="icon" variant="ghost" builders={[builder]}>
 					<svg
 						stroke-width="1.5"
 						viewBox="0 0 24 24"
@@ -122,7 +122,7 @@
 						></path>
 					</svg>
 					<span class="sr-only">Dashboard</span>
-				</a>
+				</Button>
 			</Sheet.Trigger>
 			<Sheet.Content side="left" class="md:max-w-xs">
 				<nav class="grid gap-6 text-lg font-medium">
@@ -138,16 +138,15 @@
 						</div>
 						<span>Svelte-Stack</span>
 					</a>
-					{#each navLinks as { href, label, icon }}
+					{#each navLinks as { href, icon, label }}
+						{@const Icon = icon}
 						<a
 							rel="noreferrer noopener"
 							{href}
 							onclick={onMobileClick}
 							class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
 						>
-							{#if icon}
-								<svelte:component this={icon} class="h-5 w-5" />
-							{/if}
+							<Icon />
 							{label}
 						</a>
 					{/each}
@@ -158,7 +157,7 @@
 			<nav class="flex items-center space-x-2">
 				{#if user}
 					{#if !$page.route.id?.includes('dashboard')}
-						<Button href="/dashboard" variant="outline">{m.dashboard()}</Button>
+						<Button href="/dashboard/products" variant="outline">{m.dashboard()}</Button>
 					{/if}
 				{:else}
 					<Button href="/auth/login" variant="outline">{m.login()}</Button>
@@ -192,7 +191,10 @@
 									>
 										<Select.Trigger class="w-[180px]">
 											<div class="flex h-full content-center gap-x-2">
-												<svelte:component this={getLanguageFlag(language)} />
+												{#if language}
+													{@const Flag = getLanguageFlag(language)}
+													<Flag />
+												{/if}
 												<Select.Value class="pt-0.5" placeholder="Language" />
 											</div>
 										</Select.Trigger>
@@ -203,7 +205,8 @@
 													aria-current={lang === languageTag() ? 'page' : undefined}
 													class="gap-x-2"
 												>
-													<svelte:component this={getLanguageFlag(lang)} />
+													{@const Flag = getLanguageFlag(lang)}
+													<Flag />
 													{getLanguageName(lang)}
 												</Select.Item>
 											{/each}

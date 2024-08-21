@@ -91,6 +91,7 @@
 				</CardContent>
 				<CardFooter>
 					{#each socialNetworks as { name, url }}
+						{@const Icon = icons[name]}
 						<div>
 							<a
 								rel="noreferrer noopener"
@@ -99,7 +100,7 @@
 								class={buttonVariants({ variant: 'ghost', size: 'sm' })}
 							>
 								<span class="sr-only">{name} icon</span>
-								<svelte:component this={icons[name]} />
+								<Icon />
 							</a>
 						</div>
 					{/each}
