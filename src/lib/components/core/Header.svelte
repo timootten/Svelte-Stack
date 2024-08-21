@@ -71,7 +71,7 @@
 		<div class="mr-4 hidden md:flex">
 			{#if showLogo}
 				<a href="/" class="mr-6 flex items-center space-x-2">
-					<enhanced:img src="$img/favicon.png?w=32&h=32&enhanced" alt="LOGO" class="h-8 w-8" />
+					<enhanced:img src="$img/favicon.png?w=48&h=48&enhanced" alt="LOGO" class="h-8 w-8" />
 					<span class="hidden font-bold sm:inline-block">Svelte-Stack</span>
 				</a>
 			{/if}
@@ -130,7 +130,7 @@
 						<div
 							class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
 						>
-							<enhanced:img src="$img/favicon.png?w=32&h=32&enhanced" alt="LOGO" class="h-8 w-8" />
+							<enhanced:img src="$img/favicon.png?w=48&h=48&enhanced" alt="LOGO" class="h-8 w-8" />
 						</div>
 						<span>Svelte-Stack</span>
 					</a>
