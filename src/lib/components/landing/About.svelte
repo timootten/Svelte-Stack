@@ -34,6 +34,7 @@
 					src={placeHolder300}
 					alt="About"
 					class="mx-auto w-[300px] rounded-lg object-contain"
+					sizes="min(300px)"
 				/>
 			</div>
 			<div class="bg-green-0 flex flex-col justify-between">
