@@ -92,3 +92,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 Feel free to customize this template to better fit your project's specific needs and goals.
 
 Contributing: Timo Otten
+
+Credits: https://github.com/leoMirandaa/shadcn-landing-page
