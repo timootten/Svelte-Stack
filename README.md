@@ -81,8 +81,6 @@ Contributions are welcome! If you'd like to contribute to Svelte-Stack, please f
    ```
 5. **Create a pull request** to the main repository. Please provide a detailed description of your changes.
 
-For more details, see the [CONTRIBUTING](CONTRIBUTING.md) file.
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
