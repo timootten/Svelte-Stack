@@ -94,7 +94,7 @@
 						/>
 					</div>
 					<CardTitle class="text-center">Timo Otten</CardTitle>
-					<CardDescription class="font-normal text-primary"
+					<CardDescription class="font-normal text-orange-500"
 						>Full Stack {m.developer()}</CardDescription
 					>
 				</CardHeader>
@@ -127,7 +127,7 @@
 				<CardHeader>
 					<CardTitle class="item-center flex justify-between">
 						{m.free()}
-						<Badge variant="secondary" class="text-sm text-primary">{m.popular()}</Badge>
+						<Badge variant="secondary" class="text-sm text-orange-500">{m.popular()}</Badge>
 					</CardTitle>
 					<div>
 						<span class="text-3xl font-bold">

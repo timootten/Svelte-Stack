@@ -10,6 +10,7 @@
 	} from '../ui/card';
 	import { Button } from '../ui/button';
 	import { Badge } from '../ui/badge';
+	import * as m from '$lib/paraglide/messages';
 
 	// Import necessary components
 
@@ -88,7 +89,7 @@
 					<CardTitle class="item-center flex justify-between">
 						{pricing.title}
 						{#if pricing.popular === PopularPlanType.YES}
-							<Badge variant="secondary" class="text-sm text-primary">Most popular</Badge>
+							<Badge variant="secondary" class="text-sm text-orange-500">{m.popular()}</Badge>
 						{/if}
 					</CardTitle>
 					<div>

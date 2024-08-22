@@ -39,9 +39,7 @@
 			<div class="bg-green-0 flex flex-col justify-between">
 				<div class="pb-6">
 					<h2 class="text-3xl font-bold md:text-4xl">
-						<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-							About
-						</span>
+						<span class="text-orange-500 text-transparent"> About </span>
 						Company
 					</h2>
 					<p class="mt-4 text-xl text-muted-foreground">

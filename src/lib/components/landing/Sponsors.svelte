@@ -42,7 +42,9 @@
 </script>
 
 <section id="sponsors" class="container pt-24 sm:py-32">
-	<h2 class="text-md mb-8 text-center font-bold text-primary lg:text-xl">Investors and founders</h2>
+	<h2 class="mb-8 text-center text-xl font-bold text-orange-500 lg:text-2xl">
+		Investors and founders
+	</h2>
 
 	<div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
 		{#each sponsors as { icon, name, size }}

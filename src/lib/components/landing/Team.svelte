@@ -84,7 +84,7 @@
 						/>
 					</div>
 					<CardTitle class="text-center">{name}</CardTitle>
-					<CardDescription class="text-primary">{position}</CardDescription>
+					<CardDescription class="text-orange-500">{position}</CardDescription>
 				</CardHeader>
 				<CardContent class="pb-2 text-center">
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>

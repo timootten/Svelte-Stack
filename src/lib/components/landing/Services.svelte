@@ -35,9 +35,7 @@
 	<div class="grid place-items-center gap-8 lg:grid-cols-[1fr,1fr]">
 		<div>
 			<h2 class="text-3xl font-bold md:text-4xl">
-				<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-					Client-Centric
-				</span>
+				<span class="text-orange-500 text-transparent"> Client-Centric </span>
 				Services
 			</h2>
 

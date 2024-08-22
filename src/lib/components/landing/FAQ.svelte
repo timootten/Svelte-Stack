@@ -57,8 +57,8 @@
 		Still have questions?
 		<a
 			rel="noreferrer noopener"
-			href="/"
-			class="border-primary text-primary transition-all hover:border-b-2"
+			href="mailto:Admin@ShadeHost.eu"
+			class="border-primary font-bold text-orange-500 transition-all hover:border-b-2"
 		>
 			Contact us
 		</a>
