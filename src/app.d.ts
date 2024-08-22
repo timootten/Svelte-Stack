@@ -14,6 +14,7 @@ declare global {
       paraglide: ParaglideLocals<AvailableLanguageTag>,
       user: import('lucia').User | null;
       session: import('lucia').Session | null;
+      theme: "light" | "dark"
     }
   }
 }

@@ -7,7 +7,7 @@ import Inspect from 'vite-plugin-inspect';
 
 export default defineConfig({
   plugins: [
-    paraglide({ project: './project.inlang', outdir: './src/lib/paraglides' }),
+    paraglide({ project: './project.inlang', outdir: './src/lib/paraglide' }),
     //Inspect(),
     enhancedImages(),
     sveltekit(),
@@ -19,5 +19,5 @@ export default defineConfig({
   //build: { minify: false },
   ssr: {
     noExternal: ['oslo']
-  }
+  },
 })

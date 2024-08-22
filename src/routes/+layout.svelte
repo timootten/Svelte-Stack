@@ -8,8 +8,11 @@
 	import { getFlash } from 'sveltekit-flash-message';
 	import { page } from '$app/stores';
 	import { onNavigate } from '$app/navigation';
+	import { theme } from '$lib/client/states.svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
+
+	theme.value = data.theme;
 
 	const flash = getFlash(page);
 
@@ -59,6 +62,8 @@
 			document.startViewTransition(() => new Promise(fulfil));
 		});
 	});
+
+	$inspect(theme.value);
 </script>
 
 <svelte:head>
@@ -70,7 +75,6 @@
 </svelte:head>
 
 <ParaglideJS {i18n}>
-	<ModeWatcher defaultMode={'dark'} />
 	<Toaster richColors position="top-right" />
 
 	<div class="relative flex min-h-screen flex-col bg-background" id="page">

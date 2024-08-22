@@ -6,7 +6,6 @@
 	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
 	import UsersRound from 'lucide-svelte/icons/users-round';
 	import { Button } from '$lib/components/ui/button';
-	import { toggleMode } from 'mode-watcher';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
@@ -19,6 +18,8 @@
 	import { Label } from '../ui/label';
 	import { goto } from '$app/navigation';
 	import * as m from '$lib/paraglide/messages';
+	import { enhance } from '$app/forms';
+	import { theme } from '$lib/client/states.svelte';
 
 	type Props = {
 		user: import('lucia').User | null;
@@ -64,6 +65,12 @@
 	};
 
 	let language = $state(languageTag());
+
+	const changeTheme = () => {
+		theme.value === 'light' ? (theme.value = 'dark') : (theme.value = 'light');
+		document.documentElement.setAttribute('data-theme', theme.value);
+		return async () => {};
+	};
 </script>
 
 <header class="z-50 w-full">
@@ -212,15 +219,17 @@
 								</div>
 								<div class="flex flex-col gap-y-2">
 									<Label>{m.theme()}</Label>
-									<Button on:click={toggleMode} variant="outline" size="icon">
-										<Sun
-											class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-										/>
-										<Moon
-											class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-										/>
-										<span class="sr-only">{m.theme()}</span>
-									</Button>
+									<form method="post" action="/?/changeTheme" use:enhance={changeTheme}>
+										<Button type="submit" variant="outline" size="icon">
+											<Sun
+												class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+											/>
+											<Moon
+												class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+											/>
+											<span class="sr-only">{m.theme()}</span>
+										</Button>
+									</form>
 								</div>
 							</div>
 						</div>
