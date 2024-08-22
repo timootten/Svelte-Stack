@@ -72,8 +72,12 @@
 		{#each testimonials as { image, name, userName, comment }}
 			<Card class="max-w-md overflow-hidden md:break-inside-avoid">
 				<CardHeader class="flex flex-row items-center gap-4 pb-2">
-					<Avatar>
-						<enhanced:img alt="John Doe" src={image} class="h-[50px] w-[50px]" />
+					<Avatar class="h-[50px] w-[50px]">
+						<enhanced:img
+							alt="John Doe"
+							src={image}
+							class="aspect-square h-[50px] w-[50px] object-center"
+						/>
 					</Avatar>
 
 					<div class="flex flex-col">
