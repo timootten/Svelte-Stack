@@ -1,5 +1,5 @@
 <script lang="ts">
-	import placeHolder50 from '$img/placeholder/50.png?enhanced';
+	import placeHolder50 from '$img/placeholder/50.png';
 
 	interface SponsorProps {
 		icon: any;
