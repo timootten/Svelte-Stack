@@ -1,10 +1,9 @@
-// file initialized by the Paraglide-SvelteKit CLI - Feel free to edit it
 import { createI18n } from "@inlang/paraglide-sveltekit"
-//import * as runtime from "$lib/paraglide/runtime.js"
+import * as runtime from "$lib/paraglide/runtime.js"
 import Us from 'svelte-flag-icons/Us.svelte';
 import De from 'svelte-flag-icons/De.svelte';
 
-/*const i18n = createI18n(runtime)
+const i18n = createI18n(runtime)
 
 export { i18n };
 
@@ -30,4 +29,4 @@ export const getLanguageFlag = (locale: LOCALE) => {
     default:
       return undefined;
   }
-}*/
+}

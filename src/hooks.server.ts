@@ -5,5 +5,5 @@ import { rateLimitHandler } from './hooks/rateLimitHandler';
 import { websocketHandler } from './hooks/websocketHandler';
 import { themeHandler } from './hooks/themeHandler';
 
-export const handle = sequence(i18n.handle());
+export const handle = i18n.handle()
 export { websocketHandler as handleWebsocket };
