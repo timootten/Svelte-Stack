@@ -1,5 +1,5 @@
 <script lang="ts">
-	import placeHolder50 from '$img/placeholder/50.png';
+	import placeHolder50 from '$img/placeholder/50.png?enhanced';
 
 	interface SponsorProps {
 		icon: any;
@@ -49,7 +49,7 @@
 	<div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
 		{#each sponsors as { icon, name, size }}
 			<div class="flex items-center gap-1 text-muted-foreground/60">
-				<enhanced:img src={icon} alt={name} class="min-h-[50px] min-w-[50px]" />
+				<enhanced:img src={icon} alt={name} sizes="(min-width: 50px)" />
 				<h3 class="text-xl font-bold">{name}</h3>
 			</div>
 		{/each}
