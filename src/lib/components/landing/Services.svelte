@@ -48,7 +48,7 @@
 					<Card>
 						<CardHeader class="flex items-start justify-start gap-4 space-y-1 md:flex-row">
 							<div class="mt-1 rounded-2xl bg-primary/20 p-1">
-								<enhanced:img src={icon} alt={title} sizes="min(50px)" />
+								<enhanced:img src={icon} alt={title} class="h-[50px] w-[50px]" />
 							</div>
 							<div>
 								<CardTitle>{title}</CardTitle>
