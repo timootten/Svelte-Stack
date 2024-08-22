@@ -18,7 +18,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.5.24",
-		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@sveltejs/vite-plugin-svelte": "4.0.0-next.6",
 		"@types/bun": "^1.1.6",
 		"@types/dom-view-transitions": "^1.0.5",
 		"@types/nodemailer": "^6.4.15",
