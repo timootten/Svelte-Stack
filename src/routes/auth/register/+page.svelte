@@ -6,16 +6,17 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
 	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
 	import PasswordScore from '$lib/components/dashboard/PasswordScore.svelte';
 	import { onMount } from 'svelte';
 	import type { zxcvbn as zxcvbnType } from '@zxcvbn-ts/core';
+	import { theme } from '$lib/client/states.svelte.js';
+	import { languageTag } from '$lib/paraglide/runtime.js';
 
 	let { data } = $props();
 
-	let reset: (() => void | undefined) | undefined = $state();
+	let reset: (() => void) | undefined = $state();
 
 	const {
 		form,
@@ -102,9 +103,10 @@
 			<div class="flex h-[65px] w-full content-center justify-center">
 				<Turnstile
 					bind:reset
+					language={languageTag()}
 					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
 					appearance="always"
-					theme={$mode}
+					theme={theme.value}
 				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Register</Button>

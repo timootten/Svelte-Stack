@@ -23,8 +23,6 @@
 			toast.error(event.result.error.message);
 		}
 	});
-
-	$inspect($form.email).with(console.error);
 </script>
 
 <form method="post" action="?/general" use:enhance>

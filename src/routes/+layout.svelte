@@ -61,7 +61,6 @@
 		});
 	});
 
-	$inspect(theme.value);
 </script>
 
 <svelte:head>

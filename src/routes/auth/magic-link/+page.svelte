@@ -5,13 +5,14 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
-	import { mode } from 'mode-watcher';
 	import OAuth from '$lib/components/auth/OAuth.svelte';
 	import { Turnstile } from '$lib/components/utils/Turnstile/index.js';
+	import { theme } from '$lib/client/states.svelte.js';
+	import { languageTag } from '$lib/paraglide/runtime.js';
 
-	export let data;
+	let { data } = $props();
 
-	let reset: () => void | undefined;
+	let reset: (() => void) | undefined = $state();
 
 	const {
 		form,
@@ -61,9 +62,10 @@
 			<div class="flex h-[65px] w-full content-center justify-center">
 				<Turnstile
 					bind:reset
+					language={languageTag()}
 					siteKey={data.CLOUDFLARE_CAPTCHA_SITE_KEY}
 					appearance="always"
-					theme={$mode}
+					theme={theme.value}
 				/>
 			</div>
 			<Button type="submit" class="w-full" loading={$delayed}>Send Magic Link</Button>
