@@ -1,80 +1,96 @@
-TODO:
+# Svelte-Stack
 
-Add AGB Accept on Register
-Add Confirm Password Register
-Add for all forms client validators
-Add Email resend and info in settings if verified (Make Button 1/4 on the button right, resend or success icon if verified)
+Svelte-Stack is a comprehensive template designed to kickstart your next Svelte project. It offers a robust foundation with numerous pre-configured features and components, making development faster and more efficient.
 
-Later:
+## Features
 
-Change React Email to Svelte Email (Check for Tailwind or use a large css script tag)
+- **Multiple Languages Support**: Built-in internationalization (i18n) capabilities for creating multi-language applications easily.
+- **Theme Switching**: Users can toggle between dark and light themes effortlessly, enhancing user experience across different environments.
+- **Database Integration**: Utilizes [Drizzle ORM](https://orm.drizzle.team/) for seamless and efficient database operations, allowing you to work with various databases with ease.
+- **Authentication**: A full-fledged authentication system powered by [Lucia](https://lucia-auth.com/), providing secure user management.
+- **Performance**: The project leverages [Bun](https://bun.sh/) for improved speed and efficiency during development and runtime.
+- **Email Functionality**: Integrated email sending capabilities to handle user communications.
+- **Security**:
+  - **Argon2**: For secure password hashing, ensuring that user passwords are stored securely.
+  - **Rate Limiting**: Protects your application from abuse by limiting the number of requests a user can make in a given time period.
+- **UI Components**:
+  - **Shadcn Svelte**: Beautiful, customizable UI elements that blend seamlessly with Svelte.
+  - **Toast Notifications**: Provide users with feedback on their actions, improving the user experience.
+- **Form Validation**:
+  - Powered by [Zod](https://zod.dev/) for robust schema validation.
+  - Integrated with [Superforms](https://github.com/ciscoheat/superforms) for seamless, reactive form handling and validation in SvelteKit.
+- **And much more!**: The template is designed to be extensible, with additional features easily added as your project grows.
 
-Website GitHub button and Get Started are not same height
+## Pre-made Components
 
-Add Footer links and change about to Links or something like that
+Svelte-Stack comes with several pre-built components to accelerate your development:
 
-Settings disable button when nothing was changed.
+- **About**
+- **Concepts**
+- **Discover**
+- **FAQ**
+- **Features**
+- **Hero**
+- **How It Works**
+- **Newsletter**
+- **Pricing**
+- **Scroll To Top**
+- **Services**
+- **Sponsors**
+- **Team**
 
-Add cooldown for verify email
+These components are fully customizable and ready to be integrated into your application.
 
-Profile:
+## Getting Started
 
-General Information
--Username
--E-Mail
--First Name
--Last Name
--Date of Birth
--Phone Number
--Profile Picture (Upload)
--Password (Change)
-Address Information
--Street Address
--City
--State/Province
--Zip/Postal Code
--Country
-Account Preferences
--Language Preference
--Time Zone
--Currency Preference
--Communication Preferences (Email, SMS, Push Notifications)
--Two-Factor Authentication (Enable/Disable)
-Payment Information
--Credit/Debit Card Number
--Expiration Date
--CVV
--Billing Address (Separate from General Address if needed)
--PayPal Account (Optional)
-Security Settings
--Security Questions and Answers
--Login History (List of recent logins)
--Authorized Devices (List of devices that have logged in)
-Subscription & Membership
--Subscription Plan (Details of current plan)
--Renewal Date
--Payment History
--Upgrade/Downgrade Subscription Options
-Notifications
--Email Notifications (On/Off)
--SMS Notifications (On/Off)
--Push Notifications (On/Off)
--Newsletter Subscription (Subscribe/Unsubscribe)
-Activity Log
--Recent Activities (Log of recent actions on the account)
--Downloads History
--Purchases History
-Support
--Support Tickets (List of submitted support tickets)
--Chat History with Support
--Frequently Asked Questions (FAQs)
-Privacy Settings
--Profile Visibility (Public/Private)
--Data Sharing Preferences
--Ad Preferences
--Account Deactivation (Option to deactivate or delete account)
-Additional Information
--Biography (Short bio or personal description)
--Interests & Hobbies
--Skills & Expertise
--Website/Blog URL
+To get started with Svelte-Stack, follow these steps:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/timootten/Svelte-Stack.git
+   ```
+
+2. **Install dependencies** using Bun:
+
+   ```bash
+   bun install
+   ```
+
+3. **Run the development server**:
+
+   ```bash
+   bun run dev
+   ```
+
+4. **Open your browser** and navigate to `http://localhost:3000` to view the application.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to Svelte-Stack, please follow these steps:
+
+1. **Fork the repository** on GitHub.
+2. **Create a new branch** for your feature or bugfix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make your changes** and commit them with clear and descriptive commit messages.
+4. **Push your changes** to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. **Create a pull request** to the main repository. Please provide a detailed description of your changes.
+
+For more details, see the [CONTRIBUTING](CONTRIBUTING.md) file.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+**Note**: This project uses various third-party packages, each of which may have its own license. Please refer to the license information in each package for more details.
+
+---
+
+Feel free to customize this template to better fit your project's specific needs and goals.
+
+Contributing: Timo Otten
