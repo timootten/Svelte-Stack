@@ -3,7 +3,6 @@ import { join } from 'path';
 import { EventEmitter } from 'events';
 import { IncomingMessage, ServerResponse } from 'http';
 import type { Server, WebSocketHandler } from 'bun';
-
 const fakeServer = new EventEmitter();
 
 const vite = await createServer({
@@ -17,18 +16,11 @@ const vite = await createServer({
   appType: 'custom'
 });
 
-let bunternal = (socket: any) => {
-  for (const prop of Object.getOwnPropertySymbols(socket)) {
-    if (prop.toString().includes('bunternal')) {
-      bunternal = () => prop;
-      return prop as any;
-    }
-  }
-};
+const bunternal = Symbol.for('::bunternal::');
 
 const hooks = (await vite.ssrLoadModule('src/hooks.server.ts')) as any;
 
-Bun.serve({
+const server = Bun.serve({
   port: 5173,
   async fetch(request: Request, server: Server) {
     let pendingResponse: Response | undefined;
@@ -40,7 +32,6 @@ Bun.serve({
     function raise(err: any) {
       if (pendingError) return;
       reject?.((pendingError = err));
-
     }
 
     function respond(res: Response) {
@@ -52,7 +43,7 @@ Bun.serve({
     const res = new (ServerResponse as any)(req, respond);
 
     const socket = req.socket as any;
-    socket[bunternal(socket)] = [server, res, request];
+    socket[bunternal] = [fakeServer, res, request];
 
     req.once('error', raise);
     res.once('error', raise);
@@ -112,5 +103,7 @@ Bun.serve({
     }
   } as WebSocketHandler<Pick<WebSocketHandler<any>, 'open' | 'message' | 'drain' | 'close' | 'ping' | 'pong'>>
 });
+
+fakeServer[bunternal] = server;
 
 console.log('Server running at http://localhost:5173');
