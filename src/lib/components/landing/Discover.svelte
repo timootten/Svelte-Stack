@@ -73,7 +73,7 @@
 			<Card class="max-w-md overflow-hidden md:break-inside-avoid">
 				<CardHeader class="flex flex-row items-center gap-4 pb-2">
 					<Avatar>
-						<enhanced:img alt="John Doe" src={image} />
+						<enhanced:img alt="John Doe" src="$img/placeholder/50.png?w=50&h=50&enhanced" />
 					</Avatar>
 
 					<div class="flex flex-col">
