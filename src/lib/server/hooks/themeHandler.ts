@@ -1,9 +1,7 @@
 import type { Handle } from "@sveltejs/kit";
 
 export const themeHandler: Handle = async ({ event, resolve }) => {
-  let theme: "light" | "dark" = event.cookies.get('theme') === 'light' ? 'light' : 'dark'
-
-  console.log("theme", theme)
+  const theme: "light" | "dark" = event.cookies.get('theme') === 'light' ? 'light' : 'dark';
 
   event.locals.theme = theme;
 
