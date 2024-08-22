@@ -68,7 +68,11 @@
 
 	const changeTheme = () => {
 		theme.value === 'light' ? (theme.value = 'dark') : (theme.value = 'light');
-		document.documentElement.setAttribute('data-theme', theme.value);
+		if (theme.value === 'dark') {
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+		}
 		return async () => {};
 	};
 </script>
