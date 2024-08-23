@@ -65,12 +65,16 @@ export async function sendVerificationEmail(userId: string, email: string, usern
 
   const FROM = process.env.SMTP_FROM;
 
-  transporter.sendMail({
-    from: `Svelte-Stack <${FROM}>`,
-    to: email,
-    subject: "Verify your email",
-    html: await render(VerificationEmail({ link, username }))
-  });
+  try {
+    await transporter.sendMail({
+      from: `Svelte-Stack <${FROM}>`,
+      to: email,
+      subject: "Verify your email",
+      html: await render(VerificationEmail({ link, username }))
+    });
+  } catch (error) {
+    console.log("Mail Error: ", error)
+  }
 };
 
 export async function sendPasswordResetEmail(userId: string, email: string, username: string) {
@@ -81,7 +85,7 @@ export async function sendPasswordResetEmail(userId: string, email: string, user
   const link = `${ENV_BASE_URL}/auth/reset-password?token=${token}`
 
   const FROM = process.env.SMTP_FROM;
-  console.log("XXX 12323")
+
   try {
     await transporter.sendMail({
       from: `Svelte-Stack <${FROM}>`,
@@ -92,7 +96,6 @@ export async function sendPasswordResetEmail(userId: string, email: string, user
   } catch (error) {
     console.log("Mail Error: ", error)
   }
-  console.log("3434")
 };
 
 export async function sendMagicLinkEmail(userId: string, email: string, username: string) {
@@ -104,12 +107,16 @@ export async function sendMagicLinkEmail(userId: string, email: string, username
 
   const FROM = process.env.SMTP_FROM;
 
-  transporter.sendMail({
-    from: `Svelte-Stack <${FROM}>`,
-    to: email,
-    subject: "Magic Link",
-    html: await render(MagicLinkEmail({ link, username }))
-  });
+  try {
+    await transporter.sendMail({
+      from: `Svelte-Stack <${FROM}>`,
+      to: email,
+      subject: "Magic Link",
+      html: await render(MagicLinkEmail({ link, username }))
+    });
+  } catch (error) {
+    console.log("Mail Error: ", error)
+  }
 };
 
 interface TokenValidateResponse {

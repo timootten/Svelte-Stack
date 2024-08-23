@@ -2,8 +2,8 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { enhance } from '$app/forms';
 
-	let githubLoading = false;
-	let googleLoading = false;
+	let githubLoading = $state(false);
+	let googleLoading = $state(false);
 </script>
 
 <div class="flex justify-between gap-x-2">
