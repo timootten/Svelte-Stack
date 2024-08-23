@@ -51,9 +51,7 @@ export const sessionTable = pgTable("session", {
   id: varchar('id', {
     length: 255
   }).primaryKey(),
-  userId: varchar('user_id', {
-    length: 255
-  }).notNull()
+  userId: text('user_id').notNull()
     .references(() => userTable.id),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,

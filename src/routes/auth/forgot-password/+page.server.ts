@@ -37,6 +37,7 @@ export const actions = {
     });
 
     if (user) {
+      console.log("23232323")
       sendPasswordResetEmail(user.id, user.email, user.username);
     }
 

@@ -18,8 +18,12 @@ import MagicLinkEmail from './email/magic-link-email';
 // Dont delete this, this is needed for the emails
 import ReactDOMServer from 'react-dom/server';
 
+// Sometimes this error: certificate has expired
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const transporter = nodemailer.createTransport({
-  url: process.env.SMTP_URL
+  url: process.env.SMTP_URL,
+  tls: { rejectUnauthorized: false }
 });
 
 const options = {
@@ -65,7 +69,7 @@ export async function sendVerificationEmail(userId: string, email: string, usern
     from: `Svelte-Stack <${FROM}>`,
     to: email,
     subject: "Verify your email",
-    html: render(VerificationEmail({ link, username }))
+    html: await render(VerificationEmail({ link, username }))
   });
 };
 
@@ -77,13 +81,18 @@ export async function sendPasswordResetEmail(userId: string, email: string, user
   const link = `${ENV_BASE_URL}/auth/reset-password?token=${token}`
 
   const FROM = process.env.SMTP_FROM;
-
-  transporter.sendMail({
-    from: `Svelte-Stack <${FROM}>`,
-    to: email,
-    subject: "Reset your Password",
-    html: render(PasswordResetEmail({ link, username }))
-  });
+  console.log("XXX 12323")
+  try {
+    await transporter.sendMail({
+      from: `Svelte-Stack <${FROM}>`,
+      to: email,
+      subject: "Reset your Password",
+      html: await render(PasswordResetEmail({ link, username }))
+    });
+  } catch (error) {
+    console.log("Mail Error: ", error)
+  }
+  console.log("3434")
 };
 
 export async function sendMagicLinkEmail(userId: string, email: string, username: string) {
@@ -99,7 +108,7 @@ export async function sendMagicLinkEmail(userId: string, email: string, username
     from: `Svelte-Stack <${FROM}>`,
     to: email,
     subject: "Magic Link",
-    html: render(MagicLinkEmail({ link, username }))
+    html: await render(MagicLinkEmail({ link, username }))
   });
 };
 
