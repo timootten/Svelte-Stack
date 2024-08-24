@@ -13,8 +13,8 @@ const Root = SheetPrimitive.Root;
 const Close = SheetPrimitive.Close;
 const Trigger = SheetPrimitive.Trigger;
 
-
 export {
+  Root,
   Close,
   Trigger,
   Portal,
