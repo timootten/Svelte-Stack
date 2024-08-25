@@ -1,69 +1,61 @@
 <script>
-	// Import necessary Svelte components
+	import * as m from '$lib/paraglide/messages';
 	import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 	import placeHolder50 from '$img/placeholder/50.png?enhanced';
 
-	// Define the testimonial data
 	const testimonials = [
 		{
 			image: placeHolder50,
-			name: 'John Doe Svelte',
-			userName: '@john_Doe',
-			comment: 'This landing page is awesome!'
+			name: 'Alice Svelte',
+			userName: '@alice_svelte',
+			comment: m.testimonial1()
 		},
 		{
 			image: placeHolder50,
-			name: 'John Doe Svelte',
-			userName: '@john_Doe1',
-			comment:
-				'Lorem ipsum dolor sit amet,empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'
+			name: 'Bob Developer',
+			userName: '@bob_developer',
+			comment: m.testimonial2()
 		},
 		{
 			image: placeHolder50,
-			name: 'John Doe Svelte',
-			userName: '@john_Doe2',
-			comment:
-				'Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.'
+			name: 'Charlie Coder',
+			userName: '@charlie_coder',
+			comment: m.testimonial3()
 		},
 		{
 			image: placeHolder50,
-			name: 'John Doe Svelte',
-			userName: '@john_Doe3',
-			comment:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+			name: 'Dana Designer',
+			userName: '@dana_designer',
+			comment: m.testimonial4()
 		},
 		{
 			image: placeHolder50,
-			name: 'John Doe Svelte',
-			userName: '@john_Doe4',
-			comment:
-				'Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud.'
+			name: 'Eve Engineer',
+			userName: '@eve_engineer',
+			comment: m.testimonial5()
 		},
 		{
 			image: placeHolder50,
-			name: 'John Doe Svelte',
-			userName: '@john_Doe5',
-			comment:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+			name: 'Frank Frontend',
+			userName: '@frank_frontend',
+			comment: m.testimonial6()
 		}
 	];
 </script>
 
 <section id="testimonials" class="container py-24 sm:py-32">
 	<h2 class="text-3xl font-bold md:text-4xl">
-		Discover Why
+		{m.discoverWhy()}
 		<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-			{' '}
-			People Love{' '}
+			{m.peopleLove()}
 		</span>
-		This Landing Page
+		{m.companyName()}
 	</h2>
 
 	<p class="pb-8 pt-4 text-xl text-muted-foreground">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non unde error facere hic reiciendis
-		illo
+		{m.testimonialDescription()}
 	</p>
 
 	<div
@@ -74,7 +66,7 @@
 				<CardHeader class="flex flex-row items-center gap-4 pb-2">
 					<Avatar class="h-[50px] w-[50px]">
 						<enhanced:img
-							alt="John Doe"
+							alt={name}
 							src={image}
 							class="aspect-square h-[50px] w-[50px] object-center"
 						/>

@@ -2,6 +2,8 @@
 	import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 	import placeHolder50 from '$img/placeholder/50.png?enhanced';
 	import placeHolder500 from '$img/placeholder/500.png?enhanced';
+	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
 
 	interface ServiceProps {
 		title: string;
@@ -11,21 +13,18 @@
 
 	const serviceList: ServiceProps[] = [
 		{
-			title: 'Code Collaboration',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
+			title: m.multipleLanguagesSupport(),
+			description: m.multipleLanguagesSupportDescription(),
 			icon: placeHolder50
 		},
 		{
-			title: 'Project Management',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
+			title: m.themeSwitching(),
+			description: m.themeSwitchingDescription(),
 			icon: placeHolder50
 		},
 		{
-			title: 'Task Automation',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
+			title: m.authenticationSystem(),
+			description: m.authenticationSystemDescription(),
 			icon: placeHolder50
 		}
 	];
@@ -35,20 +34,21 @@
 	<div class="grid place-items-center gap-8 lg:grid-cols-[1fr,1fr]">
 		<div>
 			<h2 class="text-3xl font-bold md:text-4xl">
-				<span class="text-orange-500 text-transparent"> Client-Centric </span>
-				Services
+				{@html hightlight(m.clientCentricTitle(), m.clientCentric())}
 			</h2>
 
 			<p class="mb-8 mt-4 text-xl text-muted-foreground">
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis dolor.
+				{m.servicesDescription()}
 			</p>
 
 			<div class="flex flex-col gap-8">
 				{#each serviceList as { icon, title, description }}
 					<Card>
 						<CardHeader class="flex items-start justify-start gap-4 space-y-1 md:flex-row">
-							<div class="mt-1 rounded-2xl bg-primary/20 p-1">
-								<enhanced:img src={icon} alt={title} class="h-[50px] w-[50px]" />
+							<div class="mt-1 flex rounded-2xl bg-primary/20">
+								<div class="h-[50px] w-[50px]">
+									<enhanced:img src={icon} alt={title} class="h-[50px] w-[50px] object-cover" />
+								</div>
 							</div>
 							<div>
 								<CardTitle>{title}</CardTitle>

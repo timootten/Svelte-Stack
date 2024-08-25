@@ -2,6 +2,8 @@
 	import { Button } from '../ui/button';
 	import { Input } from '../ui/input';
 
+	import * as m from '$lib/paraglide/messages';
+
 	// Handle form submission
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();
@@ -13,13 +15,11 @@
 
 	<div class="container py-24 sm:py-32">
 		<h3 class="text-center text-4xl font-bold md:text-5xl">
-			Join Our Daily
-			<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-				Newsletter
-			</span>
+			{m.newsletterTitle()}
+			<span class="text-orange-500"> {m.newsletter()} </span>
 		</h3>
 		<p class="mb-8 mt-4 text-center text-xl text-muted-foreground">
-			Lorem ipsum dolor sit amet consectetur.
+			{m.newsletterDescription()}
 		</p>
 
 		<form
@@ -27,11 +27,11 @@
 			on:submit={handleSubmit}
 		>
 			<Input
-				placeholder="leomirandadev@gmail.com"
+				placeholder="youremail@example.com"
 				class="bg-muted/50 dark:bg-muted/80"
 				aria-label="email"
 			/>
-			<Button type="submit">Subscribe</Button>
+			<Button type="submit">{m.subscribe()}</Button>
 		</form>
 	</div>
 

@@ -7,6 +7,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function hightlight(text: string, hightlight: string) {
+  const regex = new RegExp(`(${hightlight})`, "gi");
+  return text.replace(regex, '<span class="text-orange-500">$1</mark>');
+}
+
 
 export function simpleHash(str: string): string {
   let hash = 0;

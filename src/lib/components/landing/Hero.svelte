@@ -12,6 +12,7 @@
 		CardTitle
 	} from '../ui/card';
 
+	import TimoOttenImage from '$img/Timo_Otten.jpeg?enhanced';
 	import placeHolder100 from '$img/placeholder/100.png?enhanced';
 	import Check from 'lucide-svelte/icons/check';
 	import * as m from '$lib/paraglide/messages';
@@ -88,7 +89,7 @@
 				<CardHeader class="mt-8 flex items-center justify-center pb-2">
 					<div class="absolute -top-12">
 						<enhanced:img
-							src={placeHolder100}
+							src={TimoOttenImage}
 							alt="user avatar"
 							class="aspect-square h-24 w-24 rounded-full object-cover grayscale-[0%]"
 						/>
@@ -148,7 +149,7 @@
 				</CardHeader>
 
 				<CardContent>
-					<Button class="w-full">Start Free Trial</Button>
+					<Button class="w-full">{m.startForFree()}</Button>
 				</CardContent>
 
 				<hr class="m-auto mb-4 w-4/5" />

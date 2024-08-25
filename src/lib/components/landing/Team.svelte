@@ -17,64 +17,60 @@
 	};
 
 	import placeHolder100 from '$img/placeholder/100.png?enhanced';
+	import TimoOttenImage from '$img/Timo_Otten.jpeg?enhanced';
 
+	import * as m from '$lib/paraglide/messages';
 	// Team data
 	const teamList = [
 		{
-			imageUrl: placeHolder100,
-			name: 'Emma Smith',
-			position: 'Product Manager',
+			imageUrl: TimoOttenImage,
+			name: 'Timo Otten',
+			position: 'Full Stack Developer',
 			socialNetworks: [
 				{ name: 'Linkedin', url: 'http://linkedin.com' },
 				{ name: 'Facebook', url: 'https://www.facebook.com/' },
 				{ name: 'Instagram', url: 'https://www.instagram.com/' }
-			]
+			],
+			description: m.meText()
 		},
 		{
 			imageUrl: placeHolder100,
-			name: 'John Doe',
-			position: 'Tech Lead',
-			socialNetworks: [
-				{ name: 'Linkedin', url: 'http://linkedin.com' },
-				{ name: 'Facebook', url: 'https://www.facebook.com/' },
-				{ name: 'Instagram', url: 'https://www.instagram.com/' }
-			]
+			name: 'None',
+			position: 'None',
+			socialNetworks: [],
+			description: 'No team member assigned to this position yet.'
 		},
 		{
 			imageUrl: placeHolder100,
-			name: 'Ashley Ross',
-			position: 'Frontend Developer',
-			socialNetworks: [
-				{ name: 'Linkedin', url: 'http://linkedin.com' },
-				{ name: 'Instagram', url: 'https://www.instagram.com/' }
-			]
+			name: 'None',
+			position: 'None',
+			socialNetworks: [],
+			description: 'No team member assigned to this position yet.'
 		},
 		{
 			imageUrl: placeHolder100,
-			name: 'Bruce Rogers',
-			position: 'Backend Developer',
-			socialNetworks: [
-				{ name: 'Linkedin', url: 'http://linkedin.com' },
-				{ name: 'Facebook', url: 'https://www.facebook.com/' }
-			]
+			name: 'None',
+			position: 'None',
+			socialNetworks: [],
+			description: 'No team member assigned to this position yet.'
 		}
 	];
 </script>
 
 <section id="team" class="container py-24 sm:py-32">
 	<h2 class="text-3xl font-bold md:text-4xl">
-		<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-			Our Dedicated
+		<span class="text-orange-500">
+			{m.teamTitle()}
 		</span>
-		Crew
+		{m.crew()}
 	</h2>
 	<p class="mb-10 mt-4 text-xl text-muted-foreground">
-		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis dolor pariatur sit!
+		{m.teamDescription()}
 	</p>
 
 	<div class="grid gap-8 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
-		{#each teamList as { imageUrl, name, position, socialNetworks }}
-			<Card class="relative mt-8 flex flex-col items-center justify-center bg-muted/50">
+		{#each teamList as { imageUrl, name, position, socialNetworks, description }}
+			<Card class="relative mt-8 flex flex-col items-center bg-muted/50">
 				<CardHeader class="mt-8 flex items-center justify-center pb-2">
 					<div class="absolute -top-12 h-24 w-24">
 						<enhanced:img
@@ -87,7 +83,7 @@
 					<CardDescription class="text-orange-500">{position}</CardDescription>
 				</CardHeader>
 				<CardContent class="pb-2 text-center">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<p>{description}</p>
 				</CardContent>
 				<CardFooter>
 					{#each socialNetworks as { name, url }}

@@ -1,7 +1,9 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
 	import { Badge } from '../ui/badge';
 	import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 	import placeHolder200 from '$img/placeholder/200.png?enhanced';
+	import { hightlight } from '$lib/utils';
 
 	interface FeatureProps {
 		title: string;
@@ -11,42 +13,43 @@
 
 	const features: FeatureProps[] = [
 		{
-			title: 'Responsive Design',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			image: placeHolder200
+			image: placeHolder200,
+			title: m.accessibility(),
+			description: m.accessibilityDescription()
 		},
 		{
-			title: 'Intuitive user interface',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			image: placeHolder200
+			image: placeHolder200,
+			title: m.performance(),
+			description: m.performanceDescription()
 		},
 		{
-			title: 'AI-Powered insights',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.',
-			image: placeHolder200
+			image: placeHolder200,
+			title: m.security(),
+			description: m.securityDescription()
+		},
+		{
+			image: placeHolder200,
+			title: m.customization(),
+			description: m.customizationDescription()
 		}
 	];
 
 	const featureList: string[] = [
-		'Dark/Light theme',
-		'Reviews',
-		'Features',
-		'Pricing',
-		'Contact form',
-		'Our team',
-		'Responsive design',
-		'Newsletter',
-		'Minimalist'
+		m.themeSwitching(),
+		m.toastNotifications(),
+		m.uiComponents(),
+		m.emailFunctionality(),
+		m.databaseIntegration(),
+		m.authentication(),
+		m.responsiveDesign(),
+		m.manyFeatures(),
+		m.tinyBundleSize()
 	];
 </script>
 
 <section id="features" class="container space-y-8 py-24 sm:py-32">
 	<h2 class="text-3xl font-bold md:text-center lg:text-4xl">
-		Many{' '}
-		<span class="bg-clip-text text-orange-500 text-transparent"> Great Features </span>
+		{@html hightlight(m.greatFeaturesTitle(), m.features())}
 	</h2>
 
 	<div class="flex flex-wrap gap-4 md:justify-center">
@@ -57,7 +60,7 @@
 		{/each}
 	</div>
 
-	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 		{#each features as { title, description, image }}
 			<Card>
 				<CardHeader>

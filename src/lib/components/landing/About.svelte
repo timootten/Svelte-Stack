@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
 	import placeHolder300 from '$img/placeholder/300.png?enhanced';
 
 	interface statsProps {
@@ -8,20 +9,20 @@
 
 	const stats: statsProps[] = [
 		{
-			quantity: '2.7K+',
-			description: 'Users'
+			quantity: '13+',
+			description: m.components()
 		},
 		{
-			quantity: '1.8K+',
-			description: 'Subscribers'
+			quantity: '2+',
+			description: m.supportedLanguages()
 		},
 		{
-			quantity: '112',
-			description: 'Downloads'
+			quantity: '10+',
+			description: m.integratedFeatures()
 		},
 		{
-			quantity: '4',
-			description: 'Products'
+			quantity: '2',
+			description: m.themes()
 		}
 	];
 </script>
@@ -40,14 +41,11 @@
 			<div class="bg-green-0 flex flex-col justify-between">
 				<div class="pb-6">
 					<h2 class="text-3xl font-bold md:text-4xl">
-						<span class="text-orange-500 text-transparent"> About </span>
-						Company
+						<span class="text-orange-500"> {m.about()} </span>
+						{m.companyName()}
 					</h2>
 					<p class="mt-4 text-xl text-muted-foreground">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
-						sit amet, consectetur adipiscing elit.
+						{m.aboutDescription()}
 					</p>
 				</div>
 

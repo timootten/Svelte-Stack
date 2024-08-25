@@ -11,27 +11,12 @@ export default defineConfig({
     //Inspect(),
     enhancedImages(),
     sveltekit(),
-    /*visualizer({
+    visualizer({
       emitFile: true,
       filename: "stats.html",
-    }),*/
+    }),
   ],
-  build: {
-    minify: true,
-    /*rollupOptions: {
-      output: {
-        manualChunks(id: string) {
-          console.log("CHUNK ID: ", id)
-          if (id.includes('@melt-ui')) {
-            return 'melt-ui'
-          }
-          if (id.includes('bits-ui')) {
-            return `bits-ui`;
-          }
-        }
-      }
-    }*/
-  },
+  //build: { minify: false },
   ssr: {
     noExternal: ['oslo']
   },

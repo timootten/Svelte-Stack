@@ -23,70 +23,53 @@
 	// Pricing data
 	const pricingList = [
 		{
-			title: 'Free',
+			title: m.free(),
 			popular: PopularPlanType.NO,
 			price: 0,
-			description: 'Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.',
-			buttonText: 'Get Started',
-			benefitList: [
-				'1 Team member',
-				'2 GB Storage',
-				'Upto 4 pages',
-				'Community support',
-				'lorem ipsum dolor'
-			]
+			description:
+				'Always free under the MIT license, ensuring you have unrestricted access to all features without any cost.',
+			buttonText: m.getStartedButton(),
+			benefitList: ['Open Source', 'Fast', 'Many Features', 'Preconfigured', 'Community support']
 		},
 		{
-			title: 'Premium',
+			title: m.sponsor(),
 			popular: PopularPlanType.YES,
 			price: 5,
-			description: 'Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.',
-			buttonText: 'Start Free Trial',
-			benefitList: [
-				'4 Team member',
-				'4 GB Storage',
-				'Upto 6 pages',
-				'Priority support',
-				'lorem ipsum dolor'
-			]
+			description: 'Support the project and get better support for your questions.',
+			buttonText: m.becomeSponsorButton(),
+			benefitList: ['Open Source', 'Fast', 'Many Features', 'Preconfigured', 'Priority support']
 		},
 		{
-			title: 'Enterprise',
+			title: m.sponsorPlus(),
 			popular: PopularPlanType.NO,
-			price: 40,
-			description: 'Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.',
-			buttonText: 'Contact US',
-			benefitList: [
-				'10 Team member',
-				'8 GB Storage',
-				'Upto 10 pages',
-				'Priority support',
-				'lorem ipsum dolor'
-			]
+			price: 20,
+			description: 'Get premium support and contribute significantly to the project.',
+			buttonText: m.becomeSponsorPlusButton(),
+			benefitList: ['Open Source', 'Fast', 'Many Features', 'Preconfigured', 'Premium support']
 		}
 	];
 </script>
 
 <section id="pricing" class="container py-24 sm:py-32">
 	<h2 class="text-center text-3xl font-bold md:text-4xl">
-		Get
-		<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-			Unlimited
-		</span>
-		Access
+		{m.get()}
+		<span class="text-orange-500"> {m.unlimited()} </span>
+		{m.access()}
 	</h2>
 	<h3 class="pb-8 pt-4 text-center text-xl text-muted-foreground">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias reiciendis.
+		{m.pricingDescription()}
 	</h3>
 	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 		{#each pricingList as pricing}
 			<Card
-				class={pricing.popular === PopularPlanType.YES
-					? 'shadow-black/10 drop-shadow-xl dark:shadow-white/10'
-					: ''}
+				class={`flex h-full flex-col ${
+					pricing.popular === PopularPlanType.YES
+						? 'shadow-black/10 drop-shadow-xl dark:shadow-white/10'
+						: ''
+				}`}
 			>
 				<CardHeader>
-					<CardTitle class="item-center flex justify-between">
+					<CardTitle class="item-center flex h-8 justify-between">
 						{pricing.title}
 						{#if pricing.popular === PopularPlanType.YES}
 							<Badge variant="secondary" class="text-sm text-orange-500">{m.popular()}</Badge>
@@ -99,8 +82,8 @@
 					<CardDescription>{pricing.description}</CardDescription>
 				</CardHeader>
 
-				<CardContent>
-					<Button class="w-full">{pricing.buttonText}</Button>
+				<CardContent class="flex-grow">
+					<Button class="mt-auto w-full">{pricing.buttonText}</Button>
 				</CardContent>
 
 				<hr class="m-auto mb-4 w-4/5" />
