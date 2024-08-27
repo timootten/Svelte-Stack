@@ -60,7 +60,6 @@
 			document.startViewTransition(() => new Promise(fulfil));
 		});
 	});
-
 </script>
 
 <svelte:head>
