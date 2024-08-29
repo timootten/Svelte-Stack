@@ -1,5 +1,7 @@
 <script lang="ts">
 	import placeHolder50 from '$img/placeholder/50.png?enhanced';
+	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
 
 	interface SponsorProps {
 		icon: any;
@@ -43,7 +45,7 @@
 
 <section id="sponsors" class="container pt-24 sm:py-32">
 	<h2 class="mb-8 text-center text-xl font-bold text-orange-500 lg:text-2xl">
-		Investors and founders
+		{@html hightlight(m.sponsorsTitle())}
 	</h2>
 
 	<div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">

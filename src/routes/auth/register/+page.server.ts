@@ -47,7 +47,7 @@ export const actions = {
       where: or(ilike(userTable.email, form.data.email), ilike(userTable.username, form.data.username))
     })
 
-    if (user && user?.email.toLowerCase() === form.data.email.toLowerCase()) return setError(form, 'email', 'Your email address has already been used.');
+    if (user && user?.email.toLowerCase() === form.data.email.toLowerCase()) return setError(form, 'email', 'This email address has already been used.');
 
     if (user && user?.username.toLowerCase() === form.data.username.toLowerCase()) return setError(form, 'username', 'This username is already taken.');
 

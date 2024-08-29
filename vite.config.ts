@@ -11,10 +11,10 @@ export default defineConfig({
     //Inspect(),
     enhancedImages(),
     sveltekit(),
-    visualizer({
+    /*visualizer({
       emitFile: true,
       filename: "stats.html",
-    }),
+    }),*/
   ],
   //build: { minify: false },
   ssr: {

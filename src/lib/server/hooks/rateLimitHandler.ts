@@ -39,7 +39,7 @@ export const rateLimitHandler: Handle = async ({ event, resolve }) => {
       }
     }
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     // event.getClientAdress during prerender is not accessible
   }
   return resolve(event);

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
 	import { Button } from '../ui/button';
 </script>
 
@@ -7,10 +8,9 @@
 	<div class="container place-items-center lg:grid lg:grid-cols-2">
 		<div class="lg:col-start-1">
 			<h2 class="text-3xl font-bold md:text-4xl">
-				{m.allYour()}
-				<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-					{m.ideasAndConcepts()}
-				</span>
+				{@html hightlight(m.conceptsTitle(), m.ideasAndConcepts())}
+
+				<br />
 				{m.inOneInterface()}
 			</h2>
 			<p class="mb-8 mt-4 text-xl text-muted-foreground lg:mb-0">

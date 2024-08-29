@@ -17,6 +17,7 @@
 	import Check from 'lucide-svelte/icons/check';
 	import * as m from '$lib/paraglide/messages';
 	import { languageTag } from '$lib/paraglide/runtime';
+	import { hightlight } from '$lib/utils';
 </script>
 
 <section class="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
@@ -29,15 +30,7 @@
 					{m.companyName()}
 				</span>
 			</h1>
-			{m.landingPageFor()}
-			<h2 class="inline">
-				<span
-					class="inline bg-gradient-to-r from-[#e29f48] via-[#eec56c] to-[#ec8b0c] bg-clip-text text-transparent"
-				>
-					Svelte
-				</span>
-				{m.developers()}
-			</h2>
+			{@html hightlight(m.landingPageFor(), 'Svelte')}
 		</main>
 
 		<p class="mx-auto text-xl text-muted-foreground md:w-10/12 lg:mx-0">

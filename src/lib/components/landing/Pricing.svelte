@@ -11,6 +11,8 @@
 	import { Button } from '../ui/button';
 	import { Badge } from '../ui/badge';
 	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	// Import necessary components
 
@@ -26,35 +28,50 @@
 			title: m.free(),
 			popular: PopularPlanType.NO,
 			price: 0,
-			description:
-				'Always free under the MIT license, ensuring you have unrestricted access to all features without any cost.',
-			buttonText: m.getStartedButton(),
-			benefitList: ['Open Source', 'Fast', 'Many Features', 'Preconfigured', 'Community support']
+			description: m.freePlanDescription(),
+			buttonText: m.startForFree(),
+			benefitList: [
+				m.openSource(),
+				m.fast(),
+				m.manyFeatures(),
+				m.preconfigured(),
+				m.normalSupport()
+			]
 		},
 		{
 			title: m.sponsor(),
 			popular: PopularPlanType.YES,
 			price: 5,
-			description: 'Support the project and get better support for your questions.',
+			description: m.sponsorPlanDescription(),
 			buttonText: m.becomeSponsorButton(),
-			benefitList: ['Open Source', 'Fast', 'Many Features', 'Preconfigured', 'Priority support']
+			benefitList: [
+				m.openSource(),
+				m.fast(),
+				m.manyFeatures(),
+				m.preconfigured(),
+				m.prioritySupport()
+			]
 		},
 		{
 			title: m.sponsorPlus(),
 			popular: PopularPlanType.NO,
 			price: 20,
-			description: 'Get premium support and contribute significantly to the project.',
+			description: m.sponsorPlusPlanDescription(),
 			buttonText: m.becomeSponsorPlusButton(),
-			benefitList: ['Open Source', 'Fast', 'Many Features', 'Preconfigured', 'Premium support']
+			benefitList: [
+				m.openSource(),
+				m.fast(),
+				m.manyFeatures(),
+				m.preconfigured(),
+				m.premiumSupport()
+			]
 		}
 	];
 </script>
 
 <section id="pricing" class="container py-24 sm:py-32">
 	<h2 class="text-center text-3xl font-bold md:text-4xl">
-		{m.get()}
-		<span class="text-orange-500"> {m.unlimited()} </span>
-		{m.access()}
+		{@html hightlight(m.pricingTitle(), m.unlimited())}
 	</h2>
 	<h3 class="pb-8 pt-4 text-center text-xl text-muted-foreground">
 		{m.pricingDescription()}
@@ -76,8 +93,13 @@
 						{/if}
 					</CardTitle>
 					<div>
-						<span class="text-3xl font-bold">${pricing.price}</span>
-						<span class="text-muted-foreground"> /month</span>
+						<span class="text-3xl font-bold">
+							{pricing.price.toLocaleString(languageTag(), {
+								style: 'currency',
+								currency: m.currency()
+							})}
+						</span>
+						<span class="text-muted-foreground"> / {m.month()}</span>
 					</div>
 					<CardDescription>{pricing.description}</CardDescription>
 				</CardHeader>

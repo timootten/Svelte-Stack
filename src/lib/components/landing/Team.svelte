@@ -20,6 +20,7 @@
 	import TimoOttenImage from '$img/Timo_Otten.jpeg?enhanced';
 
 	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
 	// Team data
 	const teamList = [
 		{
@@ -38,31 +39,28 @@
 			name: 'None',
 			position: 'None',
 			socialNetworks: [],
-			description: 'No team member assigned to this position yet.'
+			description: m.noTeamMemberAssigned()
 		},
 		{
 			imageUrl: placeHolder100,
 			name: 'None',
 			position: 'None',
 			socialNetworks: [],
-			description: 'No team member assigned to this position yet.'
+			description: m.noTeamMemberAssigned()
 		},
 		{
 			imageUrl: placeHolder100,
 			name: 'None',
 			position: 'None',
 			socialNetworks: [],
-			description: 'No team member assigned to this position yet.'
+			description: m.noTeamMemberAssigned()
 		}
 	];
 </script>
 
 <section id="team" class="container py-24 sm:py-32">
 	<h2 class="text-3xl font-bold md:text-4xl">
-		<span class="text-orange-500">
-			{m.teamTitle()}
-		</span>
-		{m.crew()}
+		{@html hightlight(m.teamTitle(), m.team())}
 	</h2>
 	<p class="mb-10 mt-4 text-xl text-muted-foreground">
 		{m.teamDescription()}

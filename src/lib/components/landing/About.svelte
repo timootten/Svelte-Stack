@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
 	import placeHolder300 from '$img/placeholder/300.png?enhanced';
+	import { hightlight } from '$lib/utils';
 
 	interface statsProps {
 		quantity: string;
@@ -41,7 +42,7 @@
 			<div class="bg-green-0 flex flex-col justify-between">
 				<div class="pb-6">
 					<h2 class="text-3xl font-bold md:text-4xl">
-						<span class="text-orange-500"> {m.about()} </span>
+						{@html hightlight(m.about())}
 						{m.companyName()}
 					</h2>
 					<p class="mt-4 text-xl text-muted-foreground">

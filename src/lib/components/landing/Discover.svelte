@@ -4,6 +4,7 @@
 	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 	import placeHolder50 from '$img/placeholder/50.png?enhanced';
+	import { hightlight } from '$lib/utils';
 
 	const testimonials = [
 		{
@@ -47,11 +48,7 @@
 
 <section id="testimonials" class="container py-24 sm:py-32">
 	<h2 class="text-3xl font-bold md:text-4xl">
-		{m.discoverWhy()}
-		<span class="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-			{m.peopleLove()}
-		</span>
-		{m.companyName()}
+		{@html hightlight(m.discoverTitle(), m.companyName())}
 	</h2>
 
 	<p class="pb-8 pt-4 text-xl text-muted-foreground">

@@ -3,6 +3,7 @@
 	import { Input } from '../ui/input';
 
 	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
 
 	// Handle form submission
 	const handleSubmit = (e: Event) => {
@@ -15,8 +16,7 @@
 
 	<div class="container py-24 sm:py-32">
 		<h3 class="text-center text-4xl font-bold md:text-5xl">
-			{m.newsletterTitle()}
-			<span class="text-orange-500"> {m.newsletter()} </span>
+			{@html hightlight(m.newsletterTitle(), m.newsletter())}
 		</h3>
 		<p class="mb-8 mt-4 text-center text-xl text-muted-foreground">
 			{m.newsletterDescription()}

@@ -7,9 +7,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function hightlight(text: string, hightlight: string) {
+export function hightlight(text: string, hightlight?: string) {
+  if (!hightlight) return `<span class="bg-gradient-to-r from-primary via-[#da924f] to-primary bg-clip-text text-transparent">${text}</span>`
   const regex = new RegExp(`(${hightlight})`, "gi");
-  return text.replace(regex, '<span class="text-orange-500">$1</mark>');
+  return text.replace(regex, '<span class="bg-gradient-to-r from-primary via-[#da924f] to-primary bg-clip-text text-transparent">$1</span>');
 }
 
 

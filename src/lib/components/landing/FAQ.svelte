@@ -1,5 +1,6 @@
 <script>
 	import * as m from '$lib/paraglide/messages';
+	import { hightlight } from '$lib/utils';
 	import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 
 	const FAQList = [
@@ -33,8 +34,7 @@
 
 <section id="faq" class="container py-24 sm:py-32">
 	<h2 class="mb-4 text-3xl font-bold md:text-4xl">
-		{m.frequentlyAsked()}
-		<span class="text-orange-500"> {m.questions()} </span>
+		{@html hightlight(m.faqTitle(), m.questions())}
 	</h2>
 
 	<Accordion class="AccordionRoot w-full">
@@ -53,9 +53,9 @@
 		<a
 			rel="noreferrer noopener"
 			href="mailto:Admin@ShadeHost.eu"
-			class="border-primary font-bold text-orange-500 transition-all hover:border-b-2"
+			class="border-primary font-bold transition-all hover:border-b-2"
 		>
-			{m.contactUs()}
+			{@html hightlight(m.contactUs())}
 		</a>
 	</h3>
 </section>

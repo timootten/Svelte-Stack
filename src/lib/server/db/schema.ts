@@ -63,7 +63,7 @@ export const sessionTable = pgTable("session", {
 
 export const userSchema = createSelectSchema(userTable, {
   email: (schema) => schema.email.email(),
-  username: (schema) => schema.username.min(4).max(16),
+  username: (schema) => schema.username.min(4).max(16).refine(s => !s.includes(' '), 'Your username cannot contain spaces!'),
   password: z.string().min(8).max(256),
 });
 

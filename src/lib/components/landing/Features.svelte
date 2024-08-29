@@ -62,16 +62,18 @@
 
 	<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 		{#each features as { title, description, image }}
-			<Card>
+			<Card class="flex h-full flex-col">
 				<CardHeader>
 					<CardTitle>{title}</CardTitle>
 				</CardHeader>
 
-				<CardContent>{description}</CardContent>
+				<CardContent class="flex-grow">
+					{description}
+				</CardContent>
 
-				<CardFooter>
+				<CardFooter class="mt-auto">
 					<div class="mx-auto">
-						<enhanced:img src={image} alt="About feature" />
+						<enhanced:img src={image} alt="About feature" class="block" />
 					</div>
 				</CardFooter>
 			</Card>

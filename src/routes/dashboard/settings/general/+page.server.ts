@@ -41,7 +41,7 @@ export const actions = {
         where: or(ilike(userTable.email, form.data.email), ilike(userTable.username, form.data.username))
       })
 
-      if (currentUser && form.data.email.toLowerCase() !== user.email.toLowerCase() && currentUser?.email.toLowerCase() === form.data.email.toLowerCase()) return setError(form, 'email', 'Your email address has already been used.');
+      if (currentUser && form.data.email.toLowerCase() !== user.email.toLowerCase() && currentUser?.email.toLowerCase() === form.data.email.toLowerCase()) return setError(form, 'email', 'This email address has already been used.');
 
       if (currentUser && form.data.username.toLowerCase() !== user.username.toLowerCase() && currentUser?.username.toLowerCase() === form.data.username.toLowerCase()) return setError(form, 'username', 'This username is already taken.');
 
@@ -49,7 +49,7 @@ export const actions = {
         username: form.data.username,
         email: form.data.email,
         emailVerified: form.data.email === user.email ? user.emailVerified : false,
-      }).where(eq(userTable.id, user!.id)).execute();
+      }).where(eq(userTable.id, user.id)).execute();
 
     } catch (error) {
 
@@ -70,7 +70,7 @@ export const actions = {
     try {
       await db.update(userTable).set({
         password: updatedPassword,
-      }).where(eq(userTable.id, user!.id)).execute();
+      }).where(eq(userTable.id, user.id)).execute();
 
     } catch (error) {
       console.log(error)
