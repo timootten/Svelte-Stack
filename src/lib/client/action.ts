@@ -1,8 +1,15 @@
 import { deserialize } from "$app/forms";
-import { onMount } from "svelte"
+
+
+import { fail, type ActionFailure as ActionFailureType } from "@sveltejs/kit"
+
+interface Class<T> extends Function {
+  new(...args: any[]): T
+}
+
+export const ActionFailure = fail(Infinity).constructor as unknown as Class<ActionFailureType>
 
 export const useAction = <T extends (...args: any) => Promise<any>>(action: string) => {
-  let value = $state<ReturnType<T>>(new Promise(() => { }) as any)
 
   const callAction = async () => {
     let formData = new FormData();
@@ -11,10 +18,5 @@ export const useAction = <T extends (...args: any) => Promise<any>>(action: stri
     return (currentResult?.data || {});
   }
 
-  onMount(async () => {
-    value = await callAction();
-  });
-
-
-  return () => value
+  return callAction() as ReturnType<T>
 }

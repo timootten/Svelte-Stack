@@ -12,6 +12,8 @@
 	import Send from 'lucide-svelte/icons/send';
 	import type { zxcvbn as zxcvbnType } from '@zxcvbn-ts/core';
 	import { onMount } from 'svelte';
+	import { useAction } from '$lib/client/action.js';
+	import type { actions } from './+page.server.js';
 
 	let { data } = $props();
 
@@ -54,11 +56,37 @@
 
 	let zxcvbn: typeof zxcvbnType | undefined = $state<typeof zxcvbnType | undefined>(undefined);
 
+	let retryAfterEmail = $state(data.retryAfterEmail);
+
 	onMount(async () => {
 		zxcvbn = (await import('@zxcvbn-ts/core')).zxcvbn;
+
+		startVerifyEmailCooldown(data.retryAfterEmail);
 	});
 
+	const startVerifyEmailCooldown = (retryAfter: number) => {
+		if (!retryAfter) return;
+		retryAfterEmail = retryAfter;
+		const intervalId = setInterval(() => {
+			retryAfterEmail = retryAfterEmail - 1;
+			if (retryAfterEmail === 0) {
+				clearInterval(intervalId);
+			}
+		}, 1000);
+	};
+
 	let passwordScore = $derived(zxcvbn ? zxcvbn($passwordForm.password || '').score : 0);
+
+	const verifyEmail = async () => {
+		const result = await useAction<typeof actions.verifyEmail>('verifyEmail');
+		console.log(result);
+		if (result.status === 'success') {
+			toast.success(result.text);
+			startVerifyEmailCooldown(result.retryAfter);
+		} else {
+			toast.error(result.text);
+		}
+	};
 </script>
 
 <div class="flex h-full w-full flex-col gap-8 pr-0 2xl:pr-96">
@@ -103,10 +131,22 @@
 									<Check class="h-4 w-4" />
 								</Button>
 							{:else}
-								<Button class="rounded-l-none">
-									<span class="pr-2">Verify E-Mail</span>
-									<Send class="h-4 w-4" />
-								</Button>
+								<div class="relative">
+									<Button
+										disabled={retryAfterEmail !== 0}
+										class="relative h-full w-full rounded-l-none"
+										onclick={verifyEmail}
+									>
+										<span class="pr-2">Verify E-Mail</span>
+										<Send class="h-4 w-4" />
+									</Button>
+									{#if retryAfterEmail}
+										<span
+											class="absolute inset-0 flex items-center justify-center text-xl font-bold text-white"
+											>{retryAfterEmail}s</span
+										>
+									{/if}
+								</div>
 							{/if}
 						</div>
 						{#if $errors.email}

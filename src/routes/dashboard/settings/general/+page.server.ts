@@ -8,6 +8,9 @@ import { eq, ilike, or } from "drizzle-orm";
 import argon2 from "argon2";
 import { z } from "zod";
 import { zxcvbn } from "@zxcvbn-ts/core";
+import { RetryAfterRateLimiter } from "sveltekit-rate-limiter/server";
+import { RetryLimiter } from "$lib/client/rateLimiter";
+import { sendVerificationEmail } from "$lib/server/auth/utils";
 
 const generalSchema = userSchema.pick({
   username: true,
@@ -22,12 +25,22 @@ const passwordSchema = z.object({
   path: ["confirmPassword"],
 });
 
-export async function load({ locals: { user } }) {
+export async function load(event) {
+  const { locals: { user } } = event;
   const generalForm = await superValidate(user, zod(generalSchema));
   const passwordForm = await superValidate(zod(passwordSchema));
 
-  return { generalForm, passwordForm, user };
+
+  const { retryAfter: retryAfterEmail } = resendLimiter.check(event.getClientAddress());
+
+  return { generalForm, passwordForm, user, retryAfterEmail };
 }
+
+
+const resendLimiter = new RetryLimiter({
+  maxAttempts: 1,
+  retryInterval: 60
+});
 
 export const actions = {
   general: async ({ request, locals: { user } }) => {
@@ -78,4 +91,18 @@ export const actions = {
     }
     return message(form, { status: "success", text: "You have successfully updated your password." });
   },
+  verifyEmail: async (event) => {
+    const { user } = event.locals;
+    if (!user) throw Error("You are not logged in");
+    const { isLimited } = resendLimiter.checkAndLimit(event.getClientAddress());
+    const { retryAfter } = resendLimiter.check(event.getClientAddress());
+
+    if (isLimited) {
+      return { status: "error", text: "Please wait until you send a new verify email.", retryAfter }
+    }
+
+    sendVerificationEmail(user.id, user.email, user.username);
+
+    return { status: "success", text: "You got an E-Mail, please verify your account.", retryAfter }
+  }
 };
