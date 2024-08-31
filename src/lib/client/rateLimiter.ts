@@ -28,7 +28,7 @@ export class RetryLimiter {
       }
     }
 
-    expiredKeys.forEach(ip => this.attempts.delete(ip));
+    expiredKeys.forEach(context => this.attempts.delete(context));
   }
 
   private startAutoCleanup(intervalSeconds: number): void {
@@ -47,9 +47,9 @@ export class RetryLimiter {
     }
   }
 
-  public check(ip: string): { isLimited: boolean; retryAfter: number } {
+  public check(context: string): { isLimited: boolean; retryAfter: number } {
     const now = Date.now();
-    const attempt = this.attempts.get(ip);
+    const attempt = this.attempts.get(context);
 
     if (!attempt) {
       return { isLimited: false, retryAfter: 0 };
@@ -66,9 +66,9 @@ export class RetryLimiter {
     return { isLimited: false, retryAfter: 0 };
   }
 
-  public limit(ip: string): void {
+  public limit(context: string): void {
     const now = Date.now();
-    const attempt = this.attempts.get(ip);
+    const attempt = this.attempts.get(context);
 
     if (attempt) {
       const elapsedTime = now - attempt.lastAttempt;
@@ -79,14 +79,14 @@ export class RetryLimiter {
       }
       attempt.lastAttempt = now;
     } else {
-      this.attempts.set(ip, { count: 1, lastAttempt: now });
+      this.attempts.set(context, { count: 1, lastAttempt: now });
     }
   }
 
-  public checkAndLimit(ip: string): { isLimited: boolean; retryAfter: number } {
-    const result = this.check(ip);
+  public checkAndLimit(context: string): { isLimited: boolean; retryAfter: number } {
+    const result = this.check(context);
     if (!result.isLimited) {
-      this.limit(ip);
+      this.limit(context);
     }
     return result;
   }

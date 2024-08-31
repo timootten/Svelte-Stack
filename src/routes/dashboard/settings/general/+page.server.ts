@@ -3,7 +3,7 @@ import { userSchema, userTable } from "$lib/server/db/schema";
 import { setError, superValidate } from "sveltekit-superforms";
 import { zod } from 'sveltekit-superforms/adapters';
 import { message } from 'sveltekit-superforms';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { eq, ilike, or } from "drizzle-orm";
 import argon2 from "argon2";
 import { z } from "zod";
@@ -27,11 +27,12 @@ const passwordSchema = z.object({
 
 export async function load(event) {
   const { locals: { user } } = event;
+  if (!user) return redirect(401, '/auth/login');
   const generalForm = await superValidate(user, zod(generalSchema));
   const passwordForm = await superValidate(zod(passwordSchema));
 
 
-  const { retryAfter: retryAfterEmail } = resendLimiter.check(event.getClientAddress());
+  const { retryAfter: retryAfterEmail } = resendLimiter.check(user.id);
 
   return { generalForm, passwordForm, user, retryAfterEmail };
 }
@@ -94,11 +95,15 @@ export const actions = {
   verifyEmail: async (event) => {
     const { user } = event.locals;
     if (!user) throw Error("You are not logged in");
-    const { isLimited } = resendLimiter.checkAndLimit(event.getClientAddress());
-    const { retryAfter } = resendLimiter.check(event.getClientAddress());
+    const { isLimited } = resendLimiter.checkAndLimit(user.id);
+    const { retryAfter } = resendLimiter.check(user.id);
 
     if (isLimited) {
       return { status: "error", text: "Please wait until you send a new verify email.", retryAfter }
+    }
+
+    if (user.emailVerified) {
+      return { status: "error", text: "You are already verified.", retryAfter }
     }
 
     sendVerificationEmail(user.id, user.email, user.username);
