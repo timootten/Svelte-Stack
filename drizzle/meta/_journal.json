@@ -15,6 +15,13 @@
       "when": 1724180404694,
       "tag": "0001_dusty_maverick",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1725147313924,
+      "tag": "0002_known_venus",
+      "breakpoints": true
     }
   ]
 }

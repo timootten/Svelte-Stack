@@ -89,7 +89,7 @@
 	};
 </script>
 
-<div class="flex h-full w-full flex-col gap-8 pr-0 2xl:pr-96">
+<div class="flex h-full w-full flex-col gap-8 pr-0">
 	<form method="post" action="?/general" use:enhance>
 		<Card.Root>
 			<Card.Header>
