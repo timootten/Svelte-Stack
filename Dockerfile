@@ -25,6 +25,7 @@ RUN bun run build
 
 # Stage 4: Final release image
 FROM builder AS release
+COPY --from=prerelease /usr/src/app/drizzle.config.ts drizzle.config.ts
 COPY --from=prerelease /usr/src/app/build .
 RUN apt-get update && apt-get install -y --no-install-recommends wget libstdc++6 && apt-get clean
 
