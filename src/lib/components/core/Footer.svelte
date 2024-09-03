@@ -1,4 +1,6 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
+
 	const footerLinks = [
 		{
 			title: 'Social Media',
@@ -9,7 +11,7 @@
 			]
 		},
 		{
-			title: 'Platforms',
+			title: m.platforms(),
 			links: [
 				{ href: '#', label: 'Web' },
 				{ href: '#', label: 'Mobile' },
@@ -17,19 +19,19 @@
 			]
 		},
 		{
-			title: 'About',
+			title: m.about(),
 			links: [
-				{ href: '/#features', label: 'Features' },
-				{ href: '/#pricing', label: 'Pricing' },
-				{ href: '/#faq', label: 'FAQ' }
+				{ href: '/#features', label: m.features() },
+				{ href: '/#pricing', label: m.pricing() },
+				{ href: '/#faq', label: m.faq() }
 			]
 		},
 		{
-			title: 'Rights',
+			title: m.rights(),
 			links: [
-				{ href: '/rights/imprint', label: 'Imprint' },
-				{ href: '/rights/privacy', label: 'Privacy Policy' },
-				{ href: '/rights/terms', label: 'Terms & Conditions' }
+				{ href: '/rights/imprint', label: m.imprint() },
+				{ href: '/rights/privacy', label: m.privacyPolicy() },
+				{ href: '/rights/terms', label: m.termsConditions() }
 			]
 		}
 	];
@@ -40,7 +42,7 @@
 		<div class="col-span-full xl:col-span-2">
 			<a rel="noreferrer noopener" href="/" class="flex text-xl font-bold">
 				<enhanced:img src="$img/favicon.png?w=32&h=32&enhanced" class="mr-2 h-8" alt="Logo" />
-				Svelte-Stack
+				{m.companyName()}
 			</a>
 		</div>
 
@@ -57,6 +59,6 @@
 	</section>
 
 	<section class="container pb-8 text-center">
-		<h3>&copy; 2024 Svelte-Stack</h3>
+		<h3>&copy; 2024 {m.companyName()}</h3>
 	</section>
 </footer>

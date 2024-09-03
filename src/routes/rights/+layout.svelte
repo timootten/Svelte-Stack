@@ -9,15 +9,16 @@
 	import { cn } from '$lib/utils.js';
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n.js';
+	import * as m from '$lib/paraglide/messages';
 
 	let { data, children } = $props();
 
 	let navItems = [
-		{ name: 'Imprint', href: '/rights/imprint' },
-		{ name: 'Privacy Policy', href: '/rights/privacy' },
-		{ name: 'Terms & Conditions', href: '/rights/terms' },
-		{ name: 'Right of Withdrawal', href: '/rights/withdrawal' },
-		{ name: 'Cookie Policy', href: '/rights/cookie' }
+		{ name: m.imprint(), href: '/rights/imprint' },
+		{ name: m.privacyPolicy(), href: '/rights/privacy' },
+		{ name: m.termsConditions(), href: '/rights/terms' },
+		{ name: m.rightOfWithdrawl(), href: '/rights/withdrawal' },
+		{ name: m.cookiePolicy(), href: '/rights/cookie' }
 	];
 
 	let activePath = $derived(i18n.route($page.url.pathname));
@@ -34,7 +35,7 @@
 					<div class="mt-8 hidden rounded-2xl bg-muted/40 shadow md:block">
 						<div class="flex flex-col gap-2">
 							<div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-								<span class="flex items-center gap-2 font-semibold">Rights</span>
+								<span class="flex items-center gap-2 font-semibold">{m.rights()}</span>
 							</div>
 							<div class="flex-1">
 								<nav class="mt-2 grid items-start px-2 text-sm font-medium lg:px-4">

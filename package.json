@@ -12,9 +12,9 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
-		"db:push": "drizzle-kit push:pg --config=drizzle.config.ts",
+		"db:push": "drizzle-kit push",
 		"db:studio": "drizzle-kit studio",
-		"translate": "bunx @inlang/cli machine translate --project 'C:\\Users\\timoo\\Desktop\\Projekte\\Svelte-Stack\\project.inlang'"
+		"translate": "pnpx @inlang/cli machine translate --project 'C:\\Users\\timoo\\Desktop\\Projekte\\Svelte-Stack\\project.inlang'"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.5.25",
@@ -44,6 +44,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@inlang/cli": "^2.18.1",
 		"@inlang/paraglide-sveltekit": "^0.11.0",
 		"@lucia-auth/adapter-drizzle": "^1.1.0",
 		"@react-email/components": "^0.0.23",

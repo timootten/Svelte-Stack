@@ -13,7 +13,7 @@
 	"login": "Login",
 	"register": "Register",
 	"logout": "Logout",
-	"myAccount": "Mein Account",
+	"myAccount": "My Account",
 	"pricing": "Pricing",
 	"testimonials": "Testimonials",
 	"faq": "FAQ",
@@ -44,7 +44,6 @@
 	"testimonial5": "Svelte-Stack's authentication system is top-notch, providing both security and ease of use.",
 	"testimonial6": "Building scalable apps has never been easier thanks to Svelte-Stack's architecture.",
 	"discoverTitle": "Discover Why People Love Svelte-Stack",
-	"peopleLove": "People Love",
 	"testimonialDescription": "See what developers are saying about their experience with Svelte-Stack.",
 	"faqQuestion1": "Is this template free?",
 	"faqAnswer1": "Yes. It is a free Svelte-Stack template.",
@@ -128,5 +127,13 @@
 	"teamTitle": "Our Dedicated Team",
 	"team": "Team",
 	"teamDescription": "Meet our dedicated team of professionals who are committed to delivering excellence and innovation in every project.",
-	"noTeamMemberAssigned": "No team member assigned to this position yet."
+	"noTeamMemberAssigned": "No team member assigned to this position yet.",
+	"rights": "Rights",
+	"imprint": "Imprint",
+	"privacyPolicy": "Privacy Policy",
+	"termsConditions": "Terms & Conditions",
+	"rightOfWithdrawl": "Right of Withdrawal",
+	"cookiePolicy": "Cookie Policy",
+	"platforms": "Platforms",
+	"socialMedia": "Social Media"
 }

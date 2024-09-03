@@ -15,7 +15,7 @@
 	"logout": "Abmelden",
 	"myAccount": "Mein Account",
 	"pricing": "Preise",
-	"testimonials": "Referenzen",
+	"testimonials": "Rezensionen",
 	"faq": "FAQ",
 	"dashboard": "Dashboard",
 	"settings": "Einstellungen",
@@ -127,5 +127,13 @@
 	"teamTitle": "Unser engagiertes Team",
 	"team": "Team",
 	"teamDescription": "Lernen Sie unser engagiertes Team von Fachleuten kennen, die sich der Bereitstellung von Exzellenz und Innovation in jedem Projekt verschrieben haben.",
-	"noTeamMemberAssigned": "Für diese Position ist noch kein Teammitglied zugewiesen."
+	"noTeamMemberAssigned": "Für diese Position ist noch kein Teammitglied zugewiesen.",
+	"rights": "Rechte",
+	"imprint": "Impressum",
+	"privacyPolicy": "Datenschutz",
+	"termsConditions": "AGBs",
+	"rightOfWithdrawl": "Widerrufsrecht",
+	"cookiePolicy": "Cookie-Richtlinien",
+	"platforms": "Plattformen",
+	"socialMedia": "Soziale Medien"
 }
