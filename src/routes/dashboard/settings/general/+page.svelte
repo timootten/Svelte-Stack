@@ -176,7 +176,7 @@
 							bind:value={$passwordForm.password}
 							{...$passwordConstraints.password}
 							name="password"
-							autocomplete="password"
+							autocomplete="on"
 							id="password"
 							type="password"
 							required
@@ -191,7 +191,7 @@
 							bind:value={$passwordForm.confirmPassword}
 							{...$passwordConstraints.confirmPassword}
 							name="confirmPassword"
-							autocomplete="confirmPassword"
+							autocomplete="on"
 							id="confirmPassword"
 							type="password"
 							required

@@ -3,7 +3,7 @@
 
 	const footerLinks = [
 		{
-			title: 'Social Media',
+			title: m.socialMedia(),
 			links: [
 				{ href: '#', label: 'GitHub' },
 				{ href: '#', label: 'Discord' },
