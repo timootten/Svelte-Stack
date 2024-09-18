@@ -1,6 +1,5 @@
 import { createSSE } from "./sse.svelte";
 
-
 export type TYPE = {
   time: string
 }

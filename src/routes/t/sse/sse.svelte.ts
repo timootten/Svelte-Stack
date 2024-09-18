@@ -6,6 +6,7 @@ type SSE<T> = {
   emit: (data: T) => void;
   onCancel: (callback: CancelCallback) => void;
   getResponse: () => Response;
+  close: () => void
 };
 
 export const createSSE = <T extends Record<string, unknown>>(): SSE<T> => {
@@ -43,6 +44,11 @@ export const createSSE = <T extends Record<string, unknown>>(): SSE<T> => {
     },
     getResponse() {
       return response;
+    },
+    close() {
+      if (controller) {
+        controller.close();
+      }
     }
   };
 };
