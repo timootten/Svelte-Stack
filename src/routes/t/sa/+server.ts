@@ -1,5 +1,6 @@
 import * as actions from '$lib/server/actions';
 import { simpleHash } from '$lib/utils.js';
+import type { RequestEvent } from '@sveltejs/kit';
 import * as devalue from 'devalue';
 
 interface Actions {
@@ -17,9 +18,10 @@ for (const [name, func] of Object.entries(actions)) {
     hashedActions[hashedName] = name;
   }
 }
-export const POST = async ({ request }) => {
+
+export const POST = async (event: RequestEvent) => {
   try {
-    const input = devalue.parse(await request.text());
+    const input = devalue.parse(await event.request.text());
     const originalActionName = hashedActions[input.action];
 
     if (!originalActionName) {
@@ -36,7 +38,9 @@ export const POST = async ({ request }) => {
       });
     }
 
-    const result = await action(input.data);
+
+    const result = await action(...input.data, event);
+
     return new Response(devalue.stringify(result), { status: 200 });
   } catch (error) {
     if (error instanceof Error) {

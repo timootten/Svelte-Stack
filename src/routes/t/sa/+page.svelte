@@ -3,13 +3,24 @@
 	import { actions } from './client';
 
 	let data = $state('Not Clicked');
+
+	let test = $state(actions.test({ message: 'Hello World' }, { test: 'test' }));
 </script>
+
+{#await test}
+	Loading
+{:then user}
+	<p>{JSON.stringify(user)}</p>
+{:catch error}
+	<p>{error.message}</p>
+{/await}
 
 <span>{data}</span>
 
 <button
 	onclick={async () => {
 		try {
+			test = actions.test({ message: 'Hello World' }, { test: 'test' });
 			const user = await actions.withZod({ message: 'Hello World' });
 			console.log('Clicked', user);
 			data = JSON.stringify(user);
@@ -24,7 +35,7 @@
 <button
 	onclick={async () => {
 		try {
-			const user = await actions.getUser({ id: '54' });
+			const user = await actions.test({ message: 'Hello World2' }, { test: 'test' });
 			console.log('Clicked', user);
 			data = JSON.stringify(user);
 		} catch (error: any) {
