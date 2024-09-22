@@ -22,8 +22,6 @@
 	});
 </script>
 
-<p>Local DirectHir {data.directHit}</p>
-<p>{direct}</p>
 {#if $navigating || direct}
 	<Loading />
 {:else}

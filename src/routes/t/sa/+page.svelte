@@ -2,9 +2,11 @@
 	import { toast } from 'svelte-sonner';
 	import { actions } from './client';
 
-	let data = $state('Not Clicked');
+	let data1 = $state('Not Clicked');
 
-	let test = $state(actions.test({ message: 'Hello World' }, { test: 'test' }));
+	const { data } = $props();
+
+	let test = $state(data.test);
 </script>
 
 {#await test}
@@ -15,15 +17,15 @@
 	<p>{error.message}</p>
 {/await}
 
-<span>{data}</span>
+<span>{data1}</span>
 
 <button
 	onclick={async () => {
 		try {
-			test = actions.test({ message: 'Hello World' }, { test: 'test' });
+			test = await actions.test({ message: 'Hello World' }, { test: 'test' });
 			const user = await actions.withZod({ message: 'Hello World' });
 			console.log('Clicked', user);
-			data = JSON.stringify(user);
+			data1 = JSON.stringify(user);
 		} catch (error: any) {
 			console.log(error);
 			if (error instanceof Error) toast.error(error.message);
@@ -37,7 +39,7 @@
 		try {
 			const user = await actions.test({ message: 'Hello World2' }, { test: 'test' });
 			console.log('Clicked', user);
-			data = JSON.stringify(user);
+			data1 = JSON.stringify(user);
 		} catch (error: any) {
 			console.log(error);
 			if (error instanceof Error) toast.error(error.message);
