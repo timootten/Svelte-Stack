@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
-	import { actions } from './client';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import { client } from './client';
+	import { SAError } from './lib/error';
 
 	let testData = $state('Not Clicked');
 </script>
@@ -10,10 +11,13 @@
 	<Button
 		onclick={async () => {
 			try {
-				const data = await actions.test({ message: 'Hello World' }, { test: 'test' });
-				testData = JSON.stringify(data);
+				const x = await client.test({ message: 'Hello12' });
+
+				console.log(x);
 			} catch (error: any) {
-				if (error instanceof Error) toast.error(error.message);
+				if (error instanceof SAError) {
+					toast.error(error.status + ': ' + error.message);
+				}
 			}
 		}}
 	>
