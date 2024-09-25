@@ -1,7 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { ZodSchema } from 'zod';
 
-export type Middleware<SchemaType> = (context: { next: () => Promise<void> } & RequestEvent, data: SchemaType) => Promise<void>;
+export type Middleware<SchemaType = any> = (context: { next: () => Promise<void> } & RequestEvent, data: SchemaType) => Promise<void>;
 export type Handler<SchemaType, ReturnType = any> = (context: RequestEvent, data: SchemaType) => Promise<ReturnType>;
 
 interface ActionBuilder<SchemaType> {
@@ -49,5 +49,25 @@ export const createAction = <SchemaType = undefined>(): ActionBuilder<SchemaType
         }
       };
     }
+  };
+};
+
+
+
+export const routeMiddleware = <Actions extends Record<string, { config: ActionConfig } | object>>(
+  actions: Actions
+) => {
+  return {
+    use(middleware: Middleware<any>) {
+      Object.values(actions).forEach(action => {
+        if (action && 'config' in action) {
+          action.config.middlewares = [...action.config.middlewares, middleware];
+        } else {
+          routeMiddleware(action as Actions).use(middleware);
+        }
+      });
+      return this; // Allow chaining
+    },
+    actions: actions,
   };
 };

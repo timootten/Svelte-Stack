@@ -1,4 +1,4 @@
-import { actions } from './lib/actions';
+import { actions } from './actions';
 import { serverHandler } from './lib/serverHandler';
 
 const handler = serverHandler(actions);

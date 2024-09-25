@@ -11,7 +11,7 @@
 	<Button
 		onclick={async () => {
 			try {
-				const x = await client.test({ message: 'Hello12' });
+				const x = await client.user.test.abc();
 
 				console.log(x);
 			} catch (error: any) {

@@ -9,21 +9,17 @@
 
 	//console.log("Data From Layout: " +JSON.stringify(data));
 
-	let direct = $state(false);
+	//let direct = $state(false);
 
 	onMount(async () => {
 		//  alert("Data: " + JSON.stringify(data));
-		if (direct) {
+		/*if (direct) {
 			//await invalidateAll();
 			//await invalidate((url) => true);
 			await invalidate('current:page');
 			direct = false;
-		}
+		}*/
 	});
 </script>
 
-{#if $navigating || direct}
-	<Loading />
-{:else}
-	{@render children?.()}
-{/if}
+{@render children?.()}

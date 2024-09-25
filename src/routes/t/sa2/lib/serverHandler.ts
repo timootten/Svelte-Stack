@@ -66,17 +66,25 @@ export const postHandler = async (event: RequestEvent) => {
 
     // Execute middlewares with next() pattern
     let index = 0;
+    let middlewareInterrupted = false;
+
+
     const next = async (): Promise<void> => {
-      if (index < config.middlewares.length) {
+      if (index !== config.middlewares.length) {
         await config.middlewares[index++]({ ...context, next }, inputData);
       }
     };
 
+
     await next();
 
-    // After middlewares, execute the handler
-    const result = await config.handler(context, inputData);
-    return new Response(devalue.stringify(result), { status: 200 });
+    // After middlewares, execute the handler only if the middleware chain was not interrupted
+    if (index === config.middlewares.length) {
+      const result = await config.handler(context, inputData);
+      return new Response(devalue.stringify(result), { status: 200 });
+    } else {
+      return new Response('Middleware chain was interrupted', { status: 400 });
+    }
 
   } catch (error) {
     if (error instanceof SAError) {

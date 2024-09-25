@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let data;
+	let { data } = $props();
 </script>
 
 <a href="/t/test">Test</a>
@@ -7,8 +7,12 @@
 <br />
 <h1>Test</h1>
 Users:<br />
-{#each data.users as user}
-	{user.id} | {user.email} - {user.balance} €<br />
-{/each}
+{#await data.users}
+	Loading
+{:then users}
+	{#each users as user}
+		{user.id} | {user.email} - {user.balance} €<br />
+	{/each}
+{/await}
 <br />
 You: {data.user?.username} | {data.user?.email} - {data.user?.balance} €<br />
