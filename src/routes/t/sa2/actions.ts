@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createAction, routeMiddleware, type Middleware } from './lib/createAction';
-import { SAError } from "./lib/error";
+import { SAError } from "./lib/actionError";
 import type { User } from "lucia";
 
 const isAuthenticed: Middleware = async ({ next, locals }) => {
@@ -10,6 +10,7 @@ const isAuthenticed: Middleware = async ({ next, locals }) => {
     status: 401,
     code: 'UNAUTHORIZED',
   });
+  await next();
 }
 
 
@@ -60,5 +61,4 @@ export const actions = {
     console.log('middleware', 'user2');
     await next()
   }).use(isAuthenticed).actions,
-
 }

@@ -2,7 +2,7 @@
 	import { toast } from 'svelte-sonner';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { client } from './client';
-	import { SAError } from './lib/error';
+	import { SAError } from './lib/actionError';
 
 	let testData = $state('Not Clicked');
 </script>
@@ -11,7 +11,7 @@
 	<Button
 		onclick={async () => {
 			try {
-				const x = await client.user.test.abc();
+				const x = await client.user.get();
 
 				console.log(x);
 			} catch (error: any) {

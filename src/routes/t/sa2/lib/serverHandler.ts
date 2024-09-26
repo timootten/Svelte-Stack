@@ -3,12 +3,8 @@ import { simpleHash } from '$lib/utils.js';
 import type { RequestEvent } from '@sveltejs/kit';
 import * as devalue from 'devalue';
 import type { ActionConfig } from './createAction';
-import { SAError } from './error';
+import { SAError } from './actionError';
 import { ZodError } from 'zod';
-
-interface Actions {
-  [key: string]: (...args: any) => any;
-}
 
 const hashedActions: { [key: string]: ActionConfig } = {};
 
@@ -66,8 +62,6 @@ export const postHandler = async (event: RequestEvent) => {
 
     // Execute middlewares with next() pattern
     let index = 0;
-    let middlewareInterrupted = false;
-
 
     const next = async (): Promise<void> => {
       if (index !== config.middlewares.length) {
@@ -75,8 +69,8 @@ export const postHandler = async (event: RequestEvent) => {
       }
     };
 
-
     await next();
+
 
     // After middlewares, execute the handler only if the middleware chain was not interrupted
     if (index === config.middlewares.length) {
@@ -100,3 +94,4 @@ export const postHandler = async (event: RequestEvent) => {
     }
   }
 };
+

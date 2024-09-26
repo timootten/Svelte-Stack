@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { useURLParams } from './url.svelte';
 
-	let params = useURLParams({ color: 'red', text: '' }, $page.url, { compress: true });
+	let params = useURLParams({ color: 'red', text: '' }, $page.url, { compress: false });
 
 	$inspect(params);
 </script>

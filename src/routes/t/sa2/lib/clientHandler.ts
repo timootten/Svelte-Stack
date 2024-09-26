@@ -2,7 +2,7 @@ import * as devalue from 'devalue';
 import type { RequestEvent } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { simpleHash } from '$lib/utils';
-import { SAError } from './error';
+import { SAError } from './actionError';
 
 type StripRequestEvent<T> = T extends (event: RequestEvent, data: infer D) => infer R
   ? D extends undefined
