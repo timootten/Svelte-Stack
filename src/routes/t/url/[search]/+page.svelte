@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { useURLParams } from './lib/url.svelte';
+	import { useURLParams } from '../lib/url.svelte';
 
-	let params = useURLParams({ color: 'red', text: '' }, $page, { compress: false });
-
-	$inspect(params);
+	let params = useURLParams({ color: 'red', text: '' }, $page, {
+		compress: false,
+		param: 'search'
+	});
 </script>
 
 <input
