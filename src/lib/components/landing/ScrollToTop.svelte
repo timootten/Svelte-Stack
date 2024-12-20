@@ -29,7 +29,7 @@
 </script>
 
 {#if showTopBtn}
-	<Button on:click={goToTop} class="fixed bottom-4 right-4 opacity-90 shadow-md" size="icon">
+	<Button onclick={goToTop} class="fixed bottom-4 right-4 opacity-90 shadow-md" size="icon">
 		<ArrowUpToLine class="h-4 w-4" />
 		<span class="sr-only">Scroll to the top</span>
 	</Button>

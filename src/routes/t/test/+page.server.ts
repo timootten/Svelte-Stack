@@ -6,11 +6,11 @@ export async function load({ locals, parent }) {
 
   const getUsers = async () => {
     const users = await db.select().from(userTable);
-    await sleep(5000)
+    //await sleep(5000)
     return users;
   }
 
   return {
-    users: getUsers()
+    users: await getUsers()
   };
 }

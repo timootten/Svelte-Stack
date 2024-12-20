@@ -34,6 +34,6 @@
 </script>
 
 <input type="text" bind:value={input} />
-<button on:click={send}>Send</button>
+<button onclick={send}>Send</button>
 
 <textarea bind:value={log} disabled rows={10}></textarea>

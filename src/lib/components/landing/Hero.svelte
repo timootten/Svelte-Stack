@@ -20,8 +20,8 @@
 	import { hightlight } from '$lib/utils';
 </script>
 
-<section class="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
-	<div class="space-y-6 text-center lg:text-start">
+<section class="container grid place-items-center gap-10 py-20 md:py-32 xl:grid-cols-2">
+	<div class="space-y-6 text-center xl:text-start">
 		<main class="text-5xl font-bold md:text-6xl">
 			<h1 class="inline">
 				<span
@@ -33,12 +33,12 @@
 			{@html hightlight(m.landingPageFor(), 'Svelte')}
 		</main>
 
-		<p class="mx-auto text-xl text-muted-foreground md:w-10/12 lg:mx-0">
+		<p class="mx-auto text-xl text-muted-foreground md:w-10/12 xl:mx-0">
 			{m.slogan()}
 		</p>
 
 		<div
-			class="flex flex-col justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0 lg:justify-normal"
+			class="flex flex-col justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0 xl:justify-normal"
 		>
 			<Button class="w-full md:w-1/3">{m.getStarted()}</Button>
 
@@ -58,7 +58,7 @@
 	</div>
 
 	<div class="z-10">
-		<div class="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
+		<div class="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 xl:flex">
 			<Card
 				class="absolute -top-[15px] w-[340px] shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
@@ -116,7 +116,7 @@
 			</Card>
 
 			<Card
-				class="absolute left-[50px] top-[150px] w-72  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+				class="absolute left-[50px] top-[170px] w-72  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
 				<CardHeader>
 					<CardTitle class="item-center flex justify-between">
@@ -160,15 +160,13 @@
 			</Card>
 
 			<Card
-				class="absolute -bottom-[30px] -right-[10px] w-[350px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+				class="absolute -bottom-[70px] -right-[10px] w-[350px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10"
 			>
-				<CardHeader class="flex items-start justify-start gap-4 space-y-1 md:flex-row">
-					<div>
-						<CardTitle>{m.features()}</CardTitle>
-						<CardDescription class="text-md mt-2">
-							{m.featuresDescriptionSmall()}
-						</CardDescription>
-					</div>
+				<CardHeader class="flex flex-col items-start justify-start gap-4 space-y-1 p-6 pb-6">
+					<CardTitle>{m.features()}</CardTitle>
+					<CardDescription class="text-md mt-2">
+						{m.featuresDescriptionSmall()}
+					</CardDescription>
 				</CardHeader>
 			</Card>
 		</div>
