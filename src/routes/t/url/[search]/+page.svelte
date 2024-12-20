@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { useURLParams } from '../lib/url.svelte';
 
-	let params = useURLParams({ color: 'red', text: '' }, $page, {
+	let params = useURLParams({ color: 'red', text: '' }, page, {
 		compress: false,
 		param: 'search'
 	});

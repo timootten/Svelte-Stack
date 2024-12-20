@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { i18n } from '$lib/i18n';
 	import { cn } from '$lib/utils';
 	import Settings from 'lucide-svelte/icons/settings';
@@ -11,7 +11,7 @@
 		{ name: 'Address', href: '/dashboard/settings/address' }
 	];
 
-	let activePath = $derived(i18n.route($page.url.pathname));
+	let activePath = $derived(i18n.route(page.url.pathname));
 </script>
 
 <main

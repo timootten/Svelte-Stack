@@ -7,7 +7,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import { cn } from '$lib/utils.js';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { i18n } from '$lib/i18n.js';
 	import * as m from '$lib/paraglide/messages';
 
@@ -21,7 +21,7 @@
 		{ name: m.cookiePolicy(), href: '/rights/cookie' }
 	];
 
-	let activePath = $derived(i18n.route($page.url.pathname));
+	let activePath = $derived(i18n.route(page.url.pathname));
 </script>
 
 <div class="flex min-h-screen w-full flex-col">

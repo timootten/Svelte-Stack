@@ -1,7 +1,7 @@
 <script lang="ts">
   	import { invalidate } from '$app/navigation';
     import { browser } from '$app/environment';
-    import { page } from '$app/stores';  
+    import { page } from '$app/state';  
     import { onMount } from 'svelte';
     
     let { data } = $props();

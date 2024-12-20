@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { navigating } from '$app/stores';
+	import { navigating } from '$app/state';
 	import Loading from '$lib/components/core/Loading.svelte';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';

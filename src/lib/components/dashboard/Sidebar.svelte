@@ -9,7 +9,7 @@
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { cn } from '$lib/utils';
 	import { i18n } from '$lib/i18n';
 
@@ -44,7 +44,7 @@
 		}
 	];
 
-	let activePath = $derived(i18n.route($page.url.pathname));
+	let activePath = $derived(i18n.route(page.url.pathname));
 </script>
 
 <div class="grid w-full">

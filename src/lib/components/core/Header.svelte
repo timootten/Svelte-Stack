@@ -7,7 +7,7 @@
 	import UsersRound from 'lucide-svelte/icons/users-round';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import * as Sheet from '$lib/components/ui/sheet';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { cn } from '$lib/utils';
 	import Avatar from './Avatar.svelte';
 	import * as Popover from '$lib/components/ui/popover/index.js';
@@ -34,7 +34,7 @@
 		{ href: '/#faq', label: m.faq(), icon: UsersRound }
 	];
 
-	let activePath = $derived(i18n.route($page.url.pathname) + $page.url.hash);
+	let activePath = $derived(i18n.route(page.url.pathname) + page.url.hash);
 
 	let open = $state(false);
 
@@ -163,7 +163,7 @@
 		<div class="flex flex-1 items-center justify-end space-x-2">
 			<nav class="flex items-center space-x-2">
 				{#if user}
-					{#if !$page.route.id?.includes('dashboard')}
+					{#if !page.route.id?.includes('dashboard')}
 						<Button href="/dashboard/products" variant="outline">{m.dashboard()}</Button>
 					{/if}
 				{:else}
@@ -188,7 +188,7 @@
 										value={languageTag()}
 										onValueChange={(selected) => {
 											if (selected) {
-												const route = i18n.route($page.url.pathname);
+												const route = i18n.route(page.url.pathname);
 												goto(i18n.resolveRoute(route, selected as any), {
 													noScroll: true
 												});
