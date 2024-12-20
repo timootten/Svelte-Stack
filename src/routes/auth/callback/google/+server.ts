@@ -25,7 +25,7 @@ export async function GET({ url, cookies }) {
 
     const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`
+        Authorization: `Bearer ${tokens.accessToken()}`
       }
     });
     const googleUser = await response.json();

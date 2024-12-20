@@ -23,7 +23,7 @@ export const websocketHandler: WebSocketHandler<{ auth_session: string }> = {
     const parsedCookies = cookie.parse(cookies);
     return upgrade(request, {
       data: {
-        auth_session: parsedCookies?.auth_session
+        auth_session: parsedCookies?.auth_session || ""
       }
     });
   },

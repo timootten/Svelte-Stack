@@ -5,7 +5,7 @@
 	import Package from 'lucide-svelte/icons/package';
 	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
 	import UsersRound from 'lucide-svelte/icons/users-round';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
@@ -101,8 +101,8 @@
 			</nav>
 		</div>
 		<Sheet.Root bind:open>
-			<Sheet.Trigger asChild let:builder>
-				<Button class="h-5 w-5 md:hidden" size="icon" variant="ghost" builders={[builder]}>
+			<Sheet.Trigger>
+				<Button class="h-5 w-5 md:hidden" size="icon" variant="ghost">
 					<svg
 						stroke-width="1.5"
 						viewBox="0 0 24 24"
@@ -170,12 +170,10 @@
 					<Button href="/auth/login" variant="outline">{m.login()}</Button>
 					<Button href="/auth/register">{m.register()}</Button>
 				{/if}
-				<Popover.Root portal={null}>
-					<Popover.Trigger asChild let:builder>
-						<Button builders={[builder]} variant="outline" size="icon">
-							<Settings class="h-[1.2rem] w-[1.2rem]" />
-							<span class="sr-only">{m.settings()}</span>
-						</Button>
+				<Popover.Root>
+					<Popover.Trigger class={buttonVariants({ variant: 'outline' })}>
+						<Settings class="h-[1.2rem] w-[1.2rem]" />
+						<span class="sr-only">{m.settings()}</span>
 					</Popover.Trigger>
 					<Popover.Content class="w-auto">
 						<div class="grid gap-4">
@@ -186,12 +184,12 @@
 								<div class="flex flex-col gap-y-2">
 									<Label>{m.language()}</Label>
 									<Select.Root
-										selected={{ value: languageTag(), label: getLanguageName(languageTag()) }}
-										onSelectedChange={(selected) => {
+										type="single"
+										value={languageTag()}
+										onValueChange={(selected) => {
 											if (selected) {
-												language = selected.value;
 												const route = i18n.route($page.url.pathname);
-												goto(i18n.resolveRoute(route, selected.value), {
+												goto(i18n.resolveRoute(route, selected as any), {
 													noScroll: true
 												});
 											}
@@ -203,7 +201,7 @@
 													{@const Flag = getLanguageFlag(language)}
 													<Flag />
 												{/if}
-												<Select.Value class="pt-0.5" placeholder="Language" />
+												<span>{getLanguageName(language)}</span>
 											</div>
 										</Select.Trigger>
 										<Select.Content>

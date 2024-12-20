@@ -1,25 +1,27 @@
 <script lang="ts">
-	import { Progress as ProgressPrimitive } from 'bits-ui';
+	import { Progress as ProgressPrimitive, type WithoutChildrenOrChild } from 'bits-ui';
 	import { cn } from '$lib/utils.js';
 
-	interface Props {
-		classLoader?: string | null | undefined;
-		text?: string | null | undefined;
-	}
-
 	let {
-		class: className = undefined,
+		ref = $bindable(null),
+		class: className,
 		max = 100,
-		value = undefined,
-		classLoader = undefined,
-		text = undefined,
-		...attr
-	}: ProgressPrimitive.Props & Props = $props();
+		value,
+		text,
+		classLoader,
+		...restProps
+	}: WithoutChildrenOrChild<ProgressPrimitive.RootProps> & {
+		text?: string;
+		classLoader?: string;
+	} = $props();
 </script>
 
 <ProgressPrimitive.Root
+	bind:ref
 	class={cn('relative h-4 w-full overflow-hidden rounded-full bg-secondary', className)}
-	{...attr}
+	{value}
+	{max}
+	{...restProps}
 >
 	<div
 		class={cn('h-full w-full flex-1 bg-primary transition-all', classLoader)}

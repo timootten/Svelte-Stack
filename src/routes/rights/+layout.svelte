@@ -63,13 +63,8 @@
 					<div class="flex flex-col">
 						<header class="ml-3 mt-2 flex h-14 items-center gap-4 md:hidden">
 							<Sheet.Root>
-								<Sheet.Trigger asChild let:builder>
-									<Button
-										variant="outline"
-										size="icon"
-										class="shrink-0 md:hidden"
-										builders={[builder]}
-									>
+								<Sheet.Trigger>
+									<Button variant="outline" size="icon" class="shrink-0 md:hidden">
 										<Menu class="h-5 w-5" />
 										<span class="sr-only">Toggle navigation menu</span>
 									</Button>

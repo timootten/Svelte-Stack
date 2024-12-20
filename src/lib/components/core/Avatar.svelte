@@ -12,10 +12,8 @@
 </script>
 
 <DropdownMenu.Root>
-	<DropdownMenu.Trigger asChild let:builder>
-		<Button variant="outline" size="icon" class="overflow-hidden rounded-full" builders={[builder]}>
-			<img src={avatarUrl} width={40} height={40} alt="Avatar" class="overflow-hidden" />
-		</Button>
+	<DropdownMenu.Trigger class="overflow-hidden rounded-full">
+		<img src={avatarUrl} width={40} height={40} alt="Avatar" class="overflow-hidden" />
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content align="end">
 		<DropdownMenu.Label>{m.myAccount()}</DropdownMenu.Label>

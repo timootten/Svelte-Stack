@@ -18,8 +18,8 @@ const generalSchema = userSchema.pick({
 });
 
 const passwordSchema = z.object({
-  password: userSchema.shape.password.unwrap(),
-  confirmPassword: userSchema.shape.password.unwrap()
+  password: userSchema.shape.password.optional().unwrap(),
+  confirmPassword: userSchema.shape.password.optional().unwrap()
 }).refine(data => data.password === data.confirmPassword, {
   message: "Passwords do not match.",
   path: ["confirmPassword"],

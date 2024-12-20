@@ -23,7 +23,7 @@ export async function GET({ url, cookies }) {
 
     const userResponse = await fetch("https://api.github.com/user", {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`,
+        Authorization: `Bearer ${tokens.accessToken()}`,
         "User-Agent": "my-app", // GitHub requires a User-Agent header
       }
     });

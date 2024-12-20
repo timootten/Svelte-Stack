@@ -45,12 +45,10 @@
 				<span class="sr-only">Acme Inc</span>
 			</a>
 			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
+				<Tooltip.Trigger>
 					<a
 						href="##"
 						class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-						use:builder.action
-						{...builder}
 					>
 						<House class="h-5 w-5" />
 						<span class="sr-only">Dashboard</span>
@@ -59,12 +57,10 @@
 				<Tooltip.Content side="right">Dashboard</Tooltip.Content>
 			</Tooltip.Root>
 			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
+				<Tooltip.Trigger>
 					<a
 						href="##"
 						class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-						use:builder.action
-						{...builder}
 					>
 						<ShoppingCart class="h-5 w-5" />
 						<span class="sr-only">Orders</span>
@@ -73,12 +69,10 @@
 				<Tooltip.Content side="right">Orders</Tooltip.Content>
 			</Tooltip.Root>
 			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
+				<Tooltip.Trigger>
 					<a
 						href="##"
 						class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-						use:builder.action
-						{...builder}
 					>
 						<Package class="h-5 w-5" />
 						<span class="sr-only">Products</span>
@@ -87,12 +81,10 @@
 				<Tooltip.Content side="right">Products</Tooltip.Content>
 			</Tooltip.Root>
 			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
+				<Tooltip.Trigger>
 					<a
 						href="##"
 						class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-						use:builder.action
-						{...builder}
 					>
 						<UsersRound class="h-5 w-5" />
 						<span class="sr-only">Customers</span>
@@ -101,12 +93,10 @@
 				<Tooltip.Content side="right">Customers</Tooltip.Content>
 			</Tooltip.Root>
 			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
+				<Tooltip.Trigger>
 					<a
 						href="##"
 						class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-						use:builder.action
-						{...builder}
 					>
 						<LineChart class="h-5 w-5" />
 						<span class="sr-only">Analytics</span>
@@ -117,12 +107,10 @@
 		</nav>
 		<nav class="mt-auto flex flex-col items-center gap-4 px-2 md:py-5">
 			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
+				<Tooltip.Trigger>
 					<a
 						href="##"
 						class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-						use:builder.action
-						{...builder}
 					>
 						<Settings class="h-5 w-5" />
 						<span class="sr-only">Settings</span>
@@ -137,8 +125,8 @@
 			class="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 md:static md:h-auto md:border-0 md:bg-transparent md:px-6"
 		>
 			<Sheet.Root>
-				<Sheet.Trigger asChild let:builder>
-					<Button builders={[builder]} size="icon" variant="outline" class="md:hidden">
+				<Sheet.Trigger>
+					<Button size="icon" variant="outline" class="md:hidden">
 						<PanelLeft class="h-5 w-5" />
 						<span class="sr-only">Toggle Menu</span>
 					</Button>
@@ -211,13 +199,8 @@
 				/>
 			</div>
 			<DropdownMenu.Root>
-				<DropdownMenu.Trigger asChild let:builder>
-					<Button
-						variant="outline"
-						size="icon"
-						class="overflow-hidden rounded-full"
-						builders={[builder]}
-					>
+				<DropdownMenu.Trigger>
+					<Button variant="outline" size="icon" class="overflow-hidden rounded-full">
 						<img
 							src={data.user?.avatarUrl}
 							width={40}
@@ -288,13 +271,8 @@
 						</Tabs.List>
 						<div class="ml-auto flex items-center gap-2">
 							<DropdownMenu.Root>
-								<DropdownMenu.Trigger asChild let:builder>
-									<Button
-										variant="outline"
-										size="sm"
-										class="h-7 gap-1 text-sm"
-										builders={[builder]}
-									>
+								<DropdownMenu.Trigger>
+									<Button variant="outline" size="sm" class="h-7 gap-1 text-sm">
 										<ListFilter class="h-3.5 w-3.5" />
 										<span class="sr-only md:not-sr-only">Filter</span>
 									</Button>
@@ -473,8 +451,8 @@
 								<span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap"> Track Order </span>
 							</Button>
 							<DropdownMenu.Root>
-								<DropdownMenu.Trigger asChild let:builder>
-									<Button builders={[builder]} size="icon" variant="outline" class="h-8 w-8">
+								<DropdownMenu.Trigger>
+									<Button size="icon" variant="outline" class="h-8 w-8">
 										<EllipsisVertical class="h-3.5 w-3.5" />
 										<span class="sr-only">More</span>
 									</Button>

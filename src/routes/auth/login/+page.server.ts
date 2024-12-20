@@ -63,9 +63,7 @@ export const actions = {
   },
   github: async ({ cookies }) => {
     const state = generateState();
-    const url = await github.createAuthorizationURL(state, {
-      scopes: ['user:email']
-    });
+    const url = github.createAuthorizationURL(state, ['user:email']);
 
     cookies.set('github_oauth_state', state, {
       path: '/',
@@ -80,9 +78,7 @@ export const actions = {
   google: async ({ cookies }) => {
     const state = generateState();
     const codeVerifier = generateCodeVerifier();
-    const url = await google.createAuthorizationURL(state, codeVerifier, {
-      scopes: ["profile", "email"]
-    });
+    const url = google.createAuthorizationURL(state, codeVerifier, ["profile", "email"]);
 
     cookies.set('google_oauth_state', state, {
       path: '/',
