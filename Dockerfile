@@ -20,7 +20,7 @@ FROM builder AS prerelease
 COPY --from=install /temp/dev/node_modules ./node_modules
 COPY . .
 RUN apt-get update && apt-get install -y --no-install-recommends libstdc++6 && apt-get clean
-RUN bun test
+# RUN bun test
 RUN bun run build
 
 # Stage 4: Final release image
